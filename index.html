@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Putte App</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --card: #21262d;
+            --accent: #3fb950;
+            --accent-bg: #0d2e16;
+            --danger: #f85149;
+            --danger-bg: #2d1117;
+            --warning: #d29922;
+            --warning-bg: #2d2100;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --border: #30363d;
+            --radius: 14px;
+            --radius-sm: 10px;
+            --radius-pill: 100px;
+        }
+
+        [data-theme="light"] {
+            --bg: #f6f8fa;
+            --surface: #ffffff;
+            --card: #f0f2f4;
+            --accent: #1a7f37;
+            --accent-bg: #d1f0d9;
+            --danger: #cf222e;
+            --danger-bg: #ffd7d5;
+            --warning: #9a6700;
+            --warning-bg: #fff8c5;
+            --text: #1f2328;
+            --text-muted: #656d76;
+            --border: #d0d7de;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0 16px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.3px;
+        }
+
+        .logo span {
+            color: var(--text);
+            font-weight: 400;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* ===== SECTION LABEL ===== */
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 22px 0 10px;
+        }
+
+        /* ===== MODE CARDS ===== */
+        .mode-card {
+            padding: 14px 16px;
+            border-radius: var(--radius);
+            border: 2px solid var(--border);
+            background: var(--card);
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: border-color 0.15s, background 0.15s;
+            user-select: none;
+        }
+
+        .mode-card.active {
+            border-color: var(--accent);
+            background: var(--accent-bg);
+        }
+
+        .mode-card-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .mode-card.active .mode-card-title {
+            color: var(--accent);
+        }
+
+        .mode-card-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.45;
+        }
+
+        /* ===== PILL GROUP ===== */
+        .pill-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            user-select: none;
+        }
+
+        .pill.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        /* ===== STEPPER ===== */
+        .stepper-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: var(--card);
+            margin-bottom: 8px;
+        }
+
+        .stepper-label {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .stepper-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .stepper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .stepper-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text);
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .stepper-value {
+            font-size: 22px;
+            font-weight: 800;
+            min-width: 28px;
+            text-align: center;
+            color: var(--accent);
+        }
+
+        /* ===== DISC LIST ===== */
+        .disc-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--card);
+            margin-bottom: 8px;
+        }
+
+        .disc-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .disc-name {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 6px;
+            line-height: 1;
+        }
+
+        .add-disc-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .disc-input {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .disc-input:focus {
+            border-color: var(--accent);
+        }
+
+        .add-btn {
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: var(--accent);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* ===== PRIMARY BUTTON ===== */
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            border-radius: var(--radius);
+            border: none;
+            background: var(--accent);
+            color: #fff;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            letter-spacing: 0.01em;
+            transition: opacity 0.15s;
+        }
+
+        .btn-primary:active {
+            opacity: 0.85;
+        }
+
+        .btn-ghost {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ===== DRILL SCREEN ===== */
+        .drill-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0 14px;
+            gap: 12px;
+        }
+
+        .drill-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-muted);
+            flex: 1;
+            text-align: center;
+        }
+
+        /* ===== PROGRESS STEPS ===== */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .step-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .step-active .step-label {
+            color: var(--accent);
+        }
+
+        .step-done .step-label {
+            color: var(--text-muted);
+        }
+
+        .step-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background 0.2s;
+        }
+
+        .dot.made {
+            background: var(--accent);
+        }
+
+        .dot.missed {
+            background: var(--danger);
+        }
+
+        /* ===== DISTANCE DISPLAY ===== */
+        .distance-display {
+            text-align: center;
+            padding: 28px 0 20px;
+        }
+
+        .distance-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 6px;
+        }
+
+        .distance-number {
+            font-size: 80px;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            letter-spacing: -3px;
+        }
+
+        .distance-unit {
+            font-size: 22px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* ===== DISC INDICATOR ===== */
+        .disc-indicator {
+            text-align: center;
+            padding: 12px 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+        }
+
+        .disc-indicator-name {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .disc-indicator-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+
+        /* ===== STATS ROW ===== */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .stat-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        /* ===== PUTT BUTTONS ===== */
+        .putt-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .btn-made {
+            padding: 32px 16px;
+            border-radius: var(--radius);
+            border: 2px solid var(--accent);
+            background: var(--accent-bg);
+            color: var(--accent);
+            font-size: 17px;
+            font-weight: 900;
+            cursor: pointer;
+            text-align: center;
+            letter-spacing: 0.03em;
+            transition: opacity 0.1s;
+            user-select: none;
+        }
+
+        .btn-missed {
+            padding: 32px 16px;
+            border-radius: var(--radius);
+            border: 2px solid var(--danger);
+            background: var(--danger-bg);
+            color: var(--danger);
+            font-size: 17px;
+            font-weight: 900;
+            cursor: pointer;
+            text-align: center;
+            letter-spacing: 0.03em;
+            transition: opacity 0.1s;
+            user-select: none;
+        }
+
+        .btn-made:active,
+        .btn-missed:active {
+            opacity: 0.75;
+        }
+
+        /* ===== COMPLETE SCREEN ===== */
+        .complete-hero {
+            text-align: center;
+            padding: 48px 0 32px;
+        }
+
+        .complete-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .complete-title {
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+
+        .complete-sub {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            padding: 11px 22px;
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 700;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.25s, transform 0.25s;
+            pointer-events: none;
+            white-space: nowrap;
+            max-width: 90vw;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.success {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .toast.error {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        /* ===== UNDO ROW ===== */
+        .undo-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 12px;
+        }
+
+        .undo-btn {
+            padding: 7px 16px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ===== HIDDEN ===== */
+        .hidden { display: none !important; }
+
+        /* ===== STREAK DOTS BIG ===== */
+        .streak-display {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 16px 0;
+        }
+
+        .streak-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .streak-dot.made {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<div id="toast" class="toast"></div>
+
+<!-- ========================================
+     SETUP SCREEN
+     ======================================== -->
+<div id="setupScreen">
+    <div class="header">
+        <div class="logo">Putte<span>App</span></div>
+        <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">M</button>
+    </div>
+
+    <!-- DRILL MODE -->
+    <div class="section-label">Velg drill</div>
+
+    <div class="mode-card active" id="mode-c1" onclick="selectMode('c1')">
+        <div class="mode-card-title">C1 Stige</div>
+        <div class="mode-card-desc">Sett X putter fra 3,3 m, 6,6 m og 10 m. Miss pa en avstand og du starter pa nytt fra 3,3 m.</div>
+    </div>
+
+    <div class="mode-card" id="mode-c2" onclick="selectMode('c2')">
+        <div class="mode-card-title">C2 Stige</div>
+        <div class="mode-card-desc">Sett X putter fra 10 m, 15 m og 20 m. Miss pa en avstand og du starter pa nytt fra 10 m.</div>
+    </div>
+
+    <div class="mode-card" id="mode-full" onclick="selectMode('full')">
+        <div class="mode-card-title">Full Stige</div>
+        <div class="mode-card-desc">C1 og C2 kombinert: 3,3 m, 6,6 m, 10 m, 15 m og 20 m. Fullfull alle fem avstandene.</div>
+    </div>
+
+    <div class="mode-card" id="mode-streak" onclick="selectMode('streak')">
+        <div class="mode-card-title">X pa rad</div>
+        <div class="mode-card-desc">Velg en avstand og sett X putter pa rad. En miss og rekken starter pa nytt.</div>
+    </div>
+
+    <div class="mode-card" id="mode-free" onclick="selectMode('free')">
+        <div class="mode-card-title">Fri puttøkt</div>
+        <div class="mode-card-desc">Ingen regler, bare tell treff og miss. Velg avstand selv underveis.</div>
+    </div>
+
+    <!-- STREAK DISTANCE -->
+    <div id="streakSection" class="hidden">
+        <div class="section-label">Avstand for X pa rad</div>
+        <div class="pill-group" id="streakPills">
+            <button class="pill active" onclick="setStreakDist(this, 3.3)">3,3 m</button>
+            <button class="pill" onclick="setStreakDist(this, 6.6)">6,6 m</button>
+            <button class="pill" onclick="setStreakDist(this, 10)">10 m</button>
+            <button class="pill" onclick="setStreakDist(this, 15)">15 m</button>
+            <button class="pill" onclick="setStreakDist(this, 20)">20 m</button>
+        </div>
+    </div>
+
+    <!-- PUTTER PER AVSTAND -->
+    <div class="section-label">Antall putter per avstand</div>
+    <div class="stepper-row">
+        <div>
+            <div class="stepper-label">Krevde treff</div>
+            <div class="stepper-sub">Du ma sette alle for a ga videre</div>
+        </div>
+        <div class="stepper">
+            <button class="stepper-btn" onclick="changeRequired(-1)">-</button>
+            <div class="stepper-value" id="requiredValue">3</div>
+            <button class="stepper-btn" onclick="changeRequired(1)">+</button>
+        </div>
+    </div>
+
+    <!-- DINE DISCER -->
+    <div class="section-label">Dine discer</div>
+    <div id="discList"></div>
+    <div class="add-disc-row">
+        <input class="disc-input" id="discInput" placeholder="Legg til disc..." />
+        <button class="add-btn" onclick="addDisc()">Legg til</button>
+    </div>
+
+    <!-- ANTALL DISCER I HANDEN -->
+    <div class="section-label" style="margin-top:20px">Antall discer i handen</div>
+    <div class="stepper-row">
+        <div>
+            <div class="stepper-label">Discer per runde</div>
+            <div class="stepper-sub">Appen roterer gjennom valgte discer</div>
+        </div>
+        <div class="stepper">
+            <button class="stepper-btn" onclick="changeDiscCount(-1)">-</button>
+            <div class="stepper-value" id="discCountValue">3</div>
+            <button class="stepper-btn" onclick="changeDiscCount(1)">+</button>
+        </div>
+    </div>
+
+    <button class="btn-primary" onclick="startDrill()" style="margin-top:20px; margin-bottom:48px">Start drill</button>
+</div>
+
+<!-- ========================================
+     DRILL SCREEN
+     ======================================== -->
+<div id="drillScreen" class="hidden">
+    <div class="drill-topbar">
+        <button class="icon-btn" onclick="goBack()">&#8592;</button>
+        <div class="drill-title" id="drillTitle">C1 Stige</div>
+        <button class="icon-btn" onclick="toggleTheme()">M</button>
+    </div>
+
+    <!-- Progress steps (hidden in free mode) -->
+    <div id="progressSteps" class="progress-steps"></div>
+
+    <!-- Distance display -->
+    <div class="distance-display">
+        <div class="distance-label">Avstand</div>
+        <div class="distance-number" id="distNumber">3,3</div>
+        <div class="distance-unit">meter</div>
+    </div>
+
+    <!-- Streak dots (only in streak mode) -->
+    <div id="streakDots" class="streak-display hidden"></div>
+
+    <!-- Free mode distance pills -->
+    <div id="freePills" class="hidden" style="margin-bottom:16px">
+        <div class="section-label" style="margin-top:0">Velg avstand</div>
+        <div class="pill-group">
+            <button class="pill active" onclick="setFreeDist(this, 3.3)">3,3 m</button>
+            <button class="pill" onclick="setFreeDist(this, 6.6)">6,6 m</button>
+            <button class="pill" onclick="setFreeDist(this, 10)">10 m</button>
+            <button class="pill" onclick="setFreeDist(this, 15)">15 m</button>
+            <button class="pill" onclick="setFreeDist(this, 20)">20 m</button>
+        </div>
+    </div>
+
+    <!-- Current disc -->
+    <div class="disc-indicator" id="discIndicator">
+        <div class="disc-indicator-name" id="discIndicatorName">Roc3</div>
+        <div class="disc-indicator-sub" id="discIndicatorSub">Disc 1 av 3</div>
+    </div>
+
+    <!-- Session stats -->
+    <div class="stats-row">
+        <div class="stat-box">
+            <div class="stat-value" id="statMade">0</div>
+            <div class="stat-label">Treff</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value" id="statMissed">0</div>
+            <div class="stat-label">Bom</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value" id="statPct">0%</div>
+            <div class="stat-label">Prosent</div>
+        </div>
+    </div>
+
+    <!-- Undo -->
+    <div class="undo-row">
+        <button class="undo-btn" onclick="undoLast()">Angre siste</button>
+    </div>
+
+    <!-- Putt buttons -->
+    <div class="putt-buttons">
+        <button class="btn-made" onclick="recordPutt(true)">INNE</button>
+        <button class="btn-missed" onclick="recordPutt(false)">UTE</button>
+    </div>
+
+    <button class="btn-ghost" onclick="restartDrill()">Start drill pa nytt</button>
+</div>
+
+<!-- ========================================
+     COMPLETE SCREEN
+     ======================================== -->
+<div id="completeScreen" class="hidden">
+    <div class="header">
+        <div class="logo">Putte<span>App</span></div>
+        <button class="icon-btn" onclick="toggleTheme()">M</button>
+    </div>
+
+    <div class="complete-hero">
+        <div class="complete-title">Fullfort!</div>
+        <div class="complete-sub" id="completeSub">Du klarte drilla!</div>
+    </div>
+
+    <div class="stats-row" style="margin-bottom:24px">
+        <div class="stat-box">
+            <div class="stat-value" id="finalMade">0</div>
+            <div class="stat-label">Treff</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value" id="finalMissed">0</div>
+            <div class="stat-label">Bom</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-value" id="finalPct">0%</div>
+            <div class="stat-label">Prosent</div>
+        </div>
+    </div>
+
+    <button class="btn-primary" onclick="restartDrill()">Ta drilla en gang til</button>
+    <button class="btn-ghost" style="margin-top:12px" onclick="goBack()">Tilbake til oppsett</button>
+</div>
+
+<script>
+// ================================================
+//  STATE
+// ================================================
+let theme = 'dark';
+let selectedMode = 'c1';
+let requiredMakes = 3;
+let discCount = 3;
+let streakDist = 3.3;
+let freeDist = 3.3;
+
+let discs = [
+    { name: 'Roc3', selected: true },
+    { name: 'Aviar', selected: true },
+    { name: 'Wizard', selected: true },
+];
+
+// Drill runtime
+let distances = [];
+let currentDistIdx = 0;
+let madeAtCurrent = 0;
+let currentDiscIdx = 0;
+let totalMade = 0;
+let totalAttempts = 0;
+let streakCount = 0;
+
+// History for undo
+let history = [];
+
+// ================================================
+//  SETUP
+// ================================================
+function renderDiscList() {
+    const el = document.getElementById('discList');
+    el.innerHTML = '';
+    discs.forEach((d, i) => {
+        const row = document.createElement('div');
+        row.className = 'disc-item';
+        row.innerHTML =
+            '<input type="checkbox"' + (d.selected ? ' checked' : '') + ' onchange="toggleDisc(' + i + ', this.checked)">' +
+            '<span class="disc-name">' + d.name + '</span>' +
+            '<button class="remove-btn" onclick="removeDisc(' + i + ')">&#215;</button>';
+        el.appendChild(row);
+    });
+}
+
+function toggleDisc(i, checked) {
+    discs[i].selected = checked;
+}
+
+function removeDisc(i) {
+    discs.splice(i, 1);
+    renderDiscList();
+}
+
+function addDisc() {
+    const input = document.getElementById('discInput');
+    const name = input.value.trim();
+    if (!name) return;
+    discs.push({ name: name, selected: true });
+    input.value = '';
+    renderDiscList();
+}
+
+document.getElementById('discInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') addDisc();
+});
+
+function changeRequired(delta) {
+    requiredMakes = Math.max(1, Math.min(20, requiredMakes + delta));
+    document.getElementById('requiredValue').textContent = requiredMakes;
+}
+
+function changeDiscCount(delta) {
+    discCount = Math.max(1, Math.min(20, discCount + delta));
+    document.getElementById('discCountValue').textContent = discCount;
+}
+
+function selectMode(mode) {
+    selectedMode = mode;
+    document.querySelectorAll('.mode-card').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById('mode-' + mode).classList.add('active');
+    const streakSection = document.getElementById('streakSection');
+    if (mode === 'streak') {
+        streakSection.classList.remove('hidden');
+    } else {
+        streakSection.classList.add('hidden');
+    }
+}
+
+function setStreakDist(btn, dist) {
+    streakDist = dist;
+    document.querySelectorAll('#streakPills .pill').forEach(function(el) { el.classList.remove('active'); });
+    btn.classList.add('active');
+}
+
+// ================================================
+//  DRILL START
+// ================================================
+function getDistances() {
+    switch (selectedMode) {
+        case 'c1':     return [3.3, 6.6, 10];
+        case 'c2':     return [10, 15, 20];
+        case 'full':   return [3.3, 6.6, 10, 15, 20];
+        case 'streak': return [streakDist];
+        case 'free':   return [freeDist];
+        default:       return [3.3, 6.6, 10];
+    }
+}
+
+function getActiveDiscs() {
+    return discs.filter(function(d) { return d.selected; });
+}
+
+function startDrill() {
+    const active = getActiveDiscs();
+    if (active.length === 0) {
+        showToast('Velg minst en disc', false);
+        return;
+    }
+    distances = getDistances();
+    currentDistIdx = 0;
+    madeAtCurrent = 0;
+    currentDiscIdx = 0;
+    totalMade = 0;
+    totalAttempts = 0;
+    streakCount = 0;
+    history = [];
+    freeDist = distances[0];
+
+    document.getElementById('setupScreen').classList.add('hidden');
+    document.getElementById('completeScreen').classList.add('hidden');
+    document.getElementById('drillScreen').classList.remove('hidden');
+
+    const titles = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X pa rad', free: 'Fri puttøkt' };
+    document.getElementById('drillTitle').textContent = titles[selectedMode];
+
+    // Show/hide free mode pills
+    const freePills = document.getElementById('freePills');
+    if (selectedMode === 'free') {
+        freePills.classList.remove('hidden');
+    } else {
+        freePills.classList.add('hidden');
+    }
+
+    updateDrillUI();
+}
+
+// ================================================
+//  DRILL UI
+// ================================================
+function fmtDist(d) {
+    return d.toString().replace('.', ',');
+}
+
+function updateDrillUI() {
+    const active = getActiveDiscs();
+    const dist = selectedMode === 'free' ? freeDist : distances[currentDistIdx];
+
+    // Distance
+    document.getElementById('distNumber').textContent = fmtDist(dist);
+
+    // Current disc
+    const dIdx = currentDiscIdx % active.length;
+    document.getElementById('discIndicatorName').textContent = active[dIdx].name;
+
+    if (selectedMode === 'streak') {
+        document.getElementById('discIndicatorSub').textContent = 'Pa rad: ' + streakCount + ' av ' + requiredMakes;
+    } else if (selectedMode === 'free') {
+        document.getElementById('discIndicatorSub').textContent = 'Disc ' + ((currentDiscIdx % discCount) + 1) + ' av ' + discCount;
+    } else {
+        document.getElementById('discIndicatorSub').textContent =
+            'Disc ' + ((currentDiscIdx % discCount) + 1) + ' av ' + discCount +
+            '  |  Treff: ' + madeAtCurrent + ' av ' + requiredMakes;
+    }
+
+    // Stats
+    const missed = totalAttempts - totalMade;
+    const pct = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
+    document.getElementById('statMade').textContent = totalMade;
+    document.getElementById('statMissed').textContent = missed;
+    document.getElementById('statPct').textContent = pct + '%';
+
+    // Progress steps
+    renderProgressSteps();
+
+    // Streak dots
+    const streakDots = document.getElementById('streakDots');
+    if (selectedMode === 'streak') {
+        streakDots.classList.remove('hidden');
+        streakDots.innerHTML = '';
+        for (let i = 0; i < requiredMakes; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'streak-dot' + (i < streakCount ? ' made' : '');
+            streakDots.appendChild(dot);
+        }
+    } else {
+        streakDots.classList.add('hidden');
+    }
+}
+
+function renderProgressSteps() {
+    const container = document.getElementById('progressSteps');
+    container.innerHTML = '';
+
+    if (selectedMode === 'streak' || selectedMode === 'free') {
+        return; // No progress steps for these modes
+    }
+
+    distances.forEach(function(dist, idx) {
+        const step = document.createElement('div');
+        let cls = 'progress-step';
+        if (idx === currentDistIdx) cls += ' step-active';
+        else if (idx < currentDistIdx) cls += ' step-done';
+        step.className = cls;
+
+        let dots = '';
+        for (let i = 0; i < requiredMakes; i++) {
+            let dotClass = 'dot';
+            if (idx < currentDistIdx) {
+                dotClass += ' made';
+            } else if (idx === currentDistIdx) {
+                if (i < madeAtCurrent) dotClass += ' made';
+            }
+            dots += '<div class="' + dotClass + '"></div>';
+        }
+
+        step.innerHTML =
+            '<div class="step-label">' + fmtDist(dist) + ' m</div>' +
+            '<div class="step-dots">' + dots + '</div>';
+        container.appendChild(step);
+    });
+}
+
+// ================================================
+//  RECORD PUTT
+// ================================================
+function recordPutt(made) {
+    // Save state for undo
+    history.push({
+        made: made,
+        totalMade: totalMade,
+        totalAttempts: totalAttempts,
+        currentDistIdx: currentDistIdx,
+        madeAtCurrent: madeAtCurrent,
+        currentDiscIdx: currentDiscIdx,
+        streakCount: streakCount,
+        freeDist: freeDist,
+    });
+
+    totalAttempts++;
+    if (made) totalMade++;
+
+    // ---- FREE MODE ----
+    if (selectedMode === 'free') {
+        currentDiscIdx++;
+        updateDrillUI();
+        return;
+    }
+
+    // ---- STREAK MODE ----
+    if (selectedMode === 'streak') {
+        if (made) {
+            streakCount++;
+            currentDiscIdx++;
+            if (streakCount >= requiredMakes) {
+                showComplete();
+                return;
+            }
+        } else {
+            if (streakCount > 0) {
+                showToast('Rekken brutt! Tilbake til 0', false);
+            }
+            streakCount = 0;
+            currentDiscIdx++;
+        }
+        updateDrillUI();
+        return;
+    }
+
+    // ---- STIGE MODES ----
+    if (made) {
+        madeAtCurrent++;
+        currentDiscIdx++;
+
+        if (madeAtCurrent >= requiredMakes) {
+            // Advance to next distance
+            currentDistIdx++;
+            madeAtCurrent = 0;
+
+            if (currentDistIdx >= distances.length) {
+                showComplete();
+                return;
+            }
+            showToast('Bra! Neste: ' + fmtDist(distances[currentDistIdx]) + ' m', true);
+        }
+    } else {
+        // Miss: restart from beginning
+        const wasProgressed = currentDistIdx > 0 || madeAtCurrent > 0;
+        if (wasProgressed) {
+            showToast('Miss! Starter pa nytt fra ' + fmtDist(distances[0]) + ' m', false);
+        } else {
+            showToast('Miss!', false);
+        }
+        currentDistIdx = 0;
+        madeAtCurrent = 0;
+        currentDiscIdx = 0;
+    }
+
+    updateDrillUI();
+}
+
+// ================================================
+//  UNDO
+// ================================================
+function undoLast() {
+    if (history.length === 0) {
+        showToast('Ingenting a angre', false);
+        return;
+    }
+    const prev = history.pop();
+    totalMade = prev.totalMade;
+    totalAttempts = prev.totalAttempts;
+    currentDistIdx = prev.currentDistIdx;
+    madeAtCurrent = prev.madeAtCurrent;
+    currentDiscIdx = prev.currentDiscIdx;
+    streakCount = prev.streakCount;
+    freeDist = prev.freeDist;
+    updateDrillUI();
+    showToast('Angret', true);
+}
+
+// ================================================
+//  FREE MODE DISTANCE
+// ================================================
+function setFreeDist(btn, dist) {
+    freeDist = dist;
+    document.querySelectorAll('#freePills .pill').forEach(function(el) { el.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('distNumber').textContent = fmtDist(dist);
+    updateDrillUI();
+}
+
+// ================================================
+//  RESTART / BACK
+// ================================================
+function restartDrill() {
+    currentDistIdx = 0;
+    madeAtCurrent = 0;
+    currentDiscIdx = 0;
+    totalMade = 0;
+    totalAttempts = 0;
+    streakCount = 0;
+    history = [];
+    freeDist = distances[0];
+
+    document.getElementById('completeScreen').classList.add('hidden');
+    document.getElementById('drillScreen').classList.remove('hidden');
+    updateDrillUI();
+}
+
+function goBack() {
+    document.getElementById('drillScreen').classList.add('hidden');
+    document.getElementById('completeScreen').classList.add('hidden');
+    document.getElementById('setupScreen').classList.remove('hidden');
+}
+
+// ================================================
+//  COMPLETE
+// ================================================
+function showComplete() {
+    const missed = totalAttempts - totalMade;
+    const pct = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
+
+    document.getElementById('drillScreen').classList.add('hidden');
+    document.getElementById('completeScreen').classList.remove('hidden');
+
+    document.getElementById('finalMade').textContent = totalMade;
+    document.getElementById('finalMissed').textContent = missed;
+    document.getElementById('finalPct').textContent = pct + '%';
+    document.getElementById('completeSub').textContent =
+        totalMade + ' treff av ' + totalAttempts + ' putter (' + pct + '%)';
+}
+
+// ================================================
+//  TOAST
+// ================================================
+let toastTimer;
+function showToast(msg, success) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast show ' + (success ? 'success' : 'error');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() {
+        toast.classList.remove('show');
+    }, 2200);
+}
+
+// ================================================
+//  THEME
+// ================================================
+function toggleTheme() {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : '');
+    const label = theme === 'dark' ? 'M' : 'L';
+    document.getElementById('themeBtn').textContent = label;
+}
+
+// ================================================
+//  INIT
+// ================================================
+renderDiscList();
+</script>
+</body>
+</html>

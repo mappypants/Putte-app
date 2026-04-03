@@ -11,128 +11,57 @@
     <style>
 
 /* =============================================
-   BASE TOKENS
+   TOKENS
    ============================================= */
 
 :root {
-    --bg:          #07080e;
-    --surface:     #0c0e18;
-    --card:        #111520;
-    --card-2:      #181e2c;
-    --text:        #f0f2f8;
-    --muted:       #5a5f72;
-    --muted-2:     #8a90a8;
-    --border:      rgba(255,255,255,0.06);
-    --border-mid:  rgba(255,255,255,0.10);
-    --r:           16px;
-    --r-sm:        10px;
-    --r-pill:      100px;
+    --bg:         #07080e;
+    --surface:    #0c0e18;
+    --card:       #111520;
+    --card-2:     #181e2c;
+    --text:       #f0f2f8;
+    --muted:      #5a5f72;
+    --muted-2:    #8a90a8;
+    --border:     rgba(255,255,255,0.06);
+    --border-mid: rgba(255,255,255,0.11);
+    --r:          13px;
+    --r-sm:       9px;
+    --r-pill:     100px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
+:root, [data-scheme="standard"] { --accent:#30d158; --accent-dim:rgba(48,209,88,.10); --accent-glow:rgba(48,209,88,.22); --danger:#ff375f; --danger-dim:rgba(255,55,95,.10); }
+[data-scheme="neon"]   { --accent:#d4ff00; --accent-dim:rgba(212,255,0,.10); --accent-glow:rgba(212,255,0,.20); --danger:#ff375f; --danger-dim:rgba(255,55,95,.10); --bg:#040613; --surface:#080b1a; --card:#0d1124; --card-2:#131830; }
+[data-scheme="sport"]  { --accent:#c8ff47; --accent-dim:rgba(200,255,71,.10); --accent-glow:rgba(200,255,71,.20); --danger:#ff6b6b; --danger-dim:rgba(255,107,107,.10); --bg:#0c0e0e; --surface:#111414; --card:#181c1c; --card-2:#1e2424; }
+[data-scheme="ocean"]  { --accent:#0a84ff; --accent-dim:rgba(10,132,255,.12); --accent-glow:rgba(10,132,255,.25); --danger:#ff453a; --danger-dim:rgba(255,69,58,.10); --bg:#060c14; --surface:#0b1220; --card:#101928; --card-2:#172132; }
+[data-scheme="ember"]  { --accent:#ff9f0a; --accent-dim:rgba(255,159,10,.10); --accent-glow:rgba(255,159,10,.22); --danger:#ff453a; --danger-dim:rgba(255,69,58,.10); --bg:#090605; --surface:#120e0a; --card:#1a1410; --card-2:#221c16; }
 
-/* ---- Color schemes ---- */
-:root, [data-scheme="standard"] {
-    --accent:      #30d158;
-    --accent-dim:  rgba(48,209,88,0.10);
-    --accent-glow: rgba(48,209,88,0.22);
-    --danger:      #ff375f;
-    --danger-dim:  rgba(255,55,95,0.10);
-    --warn:        #ffd60a;
-}
-[data-scheme="neon"] {
-    --accent:      #d4ff00;
-    --accent-dim:  rgba(212,255,0,0.10);
-    --accent-glow: rgba(212,255,0,0.20);
-    --danger:      #ff375f;
-    --danger-dim:  rgba(255,55,95,0.10);
-    --bg:          #040613;
-    --surface:     #080b1a;
-    --card:        #0d1124;
-    --card-2:      #131830;
-    --border:      rgba(255,255,255,0.06);
-}
-[data-scheme="sport"] {
-    --accent:      #c8ff47;
-    --accent-dim:  rgba(200,255,71,0.10);
-    --accent-glow: rgba(200,255,71,0.20);
-    --danger:      #ff6b6b;
-    --danger-dim:  rgba(255,107,107,0.10);
-    --bg:          #0c0e0e;
-    --surface:     #111414;
-    --card:        #181c1c;
-    --card-2:      #1e2424;
-    --border:      rgba(255,255,255,0.06);
-}
-[data-scheme="ocean"] {
-    --accent:      #0a84ff;
-    --accent-dim:  rgba(10,132,255,0.12);
-    --accent-glow: rgba(10,132,255,0.25);
-    --danger:      #ff453a;
-    --danger-dim:  rgba(255,69,58,0.10);
-    --bg:          #060c14;
-    --surface:     #0b1220;
-    --card:        #101928;
-    --card-2:      #172132;
-    --border:      rgba(255,255,255,0.07);
-}
-[data-scheme="ember"] {
-    --accent:      #ff9f0a;
-    --accent-dim:  rgba(255,159,10,0.10);
-    --accent-glow: rgba(255,159,10,0.22);
-    --danger:      #ff453a;
-    --danger-dim:  rgba(255,69,58,0.10);
-    --bg:          #090605;
-    --surface:     #120e0a;
-    --card:        #1a1410;
-    --card-2:      #221c16;
-    --border:      rgba(255,255,255,0.06);
-}
-
-/* ---- Light mode overrides ---- */
 [data-theme="light"] {
-    --bg:         #f2f4f8;
-    --surface:    #ffffff;
-    --card:       #edf0f6;
-    --card-2:     #e4e8f0;
-    --text:       #12151e;
-    --muted:      #8a90a4;
-    --muted-2:    #a0a6bc;
-    --border:     rgba(0,0,0,0.07);
-    --border-mid: rgba(0,0,0,0.12);
+    --bg:#f2f4f8; --surface:#ffffff; --card:#edf0f6; --card-2:#e4e8f0;
+    --text:#12151e; --muted:#8a90a4; --muted-2:#a0a6bc;
+    --border:rgba(0,0,0,.07); --border-mid:rgba(0,0,0,.12);
 }
-[data-theme="light"][data-scheme="neon"] {
-    --accent: #8aaa00;
-}
-[data-theme="light"][data-scheme="sport"] {
-    --accent: #6da800;
-}
-
+[data-theme="light"][data-scheme="neon"]  { --accent:#8aaa00; }
+[data-theme="light"][data-scheme="sport"] { --accent:#6da800; }
 
 /* =============================================
    RESET & BODY
    ============================================= */
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    -webkit-tap-highlight-color: transparent;
-}
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent; }
 
 body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.4;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
     max-width: 480px;
     margin: 0 auto;
-    padding: 0 18px 56px;
+    padding: 0 16px 40px;
     overflow-x: hidden;
 }
-
 
 /* =============================================
    HEADER
@@ -142,677 +71,439 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 22px 0 18px;
+    padding: 18px 0 14px;
 }
-
-.logo {
-    font-size: 22px;
-    letter-spacing: -0.5px;
-    line-height: 1;
-}
+.logo { font-size: 20px; letter-spacing: -0.4px; line-height: 1; }
 .logo-air  { font-weight: 800; color: var(--accent); }
 .logo-mail { font-weight: 400; color: var(--text); }
-
-.header-right { display: flex; align-items: center; gap: 8px; }
-
+.header-right { display: flex; align-items: center; gap: 7px; }
 .icon-btn {
-    height: 36px;
-    min-width: 36px;
-    padding: 0 12px;
+    height: 32px; min-width: 32px; padding: 0 10px;
     border-radius: var(--r-sm);
     border: 1px solid var(--border-mid);
     background: var(--card);
     color: var(--text);
-    font-size: 13px;
-    font-weight: 600;
-    font-family: inherit;
+    font-size: 12px; font-weight: 600; font-family: inherit;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 0.01em;
-    white-space: nowrap;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0.01em; white-space: nowrap;
 }
-
+.icon-btn.accent { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
 
 /* =============================================
-   COLOR SCHEME PICKER
+   QUICK STATS WIDGET
    ============================================= */
 
-.scheme-picker {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    padding: 14px 0 4px;
-    margin-bottom: 4px;
+.quick-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
 }
-
-.scheme-dot {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: transform 0.15s, border-color 0.15s;
-    position: relative;
+.qs-cell {
+    background: var(--card);
+    padding: 10px 8px;
+    text-align: center;
 }
-.scheme-dot.active {
-    border-color: var(--text);
-    transform: scale(1.15);
-}
-.scheme-dot[data-s="standard"] { background: #30d158; }
-.scheme-dot[data-s="neon"]     { background: #d4ff00; }
-.scheme-dot[data-s="sport"]    { background: #c8ff47; }
-.scheme-dot[data-s="ocean"]    { background: #0a84ff; }
-.scheme-dot[data-s="ember"]    { background: #ff9f0a; }
-
-.scheme-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-right: 4px;
-}
-
+.qs-val  { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; margin-bottom: 3px; }
+.qs-lbl  { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.qs-sub  { font-size: 10px; color: var(--muted); margin-top: 1px; }
 
 /* =============================================
    SECTION LABEL
    ============================================= */
 
 .section-label {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: var(--muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin: 24px 0 10px;
+    margin: 16px 0 7px;
 }
 
-
 /* =============================================
-   MODE CARDS
+   MODE CARDS (compact radio style)
    ============================================= */
 
-.mode-cards { display: flex; flex-direction: column; gap: 6px; }
-
+.mode-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 14px;
+}
 .mode-card {
-    padding: 14px 16px 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 10px 13px;
     border-radius: var(--r);
     border: 1px solid var(--border);
-    border-left: 3px solid transparent;
     background: var(--card);
     cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
+    transition: border-color 0.12s, background 0.12s;
     user-select: none;
 }
-.mode-card.active {
-    border-left-color: var(--accent);
-    background: var(--accent-dim);
+.mode-card.active { border-color: var(--accent); background: var(--accent-dim); }
+.mode-radio {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--border-mid);
+    flex-shrink: 0;
+    transition: all 0.12s;
+    position: relative;
 }
-.mode-card-title {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 3px;
-    letter-spacing: -0.1px;
+.mode-card.active .mode-radio {
+    border-color: var(--accent);
+    background: var(--accent);
 }
-.mode-card.active .mode-card-title { color: var(--accent); }
-.mode-card-desc {
-    font-size: 13px;
-    color: var(--muted-2);
-    line-height: 1.45;
+.mode-card.active .mode-radio::after {
+    content: '';
+    position: absolute;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: #000;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
 }
-
+.mode-text { flex: 1; }
+.mode-title { font-size: 14px; font-weight: 700; }
+.mode-card.active .mode-title { color: var(--accent); }
+.mode-sub { font-size: 12px; color: var(--muted-2); margin-top: 1px; }
 
 /* =============================================
-   PILLS
+   STREAK DISTANCE PILLS
    ============================================= */
 
-.pill-group { display: flex; gap: 7px; flex-wrap: wrap; }
-
+.streak-row {
+    margin: -8px 0 12px 27px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
 .pill {
-    padding: 8px 16px;
+    padding: 5px 12px;
     border-radius: var(--r-pill);
     border: 1px solid var(--border-mid);
     background: var(--card);
     color: var(--text);
     font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px; font-weight: 500;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: all 0.12s;
     user-select: none;
 }
-.pill.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
-    font-weight: 700;
-}
-
+.pill.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 700; }
 
 /* =============================================
-   STEPPER ROWS
+   SETTINGS ROW (makes + disc count)
    ============================================= */
 
-.stepper-row {
+.settings-inline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+.inline-ctrl {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 9px 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 16px;
-    border-radius: var(--r);
-    border: 1px solid var(--border);
-    background: var(--card);
-    margin-bottom: 8px;
 }
-.stepper-label { font-size: 15px; font-weight: 600; }
-.stepper-sub   { font-size: 12px; color: var(--muted-2); margin-top: 2px; }
-
-.stepper { display: flex; align-items: center; gap: 14px; }
-
-.stepper-btn {
-    width: 34px;
-    height: 34px;
-    border-radius: var(--r-sm);
+.inline-lbl { font-size: 12px; font-weight: 600; color: var(--muted-2); margin-bottom: 2px; }
+.inline-val { font-size: 18px; font-weight: 800; color: var(--accent); }
+.mini-stepper { display: flex; align-items: center; gap: 8px; }
+.mini-btn {
+    width: 26px; height: 26px;
+    border-radius: 7px;
     border: 1px solid var(--border-mid);
     background: var(--card-2);
     color: var(--text);
     font-family: inherit;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px; font-weight: 600;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    user-select: none; line-height: 1;
 }
-.stepper-value {
-    font-size: 22px;
-    font-weight: 800;
-    min-width: 30px;
-    text-align: center;
-    color: var(--accent);
-}
-
+.inline-val-wrap { text-align: center; min-width: 22px; }
 
 /* =============================================
-   DISC LIST
+   DISC HINT BUTTON
    ============================================= */
 
-.disc-list { display: flex; flex-direction: column; gap: 6px; }
-
-.disc-item {
+.disc-hint {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 11px 14px;
-    border-radius: var(--r-sm);
+    justify-content: space-between;
+    padding: 9px 13px;
+    background: var(--card);
     border: 1px solid var(--border);
-    background: var(--card);
-}
-.disc-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--accent);
+    border-radius: var(--r);
     cursor: pointer;
-    flex-shrink: 0;
+    margin-bottom: 14px;
 }
-.disc-name   { flex: 1; font-size: 14px; font-weight: 500; }
-.remove-btn  { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; padding: 2px 6px; line-height: 1; }
-
-.add-disc-row { display: flex; gap: 8px; margin-top: 6px; }
-
-.disc-input {
-    flex: 1;
-    padding: 10px 14px;
-    border-radius: var(--r-sm);
-    border: 1px solid var(--border-mid);
-    background: var(--card);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.15s;
-}
-.disc-input:focus { border-color: var(--accent); }
-.disc-input::placeholder { color: var(--muted); }
-
-.add-btn {
-    padding: 10px 16px;
-    border-radius: var(--r-sm);
-    border: none;
-    background: var(--accent);
-    color: #000;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
+.disc-hint-left  { font-size: 13px; font-weight: 600; }
+.disc-hint-right { font-size: 12px; color: var(--muted-2); }
 
 /* =============================================
    BUTTONS
    ============================================= */
 
 .btn-primary {
-    width: 100%;
-    padding: 17px;
-    border-radius: var(--r);
-    border: none;
-    background: var(--accent);
-    color: #000;
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 800;
-    cursor: pointer;
-    letter-spacing: 0.01em;
-    transition: opacity 0.15s;
+    width: 100%; padding: 15px;
+    border-radius: var(--r); border: none;
+    background: var(--accent); color: #000;
+    font-family: inherit; font-size: 15px; font-weight: 800;
+    cursor: pointer; letter-spacing: 0.02em;
+    transition: opacity 0.12s;
 }
-.btn-primary:active { opacity: 0.8; }
-
+.btn-primary:active { opacity: 0.82; }
 .btn-ghost {
-    width: 100%;
-    padding: 14px;
+    width: 100%; padding: 12px;
     border-radius: var(--r);
     border: 1px solid var(--border-mid);
-    background: transparent;
-    color: var(--muted-2);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
+    background: transparent; color: var(--muted-2);
+    font-family: inherit; font-size: 13px; font-weight: 600;
     cursor: pointer;
 }
-
 
 /* =============================================
    DRILL SCREEN
    ============================================= */
 
 .drill-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0 14px;
-    gap: 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 0 10px; gap: 10px;
 }
-.drill-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--muted-2);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    flex: 1;
-    text-align: center;
-}
+.drill-title { font-size: 12px; font-weight: 600; color: var(--muted-2); letter-spacing: 0.07em; text-transform: uppercase; flex: 1; text-align: center; }
 
-/* Progress steps */
-.progress-steps {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
-}
-.progress-step { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-.step-label    { font-size: 11px; color: var(--muted); font-weight: 600; }
+.progress-steps { display: flex; justify-content: center; gap: 14px; margin-bottom: 4px; flex-wrap: wrap; }
+.progress-step { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.step-label { font-size: 10px; color: var(--muted); font-weight: 600; }
 .step-active .step-label { color: var(--accent); font-weight: 700; }
-.step-dots     { display: flex; gap: 5px; }
-.dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--border-mid);
-    transition: background 0.2s;
-}
+.step-dots { display: flex; gap: 4px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--border-mid); transition: background 0.2s; }
 .dot.made { background: var(--accent); }
 
-/* Distance */
-.distance-display {
-    text-align: center;
-    padding: 28px 0 20px;
-}
-.distance-label {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 8px;
-}
+.distance-display { text-align: center; padding: 20px 0 16px; }
+.distance-label { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
 .distance-number {
-    font-size: 88px;
-    font-weight: 900;
-    color: var(--accent);
-    line-height: 0.95;
-    letter-spacing: -4px;
+    font-size: 84px; font-weight: 900; color: var(--accent);
+    line-height: 0.95; letter-spacing: -4px;
     text-shadow: 0 0 48px var(--accent-glow), 0 0 96px var(--accent-glow);
 }
-.distance-unit {
-    font-size: 20px;
-    color: var(--muted-2);
-    margin-top: 10px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-}
+.distance-unit { font-size: 18px; color: var(--muted-2); margin-top: 8px; font-weight: 500; }
 
-/* Disc indicator */
 .disc-indicator {
-    text-align: center;
-    padding: 12px 18px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    margin-bottom: 14px;
+    text-align: center; padding: 10px 16px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r); margin-bottom: 12px;
 }
-.disc-indicator-name { font-size: 17px; font-weight: 800; letter-spacing: -0.2px; }
-.disc-indicator-sub  { font-size: 13px; color: var(--muted-2); margin-top: 2px; }
+.disc-indicator-name { font-size: 16px; font-weight: 800; }
+.disc-indicator-sub  { font-size: 12px; color: var(--muted-2); margin-top: 2px; }
 
-/* Session stats */
-.stats-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-}
-.stat-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-sm);
-    padding: 12px 8px;
-    text-align: center;
-}
-.stat-value { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
-.stat-label { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+.stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 10px; }
+.stat-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 6px; text-align: center; }
+.stat-value { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.stat-label { font-size: 10px; color: var(--muted); margin-top: 1px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; }
 
-/* Undo */
-.undo-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+.undo-row { display: flex; justify-content: flex-end; margin-bottom: 8px; }
 .undo-btn {
-    padding: 7px 14px;
+    padding: 6px 13px;
     border-radius: var(--r-pill);
     border: 1px solid var(--border-mid);
-    background: none;
-    color: var(--muted-2);
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
+    background: none; color: var(--muted-2);
+    font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
 }
 
-/* HIT / MISS */
-.putt-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-
+.putt-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 9px; }
 .btn-hit {
-    padding: 36px 16px;
-    border-radius: var(--r);
-    border: none;
-    background: var(--accent);
-    color: #000;
-    font-family: inherit;
-    font-size: 18px;
-    font-weight: 900;
-    cursor: pointer;
-    letter-spacing: 0.08em;
-    transition: opacity 0.1s;
-    user-select: none;
+    padding: 32px 16px; border-radius: var(--r); border: none;
+    background: var(--accent); color: #000;
+    font-family: inherit; font-size: 18px; font-weight: 900;
+    cursor: pointer; letter-spacing: 0.08em; transition: opacity 0.1s; user-select: none;
 }
 .btn-miss {
-    padding: 36px 16px;
-    border-radius: var(--r);
-    border: none;
-    background: var(--danger);
-    color: #fff;
-    font-family: inherit;
-    font-size: 18px;
-    font-weight: 900;
-    cursor: pointer;
-    letter-spacing: 0.08em;
-    transition: opacity 0.1s;
-    user-select: none;
+    padding: 32px 16px; border-radius: var(--r); border: none;
+    background: var(--danger); color: #fff;
+    font-family: inherit; font-size: 18px; font-weight: 900;
+    cursor: pointer; letter-spacing: 0.08em; transition: opacity 0.1s; user-select: none;
 }
 .btn-hit:active, .btn-miss:active { opacity: 0.8; }
 .btn-hit.disabled, .btn-miss.disabled { opacity: 0.35; pointer-events: none; }
 
-/* Streak dots */
-.streak-dots { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 12px 0; }
-.streak-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: var(--border-mid);
-    transition: background 0.2s;
-}
+.streak-dots { display: flex; gap: 9px; justify-content: center; flex-wrap: wrap; padding: 10px 0; }
+.streak-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--border-mid); transition: background 0.2s; }
 .streak-dot.made { background: var(--accent); }
 
+.free-dist-row { margin-bottom: 12px; }
+.free-dist-row .pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
 
 /* =============================================
    COMPLETE SCREEN
    ============================================= */
 
-.complete-hero {
-    text-align: center;
-    padding: 44px 0 28px;
-    animation: slideUp 0.45s cubic-bezier(0.22,1,0.36,1);
-}
-.complete-title {
-    font-size: 44px;
-    font-weight: 900;
-    color: var(--accent);
-    letter-spacing: -2px;
-    margin-bottom: 8px;
-    text-shadow: 0 0 40px var(--accent-glow);
-}
-.complete-sub { font-size: 15px; color: var(--muted-2); margin-bottom: 32px; }
+.complete-hero { text-align: center; padding: 36px 0 22px; animation: slideUp 0.45s cubic-bezier(0.22,1,0.36,1); }
+.complete-title { font-size: 40px; font-weight: 900; color: var(--accent); letter-spacing: -2px; margin-bottom: 6px; text-shadow: 0 0 40px var(--accent-glow); }
+.complete-sub   { font-size: 14px; color: var(--muted-2); margin-bottom: 24px; }
 
-.dist-breakdown {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: 14px 16px;
-    margin-bottom: 20px;
-}
-.dist-breakdown-title {
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 12px;
-}
-.dist-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 7px 0;
-    border-top: 1px solid var(--border);
-}
-.dist-row-label { font-size: 13px; font-weight: 600; min-width: 44px; }
-.dist-row-bar   { flex: 1; height: 5px; background: var(--border-mid); border-radius: 4px; overflow: hidden; }
-.dist-row-fill  { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.5s cubic-bezier(0.22,1,0.36,1); }
-.dist-row-pct   { font-size: 13px; font-weight: 700; min-width: 38px; text-align: right; }
-
+.dist-breakdown { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 12px 14px; margin-bottom: 16px; }
+.dist-breakdown-title { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.dist-row { display: flex; align-items: center; gap: 9px; padding: 6px 0; border-top: 1px solid var(--border); }
+.dist-row-label { font-size: 12px; font-weight: 600; min-width: 40px; }
+.dist-row-bar   { flex: 1; height: 4px; background: var(--border-mid); border-radius: 4px; overflow: hidden; }
+.dist-row-fill  { height: 100%; border-radius: 4px; background: var(--accent); }
+.dist-row-pct   { font-size: 12px; font-weight: 700; min-width: 34px; text-align: right; }
 
 /* =============================================
    STATS SCREEN
    ============================================= */
 
-.stats-week-title { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 12px; }
+.stats-week-title { font-size: 16px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 10px; }
+.week-summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 18px; }
+.week-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 11px 6px; text-align: center; }
+.week-val { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.week-lbl { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; }
 
-.week-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 24px;
-}
-.week-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--r-sm);
-    padding: 14px 8px;
-    text-align: center;
-}
-.week-val { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
-.week-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
-
-.dist-stats { margin-bottom: 24px; }
-.dist-stat-row { padding: 9px 0; border-top: 1px solid var(--border); }
-.dist-stat-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 6px;
-}
+.dist-stats { margin-bottom: 18px; }
+.dist-stat-row { padding: 7px 0; border-top: 1px solid var(--border); }
+.dist-stat-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
 .dist-stat-label { font-size: 13px; font-weight: 600; }
-.dist-stat-right { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.dist-stat-right { display: flex; align-items: center; gap: 8px; font-size: 12px; }
 .dist-stat-this  { font-weight: 700; }
 .dist-stat-last  { color: var(--muted-2); }
-.dist-stat-bar   { height: 5px; background: var(--border-mid); border-radius: 4px; overflow: hidden; }
+.dist-stat-bar   { height: 4px; background: var(--border-mid); border-radius: 4px; overflow: hidden; }
 .dist-stat-fill  { height: 100%; border-radius: 4px; background: var(--accent); }
-.dist-stat-fill.warn { background: var(--warn); }
+.dist-stat-fill.warn { background: #ffd60a; }
 .dist-stat-fill.bad  { background: var(--danger); }
 
 .trend-up   { color: var(--accent); font-weight: 700; }
 .trend-down { color: var(--danger); font-weight: 700; }
-.trend-flat { color: var(--muted);  }
+.trend-flat { color: var(--muted); }
 
-.session-list { display: flex; flex-direction: column; gap: 6px; }
+.session-list { display: flex; flex-direction: column; gap: 5px; }
 .session-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 14px;
+    display: flex; align-items: center; gap: 9px;
+    padding: 10px 12px;
     border-radius: var(--r-sm);
     border: 1px solid var(--border);
     background: var(--card);
 }
-.session-date  { font-size: 12px; color: var(--muted-2); min-width: 46px; font-weight: 500; }
-.session-mode  { font-size: 14px; font-weight: 700; flex: 1; }
-.session-pct   { font-size: 14px; font-weight: 800; }
-.session-check { font-size: 14px; min-width: 16px; text-align: center; }
+.session-date  { font-size: 11px; color: var(--muted-2); min-width: 44px; font-weight: 500; }
+.session-mode  { font-size: 13px; font-weight: 700; flex: 1; }
+.session-pct   { font-size: 13px; font-weight: 800; }
+.session-check { font-size: 13px; min-width: 14px; text-align: center; }
 
-.pct-good  { color: var(--accent); }
-.pct-ok    { color: var(--warn);   }
-.pct-bad   { color: var(--danger); }
-.pct-none  { color: var(--muted);  }
+.pct-good { color: var(--accent); }
+.pct-ok   { color: #ffd60a; }
+.pct-bad  { color: var(--danger); }
+.pct-none { color: var(--muted); }
 
-.empty-state {
-    text-align: center;
-    padding: 56px 0;
-    color: var(--muted-2);
-    font-size: 15px;
-    line-height: 1.7;
-}
-.empty-state strong {
-    display: block;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--text);
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
-}
-
+.empty-state { text-align: center; padding: 48px 0; color: var(--muted-2); font-size: 14px; line-height: 1.7; }
+.empty-state strong { display: block; font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; letter-spacing: -0.3px; }
 .danger-btn {
-    width: 100%;
-    padding: 12px;
-    border-radius: var(--r);
-    border: 1px solid var(--danger);
-    background: transparent;
-    color: var(--danger);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 32px;
-    margin-bottom: 48px;
+    width: 100%; padding: 11px;
+    border-radius: var(--r); border: 1px solid var(--danger);
+    background: transparent; color: var(--danger);
+    font-family: inherit; font-size: 13px; font-weight: 600;
+    cursor: pointer; margin-top: 24px; margin-bottom: 40px;
 }
 
-.no-data { color: var(--muted); font-size: 13px; padding: 6px 0; }
+/* =============================================
+   SETTINGS SCREEN
+   ============================================= */
 
+.settings-section { margin-bottom: 6px; }
+.settings-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 14px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--r); margin-bottom: 5px;
+}
+.settings-row-label { font-size: 14px; font-weight: 600; }
+.settings-row-sub   { font-size: 12px; color: var(--muted-2); margin-top: 1px; }
+
+.scheme-dots { display: flex; gap: 10px; }
+.scheme-dot {
+    width: 24px; height: 24px; border-radius: 50%;
+    cursor: pointer; border: 2px solid transparent;
+    transition: transform 0.12s, border-color 0.12s;
+}
+.scheme-dot.active { border-color: var(--text); transform: scale(1.18); }
+.scheme-dot[data-s="standard"] { background: #30d158; }
+.scheme-dot[data-s="neon"]     { background: #d4ff00; }
+.scheme-dot[data-s="sport"]    { background: #c8ff47; }
+.scheme-dot[data-s="ocean"]    { background: #0a84ff; }
+.scheme-dot[data-s="ember"]    { background: #ff9f0a; }
+
+/* Disc list in settings */
+.disc-list { display: flex; flex-direction: column; gap: 5px; }
+.disc-item {
+    display: flex; align-items: center; gap: 11px;
+    padding: 10px 12px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    background: var(--card);
+}
+.disc-item input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+.disc-name { flex: 1; font-size: 14px; font-weight: 500; }
+.remove-btn { background: none; border: none; color: var(--muted); font-size: 17px; cursor: pointer; padding: 2px 5px; line-height: 1; }
+.add-disc-row { display: flex; gap: 7px; margin-top: 6px; }
+.disc-input {
+    flex: 1; padding: 9px 12px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border-mid);
+    background: var(--card); color: var(--text);
+    font-family: inherit; font-size: 13px; outline: none;
+    transition: border-color 0.12s;
+}
+.disc-input:focus { border-color: var(--accent); }
+.disc-input::placeholder { color: var(--muted); }
+.add-btn { padding: 9px 14px; border-radius: var(--r-sm); border: none; background: var(--accent); color: #000; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
 
 /* =============================================
    TOAST
    ============================================= */
 
 .toast {
-    position: fixed;
-    top: 26px;
-    left: 50%;
+    position: fixed; top: 22px; left: 50%;
     transform: translateX(-50%) translateY(-12px);
-    padding: 11px 22px;
-    border-radius: var(--r-pill);
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 0.22s, transform 0.22s;
-    pointer-events: none;
-    white-space: nowrap;
-    max-width: 88vw;
-    letter-spacing: 0.01em;
+    padding: 10px 20px; border-radius: var(--r-pill);
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    z-index: 1000; opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none; white-space: nowrap; max-width: 88vw;
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast.ok   { background: var(--accent); color: #000; }
 .toast.bad  { background: var(--danger); color: #fff; }
 
-
 /* =============================================
    CONFETTI
    ============================================= */
 
-#confettiWrap {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 998;
-    overflow: hidden;
-}
-.confetti-bit {
-    position: absolute;
-    top: -12px;
-    border-radius: 2px;
-    animation: confettiFall linear forwards;
-}
-
+#confettiWrap { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:998; overflow:hidden; }
+.confetti-bit { position: absolute; top: -12px; border-radius: 2px; animation: confettiFall linear forwards; }
 
 /* =============================================
    ANIMATIONS
    ============================================= */
 
-@keyframes confettiFall {
-    to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-}
-@keyframes distPulse {
-    0%   { transform: scale(1);    }
-    40%  { transform: scale(1.12); }
-    100% { transform: scale(1);    }
-}
-@keyframes distShake {
-    0%,100% { transform: translateX(0);  }
-    20%     { transform: translateX(-9px); }
-    40%     { transform: translateX(9px); }
-    60%     { transform: translateX(-5px); }
-    80%     { transform: translateX(5px); }
-}
-@keyframes slideUp {
-    from { transform: translateY(28px); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
-}
-@keyframes dotPop {
-    0%  { transform: scale(0.5); }
-    60% { transform: scale(1.4); }
-    100%{ transform: scale(1);   }
-}
+@keyframes confettiFall { to { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+@keyframes distPulse    { 0%{transform:scale(1)} 40%{transform:scale(1.1)} 100%{transform:scale(1)} }
+@keyframes distShake    { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-9px)} 40%{transform:translateX(9px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+@keyframes slideUp      { from{transform:translateY(24px);opacity:0} to{transform:translateY(0);opacity:1} }
 
 .animate-advance { animation: distPulse 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
-.animate-miss    { animation: distShake 0.4s ease; }
-
-
-/* =============================================
-   UTILITY
-   ============================================= */
-
+.animate-miss    { animation: distShake 0.38s ease; }
 .hidden { display: none !important; }
 
     </style>
@@ -828,52 +519,59 @@ body {
      ============================================= -->
 <div id="setupScreen">
     <div class="header">
-        <div class="logo">
-            <span class="logo-air">Air</span><span class="logo-mail">mail</span>
-        </div>
+        <div class="logo"><span class="logo-air">Air</span><span class="logo-mail">mail</span></div>
         <div class="header-right">
             <button class="icon-btn" onclick="showStats()">Statistikk</button>
-            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">Lys</button>
+            <button class="icon-btn" onclick="showSettings()">&#9881;</button>
         </div>
     </div>
 
-    <!-- Color scheme picker -->
-    <div class="scheme-picker">
-        <span class="scheme-label">Farge</span>
-        <div class="scheme-dot active" data-s="standard" onclick="setScheme('standard')"></div>
-        <div class="scheme-dot" data-s="neon"     onclick="setScheme('neon')"></div>
-        <div class="scheme-dot" data-s="sport"    onclick="setScheme('sport')"></div>
-        <div class="scheme-dot" data-s="ocean"    onclick="setScheme('ocean')"></div>
-        <div class="scheme-dot" data-s="ember"    onclick="setScheme('ember')"></div>
-    </div>
+    <!-- Quick stats widget -->
+    <div class="quick-stats" id="quickStats"></div>
 
-    <div class="section-label">Velg drill</div>
+    <!-- Drill selection -->
+    <div class="section-label">Drill</div>
     <div class="mode-cards">
         <div class="mode-card active" id="mode-c1" onclick="selectMode('c1')">
-            <div class="mode-card-title">C1 Stige</div>
-            <div class="mode-card-desc">Sett X putter fra 3,3 m, 6,6 m og 10 m. Bommer du starter du fra begynnelsen.</div>
+            <div class="mode-radio"></div>
+            <div class="mode-text">
+                <div class="mode-title">C1 Stige</div>
+                <div class="mode-sub">3,3 m · 6,6 m · 10 m</div>
+            </div>
         </div>
         <div class="mode-card" id="mode-c2" onclick="selectMode('c2')">
-            <div class="mode-card-title">C2 Stige</div>
-            <div class="mode-card-desc">Sett X putter fra 10 m, 15 m og 20 m. Bommer du starter du fra begynnelsen.</div>
+            <div class="mode-radio"></div>
+            <div class="mode-text">
+                <div class="mode-title">C2 Stige</div>
+                <div class="mode-sub">10 m · 15 m · 20 m</div>
+            </div>
         </div>
         <div class="mode-card" id="mode-full" onclick="selectMode('full')">
-            <div class="mode-card-title">Full Stige</div>
-            <div class="mode-card-desc">C1 og C2 kombinert. Alle fem avstandene fra 3,3 m til 20 m.</div>
+            <div class="mode-radio"></div>
+            <div class="mode-text">
+                <div class="mode-title">Full Stige</div>
+                <div class="mode-sub">3,3 · 6,6 · 10 · 15 · 20 m</div>
+            </div>
         </div>
         <div class="mode-card" id="mode-streak" onclick="selectMode('streak')">
-            <div class="mode-card-title">X på rad</div>
-            <div class="mode-card-desc">Velg en avstand og sett X putter på rad. Én miss nullstiller telleren.</div>
+            <div class="mode-radio"></div>
+            <div class="mode-text">
+                <div class="mode-title">X på rad</div>
+                <div class="mode-sub">Én avstand, sett X putter på rad</div>
+            </div>
         </div>
         <div class="mode-card" id="mode-free" onclick="selectMode('free')">
-            <div class="mode-card-title">Fri økt</div>
-            <div class="mode-card-desc">Ingen regler, bare tell treff og miss. Bytt avstand når du vil.</div>
+            <div class="mode-radio"></div>
+            <div class="mode-text">
+                <div class="mode-title">Fri økt</div>
+                <div class="mode-sub">Tell treff og miss fritt</div>
+            </div>
         </div>
     </div>
 
+    <!-- Streak distance (only when streak selected) -->
     <div id="streakSection" class="hidden">
-        <div class="section-label">Avstand</div>
-        <div class="pill-group" id="streakPills">
+        <div class="streak-row" id="streakPills">
             <button class="pill active" onclick="setStreakDist(this,3.3)">3,3 m</button>
             <button class="pill" onclick="setStreakDist(this,6.6)">6,6 m</button>
             <button class="pill" onclick="setStreakDist(this,10)">10 m</button>
@@ -882,40 +580,38 @@ body {
         </div>
     </div>
 
-    <div class="section-label">Krav per avstand</div>
-    <div class="stepper-row">
-        <div>
-            <div class="stepper-label">Nødvendige treff</div>
-            <div class="stepper-sub">Du må sette alle for å gå videre</div>
+    <!-- Krav + Discer -->
+    <div class="section-label">Innstillinger</div>
+    <div class="settings-inline">
+        <div class="inline-ctrl">
+            <div>
+                <div class="inline-lbl">Krav</div>
+                <div class="inline-val-wrap"><div class="inline-val" id="requiredValue">3</div></div>
+            </div>
+            <div class="mini-stepper">
+                <button class="mini-btn" onclick="changeRequired(-1)">-</button>
+                <button class="mini-btn" onclick="changeRequired(1)">+</button>
+            </div>
         </div>
-        <div class="stepper">
-            <button class="stepper-btn" onclick="changeRequired(-1)">-</button>
-            <div class="stepper-value" id="requiredValue">3</div>
-            <button class="stepper-btn" onclick="changeRequired(1)">+</button>
-        </div>
-    </div>
-
-    <div class="section-label">Dine discer</div>
-    <div class="disc-list" id="discList"></div>
-    <div class="add-disc-row">
-        <input class="disc-input" id="discInput" placeholder="Legg til disc..." />
-        <button class="add-btn" onclick="addDisc()">Legg til</button>
-    </div>
-
-    <div class="section-label">Discer i hånden</div>
-    <div class="stepper-row">
-        <div>
-            <div class="stepper-label">Antall</div>
-            <div class="stepper-sub">Appen roterer gjennom valgte discer</div>
-        </div>
-        <div class="stepper">
-            <button class="stepper-btn" onclick="changeDiscCount(-1)">-</button>
-            <div class="stepper-value" id="discCountValue">3</div>
-            <button class="stepper-btn" onclick="changeDiscCount(1)">+</button>
+        <div class="inline-ctrl">
+            <div>
+                <div class="inline-lbl">Discer</div>
+                <div class="inline-val-wrap"><div class="inline-val" id="discCountValue">3</div></div>
+            </div>
+            <div class="mini-stepper">
+                <button class="mini-btn" onclick="changeDiscCount(-1)">-</button>
+                <button class="mini-btn" onclick="changeDiscCount(1)">+</button>
+            </div>
         </div>
     </div>
 
-    <button class="btn-primary" onclick="startDrill()" style="margin-top:24px;margin-bottom:48px">Start drill</button>
+    <!-- Disc list hint -->
+    <div class="disc-hint" onclick="showSettings()">
+        <span class="disc-hint-left" id="discHintLabel">3 discer valgt</span>
+        <span class="disc-hint-right">Rediger &#8250;</span>
+    </div>
+
+    <button class="btn-primary" onclick="startDrill()">Start drill</button>
 </div>
 
 
@@ -926,7 +622,7 @@ body {
     <div class="drill-topbar">
         <button class="icon-btn" onclick="goBack()">&#8592;</button>
         <div class="drill-title" id="drillTitle">C1 Stige</div>
-        <button class="icon-btn" onclick="toggleTheme()">Lys</button>
+        <button class="icon-btn" onclick="toggleTheme()">M</button>
     </div>
 
     <div id="progressSteps" class="progress-steps"></div>
@@ -939,7 +635,7 @@ body {
 
     <div id="streakDots" class="streak-dots hidden"></div>
 
-    <div id="freePills" class="hidden" style="margin-bottom:14px">
+    <div id="freePills" class="free-dist-row hidden">
         <div class="pill-group">
             <button class="pill active" onclick="setFreeDist(this,3.3)">3,3 m</button>
             <button class="pill" onclick="setFreeDist(this,6.6)">6,6 m</button>
@@ -978,23 +674,23 @@ body {
      ============================================= -->
 <div id="completeScreen" class="hidden">
     <div class="header">
-        <div class="logo">
-            <span class="logo-air">Air</span><span class="logo-mail">mail</span>
+        <div class="logo"><span class="logo-air">Air</span><span class="logo-mail">mail</span></div>
+        <div class="header-right">
+            <button class="icon-btn" onclick="goBack()">&#8592;</button>
         </div>
-        <button class="icon-btn" onclick="toggleTheme()">Lys</button>
     </div>
     <div class="complete-hero">
         <div class="complete-title">Fullført</div>
         <div class="complete-sub" id="completeSub"></div>
     </div>
-    <div class="stats-row" style="margin-bottom:20px">
+    <div class="stats-row" style="margin-bottom:16px">
         <div class="stat-box"><div class="stat-value" id="finalMade">0</div><div class="stat-label">Treff</div></div>
         <div class="stat-box"><div class="stat-value" id="finalMissed">0</div><div class="stat-label">Bom</div></div>
         <div class="stat-box"><div class="stat-value" id="finalPct">0%</div><div class="stat-label">Prosent</div></div>
     </div>
     <div id="completeDists"></div>
     <button class="btn-primary" onclick="restartDrill()">Kjør igjen</button>
-    <button class="btn-ghost" style="margin-top:10px" onclick="goBack()">Tilbake til oppsett</button>
+    <button class="btn-ghost" style="margin-top:8px" onclick="goBack()">Tilbake til oppsett</button>
 </div>
 
 
@@ -1003,15 +699,57 @@ body {
      ============================================= -->
 <div id="statsScreen" class="hidden">
     <div class="header">
-        <div class="logo">
-            <span class="logo-air">Air</span><span class="logo-mail">mail</span>
-        </div>
+        <div class="logo"><span class="logo-air">Air</span><span class="logo-mail">mail</span></div>
         <div class="header-right">
-            <button class="icon-btn" onclick="hideStats()">&#8592;</button>
-            <button class="icon-btn" onclick="toggleTheme()">Lys</button>
+            <button class="icon-btn" onclick="hide('statsScreen'); show('setupScreen')">&#8592;</button>
         </div>
     </div>
     <div id="statsContent"></div>
+</div>
+
+
+<!-- =============================================
+     SETTINGS SCREEN
+     ============================================= -->
+<div id="settingsScreen" class="hidden">
+    <div class="header">
+        <div class="logo"><span class="logo-air">Air</span><span class="logo-mail">mail</span></div>
+        <div class="header-right">
+            <button class="icon-btn" onclick="hide('settingsScreen'); show('setupScreen'); updateDiscHint()">&#8592;</button>
+        </div>
+    </div>
+
+    <div class="section-label">Fargetema</div>
+    <div class="settings-row">
+        <div>
+            <div class="settings-row-label">Farge</div>
+            <div class="settings-row-sub">Velg aksentfarge for appen</div>
+        </div>
+        <div class="scheme-dots">
+            <div class="scheme-dot active" data-s="standard" onclick="setScheme('standard')"></div>
+            <div class="scheme-dot" data-s="neon"     onclick="setScheme('neon')"></div>
+            <div class="scheme-dot" data-s="sport"    onclick="setScheme('sport')"></div>
+            <div class="scheme-dot" data-s="ocean"    onclick="setScheme('ocean')"></div>
+            <div class="scheme-dot" data-s="ember"    onclick="setScheme('ember')"></div>
+        </div>
+    </div>
+
+    <div class="settings-row" style="cursor:pointer" onclick="toggleTheme()">
+        <div>
+            <div class="settings-row-label">Utseende</div>
+            <div class="settings-row-sub" id="themeLabel">Mørk modus</div>
+        </div>
+        <div class="icon-btn" style="pointer-events:none" id="themeToggleBtn">Lys</div>
+    </div>
+
+    <div class="section-label">Dine discer</div>
+    <div class="disc-list" id="discList"></div>
+    <div class="add-disc-row">
+        <input class="disc-input" id="discInput" placeholder="Legg til disc..." />
+        <button class="add-btn" onclick="addDisc()">Legg til</button>
+    </div>
+
+    <button class="danger-btn" onclick="clearAllSessions()" style="margin-top:28px">Slett all statistikk</button>
 </div>
 
 
@@ -1020,85 +758,89 @@ body {
 //  STORAGE
 // ================================================
 var SK = 'putteapp_v2';
-
-function loadSessions() {
-    try { return JSON.parse(localStorage.getItem(SK) || '[]'); } catch(e) { return []; }
-}
-function storeSession(s) {
-    var all = loadSessions();
-    all.push(s);
-    while (all.length > 500) all.shift();
-    try { localStorage.setItem(SK, JSON.stringify(all)); } catch(e) {}
-}
-function clearAllSessions() {
-    if (confirm('Slett all statistikk? Dette kan ikke angres.')) {
-        localStorage.removeItem(SK);
-        renderStatsContent();
-    }
-}
+function loadSessions() { try { return JSON.parse(localStorage.getItem(SK) || '[]'); } catch(e) { return []; } }
+function storeSession(s) { var a = loadSessions(); a.push(s); while(a.length>500) a.shift(); try{localStorage.setItem(SK,JSON.stringify(a));}catch(e){} }
+function clearAllSessions() { if (confirm('Slett all statistikk? Dette kan ikke angres.')) { localStorage.removeItem(SK); renderQuickStats(); renderStatsContent(); } }
 
 // ================================================
 //  WEEK HELPERS
 // ================================================
 function isoWeekKey(date) {
-    var d = new Date(date);
-    d.setHours(0,0,0,0);
-    d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
-    var w1 = new Date(d.getFullYear(), 0, 4);
-    var wn = 1 + Math.round(((d - w1) / 86400000 - 3 + (w1.getDay() + 6) % 7) / 7);
-    return d.getFullYear() + '-W' + String(wn).padStart(2, '0');
+    var d=new Date(date); d.setHours(0,0,0,0); d.setDate(d.getDate()+3-(d.getDay()+6)%7);
+    var w1=new Date(d.getFullYear(),0,4);
+    var wn=1+Math.round(((d-w1)/86400000-3+(w1.getDay()+6)%7)/7);
+    return d.getFullYear()+'-W'+String(wn).padStart(2,'0');
 }
 function thisWeekKey() { return isoWeekKey(new Date()); }
-function lastWeekKey() { var d = new Date(); d.setDate(d.getDate() - 7); return isoWeekKey(d); }
-function sessionsByWeek(key) { return loadSessions().filter(function(s){ return isoWeekKey(s.date) === key; }); }
+function lastWeekKey() { var d=new Date(); d.setDate(d.getDate()-7); return isoWeekKey(d); }
+function sessionsByWeek(key) { return loadSessions().filter(function(s){ return isoWeekKey(s.date)===key; }); }
 
 // ================================================
 //  STATE
 // ================================================
-var theme        = 'dark';
-var colorScheme  = 'standard';
-var selectedMode = 'c1';
-var requiredMakes = 3;
-var discCount    = 3;
-var streakDist   = 3.3;
-var freeDist     = 3.3;
-
-var discs = [
-    { name: 'Roc3',   selected: true },
-    { name: 'Aviar',  selected: true },
-    { name: 'Wizard', selected: true },
-];
-
-var distances        = [];
-var currentDistIdx   = 0;
-var madeAtCurrent    = 0;
-var currentDiscIdx   = 0;
-var totalMade        = 0;
-var totalAttempts    = 0;
-var streakCount      = 0;
-var freeDist_rt      = 3.3;
-var sessionDistStats = {};
-var history          = [];
-var processing       = false;
-var drillStarted     = false;
+var theme='dark', colorScheme='standard', selectedMode='c1';
+var requiredMakes=3, discCount=3, streakDist=3.3, freeDist=3.3;
+var discs=[{name:'Roc3',selected:true},{name:'Aviar',selected:true},{name:'Wizard',selected:true}];
+var distances=[],currentDistIdx=0,madeAtCurrent=0,currentDiscIdx=0;
+var totalMade=0,totalAttempts=0,streakCount=0,freeDist_rt=3.3;
+var sessionDistStats={},history=[],processing=false,drillStarted=false;
 
 // ================================================
-//  SCHEME
+//  QUICK STATS
 // ================================================
-function setScheme(name) {
-    colorScheme = name;
-    document.documentElement.setAttribute('data-scheme', name);
-    document.querySelectorAll('.scheme-dot').forEach(function(d) {
-        d.classList.toggle('active', d.dataset.s === name);
+function renderQuickStats() {
+    var all = loadSessions();
+
+    // C1: sessions with mode 'c1' or 'full' — use distance stats at c1 distances
+    var c1dists = ['3.3','6.6','10'];
+    var c2dists = ['15','20'];
+
+    var c1made=0, c1att=0, c2made=0, c2att=0;
+    var thisW = sessionsByWeek(thisWeekKey());
+    var srcSessions = thisW.length >= 2 ? thisW : all; // fallback to all time if few this week
+
+    srcSessions.forEach(function(s) {
+        c1dists.forEach(function(k) {
+            var ds = (s.distanceStats||{})[k];
+            if (ds) { c1made += ds.made; c1att += ds.attempts; }
+        });
+        c2dists.forEach(function(k) {
+            var ds = (s.distanceStats||{})[k];
+            if (ds) { c2made += ds.made; c2att += ds.attempts; }
+        });
     });
-    try { localStorage.setItem('putteapp_scheme', name); } catch(e) {}
+
+    var c1pct = c1att > 0 ? Math.round(c1made/c1att*100) : null;
+    var c2pct = c2att > 0 ? Math.round(c2made/c2att*100) : null;
+    var weekDrills = sessionsByWeek(thisWeekKey()).length;
+
+    function pctDisplay(p, label, sub) {
+        var cls = p === null ? 'pct-none' : p >= 75 ? 'pct-good' : p >= 50 ? 'pct-ok' : 'pct-bad';
+        return '<div class="qs-cell">' +
+            '<div class="qs-val ' + cls + '">' + (p === null ? '—' : p + '%') + '</div>' +
+            '<div class="qs-lbl">' + label + '</div>' +
+            '<div class="qs-sub">' + sub + '</div>' +
+            '</div>';
+    }
+
+    var periodLabel = (thisW.length >= 2) ? 'denne uken' : 'totalt';
+
+    document.getElementById('quickStats').innerHTML =
+        pctDisplay(c1pct, 'C1 treff', periodLabel) +
+        pctDisplay(c2pct, 'C2 treff', periodLabel) +
+        '<div class="qs-cell">' +
+        '<div class="qs-val">' + weekDrills + '</div>' +
+        '<div class="qs-lbl">Drills</div>' +
+        '<div class="qs-sub">denne uken</div>' +
+        '</div>';
 }
 
-function loadScheme() {
-    try {
-        var s = localStorage.getItem('putteapp_scheme');
-        if (s) setScheme(s);
-    } catch(e) {}
+// ================================================
+//  DISC HINT
+// ================================================
+function updateDiscHint() {
+    var n = discs.filter(function(d){ return d.selected; }).length;
+    document.getElementById('discHintLabel').textContent = n + (n === 1 ? ' disc valgt' : ' discer valgt');
 }
 
 // ================================================
@@ -1107,134 +849,115 @@ function loadScheme() {
 function renderDiscList() {
     var el = document.getElementById('discList');
     el.innerHTML = '';
-    discs.forEach(function(d, i) {
+    discs.forEach(function(d,i) {
         var row = document.createElement('div');
         row.className = 'disc-item';
-        row.innerHTML =
-            '<input type="checkbox"' + (d.selected ? ' checked' : '') + ' onchange="toggleDisc(' + i + ',this.checked)">' +
-            '<span class="disc-name">' + d.name + '</span>' +
-            '<button class="remove-btn" onclick="removeDisc(' + i + ')">&#215;</button>';
+        row.innerHTML = '<input type="checkbox"'+(d.selected?' checked':'')+' onchange="toggleDisc('+i+',this.checked)">'+
+            '<span class="disc-name">'+d.name+'</span>'+
+            '<button class="remove-btn" onclick="removeDisc('+i+')">&#215;</button>';
         el.appendChild(row);
     });
+    updateDiscHint();
 }
-function toggleDisc(i, v) { discs[i].selected = v; }
-function removeDisc(i) { discs.splice(i, 1); renderDiscList(); }
+function toggleDisc(i,v) { discs[i].selected=v; updateDiscHint(); }
+function removeDisc(i)   { discs.splice(i,1); renderDiscList(); }
 function addDisc() {
-    var input = document.getElementById('discInput');
-    var name = input.value.trim();
-    if (!name) return;
-    discs.push({ name: name, selected: true });
-    input.value = '';
-    renderDiscList();
+    var input=document.getElementById('discInput'), name=input.value.trim();
+    if(!name) return;
+    discs.push({name:name,selected:true}); input.value=''; renderDiscList();
 }
-document.getElementById('discInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') addDisc(); });
-
-function changeRequired(d) { requiredMakes = Math.max(1, Math.min(20, requiredMakes + d)); document.getElementById('requiredValue').textContent = requiredMakes; }
-function changeDiscCount(d) { discCount = Math.max(1, Math.min(20, discCount + d)); document.getElementById('discCountValue').textContent = discCount; }
-
+document.getElementById('discInput').addEventListener('keydown',function(e){ if(e.key==='Enter') addDisc(); });
+function changeRequired(d) { requiredMakes=Math.max(1,Math.min(20,requiredMakes+d)); document.getElementById('requiredValue').textContent=requiredMakes; }
+function changeDiscCount(d) { discCount=Math.max(1,Math.min(20,discCount+d)); document.getElementById('discCountValue').textContent=discCount; }
 function selectMode(mode) {
-    selectedMode = mode;
-    document.querySelectorAll('.mode-card').forEach(function(el) { el.classList.remove('active'); });
-    document.getElementById('mode-' + mode).classList.add('active');
-    document.getElementById('streakSection').classList.toggle('hidden', mode !== 'streak');
+    selectedMode=mode;
+    document.querySelectorAll('.mode-card').forEach(function(el){ el.classList.remove('active'); });
+    document.getElementById('mode-'+mode).classList.add('active');
+    document.getElementById('streakSection').classList.toggle('hidden', mode!=='streak');
 }
-function setStreakDist(btn, d) {
-    streakDist = d;
-    document.querySelectorAll('#streakPills .pill').forEach(function(el) { el.classList.remove('active'); });
+function setStreakDist(btn,d) {
+    streakDist=d;
+    document.querySelectorAll('#streakPills .pill').forEach(function(el){ el.classList.remove('active'); });
     btn.classList.add('active');
 }
+
+// ================================================
+//  SCREEN NAV
+// ================================================
+function showSettings() { renderDiscList(); hide('setupScreen'); show('settingsScreen'); }
+function showStats()    { renderStatsContent(); hide('setupScreen'); show('statsScreen'); }
+function show(id) { document.getElementById(id).classList.remove('hidden'); }
+function hide(id) { document.getElementById(id).classList.add('hidden'); }
 
 // ================================================
 //  DRILL START
 // ================================================
 function getDistances() {
-    switch (selectedMode) {
-        case 'c1':     return [3.3, 6.6, 10];
-        case 'c2':     return [10, 15, 20];
-        case 'full':   return [3.3, 6.6, 10, 15, 20];
-        case 'streak': return [streakDist];
-        case 'free':   return [freeDist];
-        default:       return [3.3, 6.6, 10];
+    switch(selectedMode){
+        case 'c1':return[3.3,6.6,10]; case 'c2':return[10,15,20];
+        case 'full':return[3.3,6.6,10,15,20]; case 'streak':return[streakDist];
+        case 'free':return[freeDist]; default:return[3.3,6.6,10];
     }
 }
-function activeDiscs() { return discs.filter(function(d) { return d.selected; }); }
+function activeDiscs() { return discs.filter(function(d){ return d.selected; }); }
 
 function startDrill() {
-    if (activeDiscs().length === 0) { showToast('Velg minst én disc', false); return; }
-    distances = getDistances();
-    currentDistIdx = 0; madeAtCurrent = 0; currentDiscIdx = 0;
-    totalMade = 0; totalAttempts = 0; streakCount = 0;
-    sessionDistStats = {}; freeDist_rt = distances[0];
-    history = []; processing = false; drillStarted = false;
-
+    if(activeDiscs().length===0){ showToast('Velg minst én disc',false); return; }
+    distances=getDistances(); currentDistIdx=0; madeAtCurrent=0; currentDiscIdx=0;
+    totalMade=0; totalAttempts=0; streakCount=0;
+    sessionDistStats={}; freeDist_rt=distances[0];
+    history=[]; processing=false; drillStarted=false;
     show('drillScreen'); hide('setupScreen'); hide('completeScreen');
-    var titles = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X på rad', free: 'Fri økt' };
-    document.getElementById('drillTitle').textContent = titles[selectedMode];
-    document.getElementById('freePills').classList.toggle('hidden', selectedMode !== 'free');
+    var titles={c1:'C1 Stige',c2:'C2 Stige',full:'Full Stige',streak:'X på rad',free:'Fri økt'};
+    document.getElementById('drillTitle').textContent=titles[selectedMode];
+    document.getElementById('freePills').classList.toggle('hidden', selectedMode!=='free');
     updateDrillUI();
 }
 
 // ================================================
 //  DRILL UI
 // ================================================
-function fmt(d) { return d.toString().replace('.', ','); }
-function currentDrillDist() { return selectedMode === 'free' ? freeDist_rt : distances[currentDistIdx]; }
+function fmt(d) { return d.toString().replace('.',','); }
+function currentDrillDist() { return selectedMode==='free'?freeDist_rt:distances[currentDistIdx]; }
 
 function updateDrillUI() {
-    var active = activeDiscs();
-    var dist   = currentDrillDist();
-    document.getElementById('distNumber').textContent = fmt(dist);
-
-    var dIdx = currentDiscIdx % active.length;
-    document.getElementById('discIndicatorName').textContent = active[dIdx].name;
-
-    if (selectedMode === 'streak') {
-        document.getElementById('discIndicatorSub').textContent = 'På rad: ' + streakCount + ' av ' + requiredMakes;
-    } else if (selectedMode === 'free') {
-        document.getElementById('discIndicatorSub').textContent = 'Disc ' + ((currentDiscIdx % discCount) + 1) + ' av ' + discCount;
+    var active=activeDiscs(), dist=currentDrillDist();
+    document.getElementById('distNumber').textContent=fmt(dist);
+    var dIdx=currentDiscIdx%active.length;
+    document.getElementById('discIndicatorName').textContent=active[dIdx].name;
+    if(selectedMode==='streak') {
+        document.getElementById('discIndicatorSub').textContent='På rad: '+streakCount+' av '+requiredMakes;
+    } else if(selectedMode==='free') {
+        document.getElementById('discIndicatorSub').textContent='Disc '+((currentDiscIdx%discCount)+1)+' av '+discCount;
     } else {
-        document.getElementById('discIndicatorSub').textContent =
-            'Disc ' + ((currentDiscIdx % discCount) + 1) + ' av ' + discCount +
-            '  ·  ' + madeAtCurrent + ' av ' + requiredMakes + ' treff';
+        document.getElementById('discIndicatorSub').textContent='Disc '+((currentDiscIdx%discCount)+1)+' av '+discCount+'  ·  '+madeAtCurrent+' av '+requiredMakes+' treff';
     }
-
-    var missed = totalAttempts - totalMade;
-    var pct    = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
-    document.getElementById('statMade').textContent   = totalMade;
-    document.getElementById('statMissed').textContent = missed;
-    document.getElementById('statPct').textContent    = pct + '%';
-
+    var missed=totalAttempts-totalMade, pct=totalAttempts>0?Math.round(totalMade/totalAttempts*100):0;
+    document.getElementById('statMade').textContent=totalMade;
+    document.getElementById('statMissed').textContent=missed;
+    document.getElementById('statPct').textContent=pct+'%';
     renderProgressSteps();
-
-    var sd = document.getElementById('streakDots');
-    if (selectedMode === 'streak') {
-        sd.classList.remove('hidden');
-        sd.innerHTML = '';
-        for (var i = 0; i < requiredMakes; i++) {
-            var dot = document.createElement('div');
-            dot.className = 'streak-dot' + (i < streakCount ? ' made' : '');
-            sd.appendChild(dot);
-        }
-    } else {
-        sd.classList.add('hidden');
-    }
+    var sd=document.getElementById('streakDots');
+    if(selectedMode==='streak'){
+        sd.classList.remove('hidden'); sd.innerHTML='';
+        for(var i=0;i<requiredMakes;i++){var dot=document.createElement('div');dot.className='streak-dot'+(i<streakCount?' made':'');sd.appendChild(dot);}
+    } else { sd.classList.add('hidden'); }
 }
 
 function renderProgressSteps() {
-    var container = document.getElementById('progressSteps');
-    container.innerHTML = '';
-    if (selectedMode === 'streak' || selectedMode === 'free') return;
-    distances.forEach(function(dist, idx) {
-        var step = document.createElement('div');
-        step.className = 'progress-step' + (idx === currentDistIdx ? ' step-active' : '');
-        var dots = '';
-        for (var i = 0; i < requiredMakes; i++) {
-            var dc = 'dot';
-            if (idx < currentDistIdx) dc += ' made';
-            else if (idx === currentDistIdx && i < madeAtCurrent) dc += ' made';
-            dots += '<div class="' + dc + '"></div>';
+    var container=document.getElementById('progressSteps'); container.innerHTML='';
+    if(selectedMode==='streak'||selectedMode==='free') return;
+    distances.forEach(function(dist,idx){
+        var step=document.createElement('div');
+        step.className='progress-step'+(idx===currentDistIdx?' step-active':'');
+        var dots='';
+        for(var i=0;i<requiredMakes;i++){
+            var dc='dot';
+            if(idx<currentDistIdx) dc+=' made';
+            else if(idx===currentDistIdx&&i<madeAtCurrent) dc+=' made';
+            dots+='<div class="'+dc+'"></div>';
         }
-        step.innerHTML = '<div class="step-label">' + fmt(dist) + ' m</div><div class="step-dots">' + dots + '</div>';
+        step.innerHTML='<div class="step-label">'+fmt(dist)+' m</div><div class="step-dots">'+dots+'</div>';
         container.appendChild(step);
     });
 }
@@ -1243,389 +966,242 @@ function renderProgressSteps() {
 //  RECORD PUTT
 // ================================================
 function recordPutt(made) {
-    if (processing) return;
-    drillStarted = true;
+    if(processing) return;
+    drillStarted=true;
+    var dist=currentDrillDist(), key=String(dist);
+    if(!sessionDistStats[key]) sessionDistStats[key]={made:0,attempts:0};
+    sessionDistStats[key].attempts++; if(made) sessionDistStats[key].made++;
+    history.push({made:made,totalMade:totalMade,totalAttempts:totalAttempts,currentDistIdx:currentDistIdx,madeAtCurrent:madeAtCurrent,currentDiscIdx:currentDiscIdx,streakCount:streakCount,freeDist_rt:freeDist_rt,sessionDistStats:JSON.parse(JSON.stringify(sessionDistStats))});
+    totalAttempts++; if(made) totalMade++;
 
-    var dist = currentDrillDist();
-    var key  = String(dist);
-    if (!sessionDistStats[key]) sessionDistStats[key] = { made: 0, attempts: 0 };
-    sessionDistStats[key].attempts++;
-    if (made) sessionDistStats[key].made++;
+    if(selectedMode==='free'){ currentDiscIdx++; updateDrillUI(); return; }
 
-    history.push({
-        made: made,
-        totalMade: totalMade, totalAttempts: totalAttempts,
-        currentDistIdx: currentDistIdx, madeAtCurrent: madeAtCurrent,
-        currentDiscIdx: currentDiscIdx, streakCount: streakCount,
-        freeDist_rt: freeDist_rt,
-        sessionDistStats: JSON.parse(JSON.stringify(sessionDistStats))
-    });
-
-    totalAttempts++;
-    if (made) totalMade++;
-
-    if (selectedMode === 'free') {
-        currentDiscIdx++;
-        updateDrillUI();
+    if(selectedMode==='streak'){
+        if(made){ streakCount++; currentDiscIdx++; updateDrillUI(); if(streakCount>=requiredMakes) setTimeout(function(){completeDrill();},350); }
+        else { if(streakCount>0) showToast('Rekken brutt. Tilbake til 0',false); streakCount=0; currentDiscIdx++; updateDrillUI(); }
         return;
     }
 
-    if (selectedMode === 'streak') {
-        if (made) {
-            streakCount++;
-            currentDiscIdx++;
-            updateDrillUI();
-            if (streakCount >= requiredMakes) {
-                setTimeout(function() { completeDrill(); }, 350);
-            }
-        } else {
-            if (streakCount > 0) showToast('Rekken brutt. Tilbake til 0', false);
-            streakCount = 0;
-            currentDiscIdx++;
-            updateDrillUI();
-        }
-        return;
-    }
-
-    if (made) {
-        madeAtCurrent++;
-        currentDiscIdx++;
-        updateDrillUI();
-        if (madeAtCurrent >= requiredMakes) {
+    if(made){
+        madeAtCurrent++; currentDiscIdx++; updateDrillUI();
+        if(madeAtCurrent>=requiredMakes){
             currentDistIdx++;
-            if (currentDistIdx >= distances.length) {
-                processing = true; lockButtons();
-                animateAdvance(function() { completeDrill(); processing = false; unlockButtons(); });
+            if(currentDistIdx>=distances.length){
+                processing=true; lockButtons();
+                animateAdvance(function(){ completeDrill(); processing=false; unlockButtons(); });
             } else {
-                processing = true; lockButtons();
-                animateAdvance(function() {
-                    madeAtCurrent = 0;
-                    updateDrillUI();
-                    showToast('Neste: ' + fmt(distances[currentDistIdx]) + ' m', true);
-                    processing = false; unlockButtons();
-                });
+                processing=true; lockButtons();
+                animateAdvance(function(){ madeAtCurrent=0; updateDrillUI(); showToast('Neste: '+fmt(distances[currentDistIdx])+' m',true); processing=false; unlockButtons(); });
             }
         }
     } else {
-        var hadProgress = currentDistIdx > 0 || madeAtCurrent > 0;
-        currentDistIdx = 0; madeAtCurrent = 0; currentDiscIdx = 0;
-        if (hadProgress) {
-            animateMiss(function() {
-                showToast('Miss. Starter fra ' + fmt(distances[0]) + ' m', false);
-                updateDrillUI();
-            });
-        } else {
-            showToast('Miss', false);
-            updateDrillUI();
-        }
+        var hadProgress=currentDistIdx>0||madeAtCurrent>0;
+        currentDistIdx=0; madeAtCurrent=0; currentDiscIdx=0;
+        if(hadProgress){ animateMiss(function(){ showToast('Miss. Starter fra '+fmt(distances[0])+' m',false); updateDrillUI(); }); }
+        else { showToast('Miss',false); updateDrillUI(); }
     }
 }
 
 // ================================================
 //  ANIMATIONS
 // ================================================
-function animateAdvance(cb) {
-    var el = document.getElementById('distNumber');
-    el.classList.add('animate-advance');
-    setTimeout(function() { el.classList.remove('animate-advance'); if (cb) cb(); }, 520);
-}
-function animateMiss(cb) {
-    var el = document.getElementById('distNumber');
-    el.classList.add('animate-miss');
-    setTimeout(function() { el.classList.remove('animate-miss'); if (cb) cb(); }, 420);
-}
-function lockButtons()   { document.getElementById('btnHit').classList.add('disabled'); document.getElementById('btnMiss').classList.add('disabled'); }
-function unlockButtons() { document.getElementById('btnHit').classList.remove('disabled'); document.getElementById('btnMiss').classList.remove('disabled'); }
+function animateAdvance(cb) { var el=document.getElementById('distNumber'); el.classList.add('animate-advance'); setTimeout(function(){ el.classList.remove('animate-advance'); if(cb)cb(); },500); }
+function animateMiss(cb)    { var el=document.getElementById('distNumber'); el.classList.add('animate-miss');    setTimeout(function(){ el.classList.remove('animate-miss');    if(cb)cb(); },400); }
+function lockButtons()      { document.getElementById('btnHit').classList.add('disabled'); document.getElementById('btnMiss').classList.add('disabled'); }
+function unlockButtons()    { document.getElementById('btnHit').classList.remove('disabled'); document.getElementById('btnMiss').classList.remove('disabled'); }
 
 function showConfetti() {
-    var colors = ['#30d158','#58a6ff','#ff9f0a','#bf5af2','#ff375f','#ffd60a'];
-    var wrap   = document.getElementById('confettiWrap');
-    wrap.innerHTML = '';
-    for (var i = 0; i < 70; i++) {
-        var bit  = document.createElement('div');
-        bit.className = 'confetti-bit';
-        var size = 5 + Math.random() * 9;
-        bit.style.cssText =
-            'left:' + (Math.random() * 100) + '%;' +
-            'background:' + colors[Math.floor(Math.random() * colors.length)] + ';' +
-            'animation-delay:' + (Math.random() * 0.6) + 's;' +
-            'animation-duration:' + (0.8 + Math.random() * 0.9) + 's;' +
-            'width:' + size + 'px;height:' + size + 'px;' +
-            'border-radius:' + (Math.random() > 0.5 ? '50%' : '3px') + ';';
+    var colors=['#30d158','#58a6ff','#ff9f0a','#bf5af2','#ff375f','#ffd60a'];
+    var wrap=document.getElementById('confettiWrap'); wrap.innerHTML='';
+    for(var i=0;i<70;i++){
+        var bit=document.createElement('div'); bit.className='confetti-bit';
+        var size=5+Math.random()*9;
+        bit.style.cssText='left:'+(Math.random()*100)+'%;background:'+colors[Math.floor(Math.random()*colors.length)]+';animation-delay:'+(Math.random()*0.6)+'s;animation-duration:'+(0.8+Math.random()*0.9)+'s;width:'+size+'px;height:'+size+'px;border-radius:'+(Math.random()>0.5?'50%':'3px')+';';
         wrap.appendChild(bit);
     }
-    setTimeout(function() { wrap.innerHTML = ''; }, 2200);
+    setTimeout(function(){ wrap.innerHTML=''; },2200);
 }
 
 // ================================================
 //  UNDO
 // ================================================
 function undoLast() {
-    if (history.length === 0) { showToast('Ingenting å angre', false); return; }
-    var prev = history.pop();
-    totalMade = prev.totalMade; totalAttempts = prev.totalAttempts;
-    currentDistIdx = prev.currentDistIdx; madeAtCurrent = prev.madeAtCurrent;
-    currentDiscIdx = prev.currentDiscIdx; streakCount = prev.streakCount;
-    freeDist_rt = prev.freeDist_rt;
-    sessionDistStats = prev.sessionDistStats;
-    updateDrillUI();
-    showToast('Angret', true);
+    if(history.length===0){ showToast('Ingenting å angre',false); return; }
+    var prev=history.pop();
+    totalMade=prev.totalMade; totalAttempts=prev.totalAttempts;
+    currentDistIdx=prev.currentDistIdx; madeAtCurrent=prev.madeAtCurrent;
+    currentDiscIdx=prev.currentDiscIdx; streakCount=prev.streakCount;
+    freeDist_rt=prev.freeDist_rt; sessionDistStats=prev.sessionDistStats;
+    updateDrillUI(); showToast('Angret',true);
 }
 
-// ================================================
-//  FREE MODE
-// ================================================
-function setFreeDist(btn, d) {
-    freeDist_rt = d;
-    document.querySelectorAll('#freePills .pill').forEach(function(el) { el.classList.remove('active'); });
+function setFreeDist(btn,d) {
+    freeDist_rt=d;
+    document.querySelectorAll('#freePills .pill').forEach(function(el){ el.classList.remove('active'); });
     btn.classList.add('active');
-    document.getElementById('distNumber').textContent = fmt(d);
-    updateDrillUI();
+    document.getElementById('distNumber').textContent=fmt(d); updateDrillUI();
 }
 
 // ================================================
 //  RESTART / BACK
 // ================================================
 function restartDrill() {
-    currentDistIdx = 0; madeAtCurrent = 0; currentDiscIdx = 0;
-    totalMade = 0; totalAttempts = 0; streakCount = 0;
-    sessionDistStats = {}; history = []; processing = false; drillStarted = false;
-    freeDist_rt = distances[0];
-    unlockButtons();
-    hide('completeScreen'); show('drillScreen');
-    updateDrillUI();
+    currentDistIdx=0; madeAtCurrent=0; currentDiscIdx=0;
+    totalMade=0; totalAttempts=0; streakCount=0;
+    sessionDistStats={}; history=[]; processing=false; drillStarted=false; freeDist_rt=distances[0];
+    unlockButtons(); hide('completeScreen'); show('drillScreen'); updateDrillUI();
 }
-
 function goBack() {
-    if (drillStarted && totalAttempts > 0) saveCurrentSession(false);
-    hide('drillScreen'); hide('completeScreen'); show('setupScreen');
+    if(drillStarted&&totalAttempts>0) saveCurrentSession(false);
+    hide('drillScreen'); hide('completeScreen'); show('setupScreen'); renderQuickStats();
 }
 
 // ================================================
 //  COMPLETE
 // ================================================
 function completeDrill() {
-    showConfetti();
-    saveCurrentSession(true);
-
-    var missed = totalAttempts - totalMade;
-    var pct    = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
-
-    document.getElementById('finalMade').textContent   = totalMade;
-    document.getElementById('finalMissed').textContent = missed;
-    document.getElementById('finalPct').textContent    = pct + '%';
-    document.getElementById('completeSub').textContent = totalMade + ' av ' + totalAttempts + ' putter (' + pct + '%)';
-
-    var allKeys = Object.keys(sessionDistStats).sort(function(a,b){ return parseFloat(a) - parseFloat(b); });
-    var distHtml = '';
-    if (allKeys.length > 1) {
-        distHtml += '<div class="dist-breakdown"><div class="dist-breakdown-title">Fordelt per avstand</div>';
-        allKeys.forEach(function(key) {
-            var s   = sessionDistStats[key];
-            var p   = s.attempts > 0 ? Math.round(s.made / s.attempts * 100) : 0;
-            var cls = p >= 75 ? 'pct-good' : p >= 50 ? 'pct-ok' : 'pct-bad';
-            distHtml +=
-                '<div class="dist-row">' +
-                '<span class="dist-row-label">' + fmt(parseFloat(key)) + ' m</span>' +
-                '<div class="dist-row-bar"><div class="dist-row-fill" style="width:' + p + '%"></div></div>' +
-                '<span class="dist-row-pct ' + cls + '">' + p + '%</span>' +
-                '</div>';
+    showConfetti(); saveCurrentSession(true);
+    var missed=totalAttempts-totalMade, pct=totalAttempts>0?Math.round(totalMade/totalAttempts*100):0;
+    document.getElementById('finalMade').textContent=totalMade;
+    document.getElementById('finalMissed').textContent=missed;
+    document.getElementById('finalPct').textContent=pct+'%';
+    document.getElementById('completeSub').textContent=totalMade+' av '+totalAttempts+' putter ('+pct+'%)';
+    var allKeys=Object.keys(sessionDistStats).sort(function(a,b){ return parseFloat(a)-parseFloat(b); });
+    var distHtml='';
+    if(allKeys.length>1){
+        distHtml='<div class="dist-breakdown"><div class="dist-breakdown-title">Per avstand</div>';
+        allKeys.forEach(function(key){
+            var s=sessionDistStats[key], p=s.attempts>0?Math.round(s.made/s.attempts*100):0;
+            var cls=p>=75?'pct-good':p>=50?'pct-ok':'pct-bad';
+            distHtml+='<div class="dist-row"><span class="dist-row-label">'+fmt(parseFloat(key))+' m</span><div class="dist-row-bar"><div class="dist-row-fill" style="width:'+p+'%"></div></div><span class="dist-row-pct '+cls+'">'+p+'%</span></div>';
         });
-        distHtml += '</div>';
+        distHtml+='</div>';
     }
-    document.getElementById('completeDists').innerHTML = distHtml;
+    document.getElementById('completeDists').innerHTML=distHtml;
     hide('drillScreen'); show('completeScreen');
 }
 
 function saveCurrentSession(completed) {
-    if (totalAttempts === 0) return;
-    var labels = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X på rad', free: 'Fri økt' };
-    storeSession({
-        id: Date.now(), date: new Date().toISOString(),
-        mode: selectedMode, modeLabel: labels[selectedMode],
-        distanceStats: JSON.parse(JSON.stringify(sessionDistStats)),
-        totalMade: totalMade, totalAttempts: totalAttempts, completed: completed
-    });
+    if(totalAttempts===0) return;
+    var labels={c1:'C1 Stige',c2:'C2 Stige',full:'Full Stige',streak:'X på rad',free:'Fri økt'};
+    storeSession({id:Date.now(),date:new Date().toISOString(),mode:selectedMode,modeLabel:labels[selectedMode],distanceStats:JSON.parse(JSON.stringify(sessionDistStats)),totalMade:totalMade,totalAttempts:totalAttempts,completed:completed});
 }
 
 // ================================================
-//  STATS SCREEN
+//  STATS
 // ================================================
-function showStats() { renderStatsContent(); hide('setupScreen'); show('statsScreen'); }
-function hideStats() { hide('statsScreen'); show('setupScreen'); }
-
-function pctCls(p) { return p === null ? 'pct-none' : p >= 75 ? 'pct-good' : p >= 50 ? 'pct-ok' : 'pct-bad'; }
-function pctStr(p) { return p === null ? '—' : p + '%'; }
-
-function trendSpan(cur, prev) {
-    if (cur === null || prev === null) return '<span class="trend-flat">—</span>';
-    if (cur > prev + 3) return '<span class="trend-up">↑</span>';
-    if (cur < prev - 3) return '<span class="trend-down">↓</span>';
+function pctCls(p) { return p===null?'pct-none':p>=75?'pct-good':p>=50?'pct-ok':'pct-bad'; }
+function pctStr(p) { return p===null?'—':p+'%'; }
+function trendSpan(cur,prev) {
+    if(cur===null||prev===null) return '<span class="trend-flat">—</span>';
+    if(cur>prev+3) return '<span class="trend-up">↑</span>';
+    if(cur<prev-3) return '<span class="trend-down">↓</span>';
     return '<span class="trend-flat">→</span>';
 }
-
 function aggregateDists(sessions) {
-    var r = {};
-    sessions.forEach(function(s) {
-        Object.keys(s.distanceStats || {}).forEach(function(k) {
-            if (!r[k]) r[k] = { made: 0, attempts: 0 };
-            r[k].made     += s.distanceStats[k].made;
-            r[k].attempts += s.distanceStats[k].attempts;
-        });
-    });
+    var r={};
+    sessions.forEach(function(s){ Object.keys(s.distanceStats||{}).forEach(function(k){ if(!r[k])r[k]={made:0,attempts:0}; r[k].made+=s.distanceStats[k].made; r[k].attempts+=s.distanceStats[k].attempts; }); });
     return r;
 }
-
-function getPct(agg, key) {
-    var s = agg[key];
-    if (!s || s.attempts === 0) return null;
-    return Math.round(s.made / s.attempts * 100);
-}
-
+function getPct(agg,key) { var s=agg[key]; if(!s||s.attempts===0) return null; return Math.round(s.made/s.attempts*100); }
 function fmtDate(iso) {
-    var d    = new Date(iso);
-    var now  = new Date();
-    var tod  = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var yd   = new Date(tod.getTime() - 86400000);
-    var sd   = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-    if (sd.getTime() === tod.getTime()) return 'I dag';
-    if (sd.getTime() === yd.getTime())  return 'I går';
-    return d.toLocaleDateString('no-NO', { day: 'numeric', month: 'short' });
+    var d=new Date(iso),now=new Date();
+    var tod=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    var yd=new Date(tod.getTime()-86400000);
+    var sd=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+    if(sd.getTime()===tod.getTime()) return 'I dag';
+    if(sd.getTime()===yd.getTime())  return 'I går';
+    return d.toLocaleDateString('no-NO',{day:'numeric',month:'short'});
 }
 
 function renderStatsContent() {
-    var all      = loadSessions();
-    var thisW    = sessionsByWeek(thisWeekKey());
-    var lastW    = sessionsByWeek(lastWeekKey());
-    var thisAgg  = aggregateDists(thisW);
-    var lastAgg  = aggregateDists(lastW);
-    var allDists = ['3.3','6.6','10','15','20'];
+    var all=loadSessions(), thisW=sessionsByWeek(thisWeekKey()), lastW=sessionsByWeek(lastWeekKey());
+    var thisAgg=aggregateDists(thisW), lastAgg=aggregateDists(lastW);
+    var allDists=['3.3','6.6','10','15','20'];
 
-    if (all.length === 0) {
-        document.getElementById('statsContent').innerHTML =
-            '<div class="empty-state"><strong>Ingen data ennå</strong>Fullfør en drill for å se statistikken din her.</div>';
+    if(all.length===0){
+        document.getElementById('statsContent').innerHTML='<div class="empty-state"><strong>Ingen data ennå</strong>Fullfør en drill for å se statistikken din her.</div>';
         return;
     }
 
-    var html = '';
+    var twMade=thisW.reduce(function(a,s){return a+s.totalMade;},0);
+    var twAtt=thisW.reduce(function(a,s){return a+s.totalAttempts;},0);
+    var twDone=thisW.filter(function(s){return s.completed;}).length;
+    var twPct=twAtt>0?Math.round(twMade/twAtt*100):0;
 
-    // This week summary
-    var twMade = thisW.reduce(function(a,s){ return a + s.totalMade; }, 0);
-    var twAtt  = thisW.reduce(function(a,s){ return a + s.totalAttempts; }, 0);
-    var twDone = thisW.filter(function(s){ return s.completed; }).length;
-    var twPct  = twAtt > 0 ? Math.round(twMade / twAtt * 100) : 0;
-
-    html += '<div class="stats-week-title">Denne uken</div>';
-
-    if (thisW.length === 0) {
-        html += '<div class="no-data" style="margin-bottom:20px">Ingen registrerte økter denne uken.</div>';
+    var html='<div class="stats-week-title">Denne uken</div>';
+    if(thisW.length===0){
+        html+='<div style="color:var(--muted);font-size:13px;margin-bottom:16px">Ingen registrerte økter denne uken.</div>';
     } else {
-        html +=
-            '<div class="week-summary">' +
-            '<div class="week-box"><div class="week-val">' + thisW.length + '</div><div class="week-lbl">Økter</div></div>' +
-            '<div class="week-box"><div class="week-val">' + twDone + '</div><div class="week-lbl">Fullført</div></div>' +
-            '<div class="week-box"><div class="week-val ' + pctCls(twPct) + '">' + twPct + '%</div><div class="week-lbl">Treff</div></div>' +
-            '</div>';
+        html+='<div class="week-summary"><div class="week-box"><div class="week-val">'+thisW.length+'</div><div class="week-lbl">Økter</div></div><div class="week-box"><div class="week-val">'+twDone+'</div><div class="week-lbl">Fullfort</div></div><div class="week-box"><div class="week-val '+pctCls(twPct)+'">'+twPct+'%</div><div class="week-lbl">Treff</div></div></div>';
     }
 
-    // Per distance
-    var hasData = allDists.some(function(k) {
-        return (thisAgg[k] && thisAgg[k].attempts > 0) || (lastAgg[k] && lastAgg[k].attempts > 0);
-    });
-
-    if (hasData) {
-        html += '<div class="section-label">Per avstand</div><div class="dist-stats">';
-        allDists.forEach(function(key) {
-            var cur  = getPct(thisAgg, key);
-            var prev = getPct(lastAgg, key);
-            if (cur === null && prev === null) return;
-            var barCls = cur === null ? '' : cur >= 75 ? '' : cur >= 50 ? ' warn' : ' bad';
-            html +=
-                '<div class="dist-stat-row">' +
-                '<div class="dist-stat-top">' +
-                '<span class="dist-stat-label">' + fmt(parseFloat(key)) + ' m</span>' +
-                '<div class="dist-stat-right">' +
-                '<span class="dist-stat-this ' + pctCls(cur) + '">' + pctStr(cur) + '</span>' +
-                '<span class="dist-stat-last">' + (prev !== null ? 'Sist: ' + prev + '%' : '') + '</span>' +
-                trendSpan(cur, prev) +
-                '</div></div>' +
-                '<div class="dist-stat-bar"><div class="dist-stat-fill' + barCls + '" style="width:' + (cur || 0) + '%"></div></div>' +
-                '</div>';
+    var hasData=allDists.some(function(k){ return (thisAgg[k]&&thisAgg[k].attempts>0)||(lastAgg[k]&&lastAgg[k].attempts>0); });
+    if(hasData){
+        html+='<div class="section-label">Per avstand</div><div class="dist-stats">';
+        allDists.forEach(function(key){
+            var cur=getPct(thisAgg,key), prev=getPct(lastAgg,key);
+            if(cur===null&&prev===null) return;
+            var barCls=cur===null?'':(cur>=75?'':cur>=50?' warn':' bad');
+            html+='<div class="dist-stat-row"><div class="dist-stat-top"><span class="dist-stat-label">'+fmt(parseFloat(key))+' m</span><div class="dist-stat-right"><span class="dist-stat-this '+pctCls(cur)+'">'+pctStr(cur)+'</span>'+(prev!==null?'<span class="dist-stat-last">Sist: '+prev+'%</span>':'')+trendSpan(cur,prev)+'</div></div><div class="dist-stat-bar"><div class="dist-stat-fill'+barCls+'" style="width:'+(cur||0)+'%"></div></div></div>';
         });
-        html += '</div>';
+        html+='</div>';
     }
 
-    // Recent sessions
-    html += '<div class="section-label">Siste økter</div><div class="session-list">';
-    var recent = all.slice().reverse().slice(0, 15);
-    recent.forEach(function(s) {
-        var p   = s.totalAttempts > 0 ? Math.round(s.totalMade / s.totalAttempts * 100) : 0;
-        var cls = pctCls(p);
-        html +=
-            '<div class="session-item">' +
-            '<span class="session-date">' + fmtDate(s.date) + '</span>' +
-            '<span class="session-mode">' + s.modeLabel + '</span>' +
-            '<span class="session-pct ' + cls + '">' + p + '%</span>' +
-            '<span class="session-check" style="color:' + (s.completed ? 'var(--accent)' : 'var(--muted)') + '">' +
-            (s.completed ? '&#10003;' : '&#8226;') + '</span>' +
-            '</div>';
+    html+='<div class="section-label">Siste okter</div><div class="session-list">';
+    var recent=all.slice().reverse().slice(0,15);
+    recent.forEach(function(s){
+        var p=s.totalAttempts>0?Math.round(s.totalMade/s.totalAttempts*100):0;
+        html+='<div class="session-item"><span class="session-date">'+fmtDate(s.date)+'</span><span class="session-mode">'+s.modeLabel+'</span><span class="session-pct '+pctCls(p)+'">'+p+'%</span><span class="session-check" style="color:'+(s.completed?'var(--accent)':'var(--muted)')+'">'+( s.completed?'&#10003;':'&#8226;')+'</span></div>';
     });
-    html += '</div>';
-    html += '<button class="danger-btn" onclick="clearAllSessions()">Slett all statistikk</button>';
-    document.getElementById('statsContent').innerHTML = html;
+    html+='</div>';
+    document.getElementById('statsContent').innerHTML=html;
 }
 
 // ================================================
 //  TOAST
 // ================================================
 var toastTimer;
-function showToast(msg, ok) {
-    var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = 'toast show ' + (ok ? 'ok' : 'bad');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function() { t.classList.remove('show'); }, 2200);
+function showToast(msg,ok) {
+    var t=document.getElementById('toast'); t.textContent=msg;
+    t.className='toast show '+(ok?'ok':'bad');
+    clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove('show'); },2200);
 }
 
 // ================================================
-//  THEME
+//  THEME & SCHEME
 // ================================================
 function toggleTheme() {
-    theme = theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', theme);
-    var label = theme === 'dark' ? 'Lys' : 'Mørk';
-    document.querySelectorAll('.icon-btn').forEach(function(btn) {
-        if (btn.textContent === 'Lys' || btn.textContent === 'Mørk') btn.textContent = label;
-    });
-    try { localStorage.setItem('putteapp_theme', theme); } catch(e) {}
+    theme=theme==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',theme);
+    var label=theme==='dark'?'Lys':'Mørk';
+    document.querySelectorAll('#themeToggleBtn, .drill-topbar .icon-btn:last-child').forEach(function(b){ b.textContent=label; });
+    document.getElementById('themeLabel').textContent=theme==='dark'?'Mørk modus':'Lys modus';
+    try{ localStorage.setItem('putteapp_theme',theme); }catch(e){}
 }
-
-function loadTheme() {
-    try {
-        var t = localStorage.getItem('putteapp_theme');
-        if (t && t !== 'dark') {
-            theme = t;
-            document.documentElement.setAttribute('data-theme', theme);
-            var label = theme === 'dark' ? 'Lys' : 'Mørk';
-            document.querySelectorAll('.icon-btn').forEach(function(btn) {
-                if (btn.textContent === 'Lys' || btn.textContent === 'Mørk') btn.textContent = label;
-            });
+function setScheme(name) {
+    colorScheme=name; document.documentElement.setAttribute('data-scheme',name);
+    document.querySelectorAll('.scheme-dot').forEach(function(d){ d.classList.toggle('active',d.dataset.s===name); });
+    try{ localStorage.setItem('putteapp_scheme',name); }catch(e){}
+}
+function loadPrefs() {
+    try{ var s=localStorage.getItem('putteapp_scheme'); if(s) setScheme(s); }catch(e){}
+    try{
+        var t=localStorage.getItem('putteapp_theme');
+        if(t&&t!=='dark'){ theme=t; document.documentElement.setAttribute('data-theme',theme);
+            var label=theme==='dark'?'Lys':'Mørk';
+            document.querySelectorAll('#themeToggleBtn').forEach(function(b){ b.textContent=label; });
+            document.getElementById('themeLabel').textContent=theme==='dark'?'Mørk modus':'Lys modus';
         }
-    } catch(e) {}
+    }catch(e){}
 }
-
-// ================================================
-//  SCREEN HELPERS
-// ================================================
-function show(id) { document.getElementById(id).classList.remove('hidden'); }
-function hide(id) { document.getElementById(id).classList.add('hidden'); }
 
 // ================================================
 //  INIT
 // ================================================
-loadScheme();
-loadTheme();
+loadPrefs();
 renderDiscList();
+renderQuickStats();
 </script>
 </body>
 </html>

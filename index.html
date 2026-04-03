@@ -8,45 +8,37 @@
     <title>Putte App</title>
     <style>
         :root {
-            --bg: #0d1117;
-            --surface: #161b22;
-            --card: #21262d;
-            --accent: #3fb950;
-            --accent-bg: #0d2e16;
-            --danger: #f85149;
-            --danger-bg: #2d1117;
-            --warning: #d29922;
-            --warning-bg: #2d2100;
-            --text: #e6edf3;
-            --text-muted: #8b949e;
-            --border: #30363d;
-            --radius: 14px;
-            --radius-sm: 10px;
-            --radius-pill: 100px;
+            --bg:         #0d1117;
+            --surface:    #161b22;
+            --card:       #21262d;
+            --accent:     #3fb950;
+            --accent-bg:  #0d2e16;
+            --danger:     #f85149;
+            --danger-bg:  #2d1117;
+            --warn:       #d29922;
+            --warn-bg:    #2d2100;
+            --text:       #e6edf3;
+            --muted:      #8b949e;
+            --border:     #30363d;
+            --r:          14px;
+            --r-sm:       10px;
+            --r-pill:     100px;
         }
-
         [data-theme="light"] {
-            --bg: #f6f8fa;
-            --surface: #ffffff;
-            --card: #f0f2f4;
-            --accent: #1a7f37;
-            --accent-bg: #d1f0d9;
-            --danger: #cf222e;
-            --danger-bg: #ffd7d5;
-            --warning: #9a6700;
-            --warning-bg: #fff8c5;
-            --text: #1f2328;
-            --text-muted: #656d76;
-            --border: #d0d7de;
+            --bg:         #f6f8fa;
+            --surface:    #ffffff;
+            --card:       #f0f2f4;
+            --accent:     #1a7f37;
+            --accent-bg:  #d1f0d9;
+            --danger:     #cf222e;
+            --danger-bg:  #ffd7d5;
+            --warn:       #9a6700;
+            --warn-bg:    #fff8c5;
+            --text:       #1f2328;
+            --muted:      #656d76;
+            --border:     #d0d7de;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body {
             background: var(--bg);
             color: var(--text);
@@ -54,7 +46,7 @@
             min-height: 100vh;
             max-width: 500px;
             margin: 0 auto;
-            padding: 0 16px 40px;
+            padding: 0 16px 48px;
             overflow-x: hidden;
         }
 
@@ -64,40 +56,35 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0 16px;
+            gap: 10px;
         }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 800;
-            color: var(--accent);
-            letter-spacing: -0.3px;
-        }
-
-        .logo span {
-            color: var(--text);
-            font-weight: 400;
-        }
-
+        .logo { font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -0.3px; }
+        .logo span { color: var(--text); font-weight: 400; }
+        .header-actions { display: flex; gap: 8px; }
         .icon-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: var(--radius-sm);
+            width: 38px; height: 38px;
+            border-radius: var(--r-sm);
             border: 1px solid var(--border);
             background: var(--card);
             color: var(--text);
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700;
             flex-shrink: 0;
         }
+        .stats-btn {
+            padding: 0 14px;
+            width: auto;
+            font-size: 13px;
+            letter-spacing: 0.02em;
+        }
 
-        /* ===== SECTION LABEL ===== */
+        /* ===== LABELS ===== */
         .section-label {
             font-size: 11px;
             font-weight: 700;
-            color: var(--text-muted);
+            color: var(--muted);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin: 22px 0 10px;
@@ -106,7 +93,7 @@
         /* ===== MODE CARDS ===== */
         .mode-card {
             padding: 14px 16px;
-            border-radius: var(--radius);
+            border-radius: var(--r);
             border: 2px solid var(--border);
             background: var(--card);
             cursor: pointer;
@@ -114,545 +101,325 @@
             transition: border-color 0.15s, background 0.15s;
             user-select: none;
         }
+        .mode-card.active { border-color: var(--accent); background: var(--accent-bg); }
+        .mode-card-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+        .mode-card.active .mode-card-title { color: var(--accent); }
+        .mode-card-desc { font-size: 13px; color: var(--muted); line-height: 1.45; }
 
-        .mode-card.active {
-            border-color: var(--accent);
-            background: var(--accent-bg);
-        }
-
-        .mode-card-title {
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 3px;
-        }
-
-        .mode-card.active .mode-card-title {
-            color: var(--accent);
-        }
-
-        .mode-card-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.45;
-        }
-
-        /* ===== PILL GROUP ===== */
-        .pill-group {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
+        /* ===== PILLS ===== */
+        .pill-group { display: flex; gap: 8px; flex-wrap: wrap; }
         .pill {
             padding: 8px 16px;
-            border-radius: var(--radius-pill);
+            border-radius: var(--r-pill);
             border: 1px solid var(--border);
             background: var(--card);
             color: var(--text);
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 14px; font-weight: 500;
             cursor: pointer;
             transition: all 0.15s;
             user-select: none;
         }
+        .pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-        .pill.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-        }
-
-        /* ===== STEPPER ===== */
+        /* ===== STEPPERS ===== */
         .stepper-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            display: flex; align-items: center; justify-content: space-between;
             padding: 14px 16px;
-            border-radius: var(--radius);
+            border-radius: var(--r);
             border: 1px solid var(--border);
             background: var(--card);
             margin-bottom: 8px;
         }
-
-        .stepper-label {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .stepper-sub {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        .stepper {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
+        .stepper-label { font-size: 15px; font-weight: 600; }
+        .stepper-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+        .stepper { display: flex; align-items: center; gap: 14px; }
         .stepper-btn {
-            width: 34px;
-            height: 34px;
-            border-radius: var(--radius-sm);
+            width: 34px; height: 34px;
+            border-radius: var(--r-sm);
             border: 1px solid var(--border);
             background: var(--surface);
             color: var(--text);
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 20px; font-weight: 600;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
+            display: flex; align-items: center; justify-content: center;
             user-select: none;
         }
-
-        .stepper-value {
-            font-size: 22px;
-            font-weight: 800;
-            min-width: 28px;
-            text-align: center;
-            color: var(--accent);
-        }
+        .stepper-value { font-size: 22px; font-weight: 800; min-width: 28px; text-align: center; color: var(--accent); }
 
         /* ===== DISC LIST ===== */
         .disc-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            display: flex; align-items: center; gap: 12px;
             padding: 12px 14px;
-            border-radius: var(--radius-sm);
+            border-radius: var(--r-sm);
             border: 1px solid var(--border);
             background: var(--card);
             margin-bottom: 8px;
         }
-
-        .disc-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--accent);
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .disc-name {
-            flex: 1;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .remove-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 20px;
-            cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 6px;
-            line-height: 1;
-        }
-
-        .add-disc-row {
-            display: flex;
-            gap: 8px;
-            margin-top: 4px;
-        }
-
+        .disc-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
+        .disc-name { flex: 1; font-size: 15px; font-weight: 500; }
+        .remove-btn { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 2px 6px; border-radius: 6px; line-height: 1; }
+        .add-disc-row { display: flex; gap: 8px; margin-top: 4px; }
         .disc-input {
-            flex: 1;
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
+            flex: 1; padding: 10px 14px;
+            border-radius: var(--r-sm);
             border: 1px solid var(--border);
             background: var(--card);
             color: var(--text);
-            font-size: 15px;
-            outline: none;
+            font-size: 15px; outline: none;
         }
+        .disc-input:focus { border-color: var(--accent); }
+        .add-btn { padding: 10px 16px; border-radius: var(--r-sm); border: none; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; }
 
-        .disc-input:focus {
-            border-color: var(--accent);
-        }
-
-        .add-btn {
-            padding: 10px 16px;
-            border-radius: var(--radius-sm);
-            border: none;
-            background: var(--accent);
-            color: #fff;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* ===== PRIMARY BUTTON ===== */
+        /* ===== BUTTONS ===== */
         .btn-primary {
-            width: 100%;
-            padding: 18px;
-            border-radius: var(--radius);
-            border: none;
-            background: var(--accent);
-            color: #fff;
-            font-size: 17px;
-            font-weight: 800;
-            cursor: pointer;
-            letter-spacing: 0.01em;
+            width: 100%; padding: 18px;
+            border-radius: var(--r); border: none;
+            background: var(--accent); color: #fff;
+            font-size: 17px; font-weight: 800;
+            cursor: pointer; letter-spacing: 0.01em;
             transition: opacity 0.15s;
         }
-
-        .btn-primary:active {
-            opacity: 0.85;
-        }
-
+        .btn-primary:active { opacity: 0.85; }
         .btn-ghost {
-            width: 100%;
-            padding: 14px;
-            border-radius: var(--radius);
+            width: 100%; padding: 14px;
+            border-radius: var(--r);
             border: 1px solid var(--border);
             background: transparent;
-            color: var(--text-muted);
-            font-size: 15px;
-            font-weight: 600;
+            color: var(--muted);
+            font-size: 15px; font-weight: 600;
             cursor: pointer;
         }
 
         /* ===== DRILL SCREEN ===== */
         .drill-topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 0 14px;
-            gap: 12px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 0 12px; gap: 12px;
         }
-
-        .drill-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--text-muted);
-            flex: 1;
-            text-align: center;
-        }
+        .drill-title { font-size: 15px; font-weight: 700; color: var(--muted); flex: 1; text-align: center; }
 
         /* ===== PROGRESS STEPS ===== */
-        .progress-steps {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-        }
-
-        .progress-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .step-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        .step-active .step-label {
-            color: var(--accent);
-        }
-
-        .step-done .step-label {
-            color: var(--text-muted);
-        }
-
-        .step-dots {
-            display: flex;
-            gap: 4px;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--border);
-            transition: background 0.2s;
-        }
-
-        .dot.made {
-            background: var(--accent);
-        }
-
-        .dot.missed {
-            background: var(--danger);
-        }
+        .progress-steps { display: flex; justify-content: center; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+        .progress-step { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+        .step-label { font-size: 11px; color: var(--muted); font-weight: 600; }
+        .step-active .step-label { color: var(--accent); font-weight: 700; }
+        .step-dots { display: flex; gap: 4px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: background 0.25s; }
+        .dot.made { background: var(--accent); }
+        .dot.pop { animation: dotPop 0.35s ease; }
 
         /* ===== DISTANCE DISPLAY ===== */
-        .distance-display {
-            text-align: center;
-            padding: 28px 0 20px;
-        }
-
-        .distance-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 6px;
-        }
-
-        .distance-number {
-            font-size: 80px;
-            font-weight: 900;
-            color: var(--accent);
-            line-height: 1;
-            letter-spacing: -3px;
-        }
-
-        .distance-unit {
-            font-size: 22px;
-            color: var(--text-muted);
-            margin-top: 6px;
-            font-weight: 500;
-        }
+        .distance-display { text-align: center; padding: 24px 0 18px; }
+        .distance-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+        .distance-number { font-size: 80px; font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -3px; }
+        .distance-unit { font-size: 22px; color: var(--muted); margin-top: 6px; font-weight: 500; }
 
         /* ===== DISC INDICATOR ===== */
         .disc-indicator {
-            text-align: center;
-            padding: 12px 20px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            margin-bottom: 16px;
+            text-align: center; padding: 12px 20px;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--r); margin-bottom: 16px;
         }
-
-        .disc-indicator-name {
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .disc-indicator-sub {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 3px;
-        }
+        .disc-indicator-name { font-size: 18px; font-weight: 800; }
+        .disc-indicator-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
 
         /* ===== STATS ROW ===== */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-bottom: 16px;
-        }
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+        .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 8px; text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 800; }
+        .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 
-        .stat-box {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 12px 8px;
-            text-align: center;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: 800;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 2px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-
-        /* ===== PUTT BUTTONS ===== */
-        .putt-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .btn-made {
-            padding: 32px 16px;
-            border-radius: var(--radius);
+        /* ===== HIT / MISS BUTTONS ===== */
+        .putt-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+        .btn-hit {
+            padding: 34px 16px;
+            border-radius: var(--r);
             border: 2px solid var(--accent);
             background: var(--accent-bg);
             color: var(--accent);
-            font-size: 17px;
-            font-weight: 900;
-            cursor: pointer;
-            text-align: center;
-            letter-spacing: 0.03em;
+            font-size: 20px; font-weight: 900;
+            cursor: pointer; text-align: center;
+            letter-spacing: 0.05em;
             transition: opacity 0.1s;
             user-select: none;
         }
-
-        .btn-missed {
-            padding: 32px 16px;
-            border-radius: var(--radius);
+        .btn-miss {
+            padding: 34px 16px;
+            border-radius: var(--r);
             border: 2px solid var(--danger);
             background: var(--danger-bg);
             color: var(--danger);
-            font-size: 17px;
-            font-weight: 900;
-            cursor: pointer;
-            text-align: center;
-            letter-spacing: 0.03em;
+            font-size: 20px; font-weight: 900;
+            cursor: pointer; text-align: center;
+            letter-spacing: 0.05em;
             transition: opacity 0.1s;
             user-select: none;
         }
+        .btn-hit:active, .btn-miss:active { opacity: 0.75; }
+        .btn-hit.disabled, .btn-miss.disabled { opacity: 0.4; pointer-events: none; }
 
-        .btn-made:active,
-        .btn-missed:active {
-            opacity: 0.75;
-        }
+        /* ===== UNDO ===== */
+        .undo-row { display: flex; justify-content: flex-end; margin-bottom: 12px; }
+        .undo-btn { padding: 7px 16px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--card); color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; }
+
+        /* ===== STREAK DOTS ===== */
+        .streak-dots { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 14px 0; }
+        .streak-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--border); transition: background 0.25s; }
+        .streak-dot.made { background: var(--accent); }
 
         /* ===== COMPLETE SCREEN ===== */
-        .complete-hero {
-            text-align: center;
-            padding: 48px 0 32px;
-        }
+        .complete-hero { text-align: center; padding: 40px 0 28px; animation: slideUp 0.45s ease; }
+        .complete-title { font-size: 42px; font-weight: 900; color: var(--accent); letter-spacing: -1.5px; margin-bottom: 8px; }
+        .complete-sub { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
 
-        .complete-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-            display: block;
+        /* ===== STATS SCREEN ===== */
+        .stat-week-header { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
+        .stat-summary-row {
+            display: flex; gap: 8px;
+            margin-bottom: 20px;
         }
+        .stat-mini-box {
+            flex: 1; background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--r-sm); padding: 10px 8px; text-align: center;
+        }
+        .stat-mini-val { font-size: 20px; font-weight: 800; }
+        .stat-mini-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 
-        .complete-title {
-            font-size: 38px;
-            font-weight: 900;
-            color: var(--accent);
-            letter-spacing: -1px;
+        .dist-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+        .dist-table th { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; padding: 0 0 10px; text-align: left; }
+        .dist-table th:not(:first-child) { text-align: center; }
+        .dist-table td { padding: 9px 0; border-top: 1px solid var(--border); font-size: 14px; }
+        .dist-table td:not(:first-child) { text-align: center; }
+        .dist-table td:first-child { font-weight: 600; }
+
+        .pct-good    { color: var(--accent); font-weight: 700; }
+        .pct-ok      { color: var(--warn);   font-weight: 700; }
+        .pct-bad     { color: var(--danger); font-weight: 700; }
+        .pct-none    { color: var(--muted);  }
+
+        .trend-up   { color: var(--accent); }
+        .trend-down { color: var(--danger); }
+        .trend-flat { color: var(--muted); }
+
+        .session-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 14px;
+            border-radius: var(--r-sm);
+            border: 1px solid var(--border);
+            background: var(--card);
             margin-bottom: 8px;
         }
+        .session-date { font-size: 12px; color: var(--muted); min-width: 44px; }
+        .session-mode { font-size: 14px; font-weight: 700; flex: 1; }
+        .session-pct { font-size: 14px; font-weight: 800; }
+        .session-check { font-size: 16px; }
 
-        .complete-sub {
-            font-size: 16px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
+        .empty-state { text-align: center; padding: 48px 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
+        .empty-state strong { display: block; font-size: 20px; color: var(--text); margin-bottom: 8px; }
+
+        .danger-btn {
+            width: 100%; padding: 12px;
+            border-radius: var(--r);
+            border: 1px solid var(--danger);
+            background: transparent;
+            color: var(--danger);
+            font-size: 14px; font-weight: 600;
+            cursor: pointer; margin-top: 32px; margin-bottom: 48px;
         }
 
         /* ===== TOAST ===== */
         .toast {
-            position: fixed;
-            top: 24px;
-            left: 50%;
+            position: fixed; top: 24px; left: 50%;
             transform: translateX(-50%) translateY(-10px);
             padding: 11px 22px;
-            border-radius: var(--radius-pill);
-            font-size: 14px;
-            font-weight: 700;
-            z-index: 1000;
-            opacity: 0;
+            border-radius: var(--r-pill);
+            font-size: 14px; font-weight: 700;
+            z-index: 1000; opacity: 0;
             transition: opacity 0.25s, transform 0.25s;
             pointer-events: none;
-            white-space: nowrap;
-            max-width: 90vw;
+            white-space: nowrap; max-width: 88vw;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.ok  { background: var(--accent); color: #fff; }
+        .toast.bad { background: var(--danger); color: #fff; }
+
+        /* ===== CONFETTI ===== */
+        #confettiWrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 998; overflow: hidden; }
+        .confetti-bit { position: absolute; top: -12px; border-radius: 2px; animation: confettiFall linear forwards; }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes confettiFall {
+            to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes dotPop {
+            0%   { transform: scale(0.6); }
+            60%  { transform: scale(1.35); }
+            100% { transform: scale(1); }
+        }
+        @keyframes distPulse {
+            0%   { transform: scale(1);    color: var(--accent); }
+            40%  { transform: scale(1.18); color: #fff; }
+            100% { transform: scale(1);    color: var(--accent); }
+        }
+        @keyframes distShake {
+            0%, 100% { transform: translateX(0); }
+            20%      { transform: translateX(-9px); }
+            40%      { transform: translateX(9px); }
+            60%      { transform: translateX(-5px); }
+            80%      { transform: translateX(5px); }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(28px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
         }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+        .animate-advance { animation: distPulse 0.5s ease forwards; }
+        .animate-miss    { animation: distShake 0.4s ease; }
 
-        .toast.success {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .toast.error {
-            background: var(--danger);
-            color: #fff;
-        }
-
-        /* ===== UNDO ROW ===== */
-        .undo-row {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 12px;
-        }
-
-        .undo-btn {
-            padding: 7px 16px;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--border);
-            background: var(--card);
-            color: var(--text-muted);
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* ===== HIDDEN ===== */
         .hidden { display: none !important; }
-
-        /* ===== STREAK DOTS BIG ===== */
-        .streak-display {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 16px 0;
-        }
-
-        .streak-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--border);
-        }
-
-        .streak-dot.made {
-            background: var(--accent);
-        }
     </style>
 </head>
 <body>
 
+<div id="confettiWrap"></div>
 <div id="toast" class="toast"></div>
 
-<!-- ========================================
+<!-- =============================================
      SETUP SCREEN
-     ======================================== -->
+     ============================================= -->
 <div id="setupScreen">
     <div class="header">
         <div class="logo">Putte<span>App</span></div>
-        <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">M</button>
+        <div class="header-actions">
+            <button class="icon-btn stats-btn" onclick="showStats()">Statistikk</button>
+            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">M</button>
+        </div>
     </div>
 
-    <!-- DRILL MODE -->
     <div class="section-label">Velg drill</div>
 
     <div class="mode-card active" id="mode-c1" onclick="selectMode('c1')">
         <div class="mode-card-title">C1 Stige</div>
-        <div class="mode-card-desc">Sett X putter fra 3,3 m, 6,6 m og 10 m. Miss pa en avstand og du starter pa nytt fra 3,3 m.</div>
+        <div class="mode-card-desc">Sett X putter fra 3,3 m, 6,6 m og 10 m. Bommer du på en avstand starter du helt fra begynnelsen.</div>
     </div>
-
     <div class="mode-card" id="mode-c2" onclick="selectMode('c2')">
         <div class="mode-card-title">C2 Stige</div>
-        <div class="mode-card-desc">Sett X putter fra 10 m, 15 m og 20 m. Miss pa en avstand og du starter pa nytt fra 10 m.</div>
+        <div class="mode-card-desc">Sett X putter fra 10 m, 15 m og 20 m. Bommer du på en avstand starter du helt fra begynnelsen.</div>
     </div>
-
     <div class="mode-card" id="mode-full" onclick="selectMode('full')">
         <div class="mode-card-title">Full Stige</div>
-        <div class="mode-card-desc">C1 og C2 kombinert: 3,3 m, 6,6 m, 10 m, 15 m og 20 m. Fullfull alle fem avstandene.</div>
+        <div class="mode-card-desc">C1 og C2 kombinert. Alle fem avstandene: 3,3 m, 6,6 m, 10 m, 15 m og 20 m.</div>
     </div>
-
     <div class="mode-card" id="mode-streak" onclick="selectMode('streak')">
-        <div class="mode-card-title">X pa rad</div>
-        <div class="mode-card-desc">Velg en avstand og sett X putter pa rad. En miss og rekken starter pa nytt.</div>
+        <div class="mode-card-title">X på rad</div>
+        <div class="mode-card-desc">Velg en avstand og sett X putter på rad. Én miss og du starter telleren på nytt.</div>
     </div>
-
     <div class="mode-card" id="mode-free" onclick="selectMode('free')">
-        <div class="mode-card-title">Fri puttøkt</div>
-        <div class="mode-card-desc">Ingen regler, bare tell treff og miss. Velg avstand selv underveis.</div>
+        <div class="mode-card-title">Fri økt</div>
+        <div class="mode-card-desc">Ingen regler, bare tell treff og miss. Bytt avstand når du vil.</div>
     </div>
 
-    <!-- STREAK DISTANCE -->
     <div id="streakSection" class="hidden">
-        <div class="section-label">Avstand for X pa rad</div>
+        <div class="section-label">Avstand</div>
         <div class="pill-group" id="streakPills">
             <button class="pill active" onclick="setStreakDist(this, 3.3)">3,3 m</button>
             <button class="pill" onclick="setStreakDist(this, 6.6)">6,6 m</button>
@@ -662,12 +429,11 @@
         </div>
     </div>
 
-    <!-- PUTTER PER AVSTAND -->
-    <div class="section-label">Antall putter per avstand</div>
+    <div class="section-label">Treffer per avstand</div>
     <div class="stepper-row">
         <div>
-            <div class="stepper-label">Krevde treff</div>
-            <div class="stepper-sub">Du ma sette alle for a ga videre</div>
+            <div class="stepper-label">Krav</div>
+            <div class="stepper-sub">Du må sette alle for å gå videre</div>
         </div>
         <div class="stepper">
             <button class="stepper-btn" onclick="changeRequired(-1)">-</button>
@@ -676,7 +442,6 @@
         </div>
     </div>
 
-    <!-- DINE DISCER -->
     <div class="section-label">Dine discer</div>
     <div id="discList"></div>
     <div class="add-disc-row">
@@ -684,11 +449,10 @@
         <button class="add-btn" onclick="addDisc()">Legg til</button>
     </div>
 
-    <!-- ANTALL DISCER I HANDEN -->
-    <div class="section-label" style="margin-top:20px">Antall discer i handen</div>
+    <div class="section-label" style="margin-top:20px">Discer i hånden</div>
     <div class="stepper-row">
         <div>
-            <div class="stepper-label">Discer per runde</div>
+            <div class="stepper-label">Antall</div>
             <div class="stepper-sub">Appen roterer gjennom valgte discer</div>
         </div>
         <div class="stepper">
@@ -701,9 +465,9 @@
     <button class="btn-primary" onclick="startDrill()" style="margin-top:20px; margin-bottom:48px">Start drill</button>
 </div>
 
-<!-- ========================================
+<!-- =============================================
      DRILL SCREEN
-     ======================================== -->
+     ============================================= -->
 <div id="drillScreen" class="hidden">
     <div class="drill-topbar">
         <button class="icon-btn" onclick="goBack()">&#8592;</button>
@@ -711,22 +475,17 @@
         <button class="icon-btn" onclick="toggleTheme()">M</button>
     </div>
 
-    <!-- Progress steps (hidden in free mode) -->
     <div id="progressSteps" class="progress-steps"></div>
 
-    <!-- Distance display -->
     <div class="distance-display">
         <div class="distance-label">Avstand</div>
         <div class="distance-number" id="distNumber">3,3</div>
         <div class="distance-unit">meter</div>
     </div>
 
-    <!-- Streak dots (only in streak mode) -->
-    <div id="streakDots" class="streak-display hidden"></div>
+    <div id="streakDots" class="streak-dots hidden"></div>
 
-    <!-- Free mode distance pills -->
-    <div id="freePills" class="hidden" style="margin-bottom:16px">
-        <div class="section-label" style="margin-top:0">Velg avstand</div>
+    <div id="freePills" class="hidden" style="margin-bottom:14px">
         <div class="pill-group">
             <button class="pill active" onclick="setFreeDist(this, 3.3)">3,3 m</button>
             <button class="pill" onclick="setFreeDist(this, 6.6)">6,6 m</button>
@@ -736,103 +495,139 @@
         </div>
     </div>
 
-    <!-- Current disc -->
-    <div class="disc-indicator" id="discIndicator">
+    <div class="disc-indicator">
         <div class="disc-indicator-name" id="discIndicatorName">Roc3</div>
         <div class="disc-indicator-sub" id="discIndicatorSub">Disc 1 av 3</div>
     </div>
 
-    <!-- Session stats -->
     <div class="stats-row">
-        <div class="stat-box">
-            <div class="stat-value" id="statMade">0</div>
-            <div class="stat-label">Treff</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value" id="statMissed">0</div>
-            <div class="stat-label">Bom</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value" id="statPct">0%</div>
-            <div class="stat-label">Prosent</div>
-        </div>
+        <div class="stat-box"><div class="stat-value" id="statMade">0</div><div class="stat-label">Treff</div></div>
+        <div class="stat-box"><div class="stat-value" id="statMissed">0</div><div class="stat-label">Bom</div></div>
+        <div class="stat-box"><div class="stat-value" id="statPct">0%</div><div class="stat-label">Prosent</div></div>
     </div>
 
-    <!-- Undo -->
     <div class="undo-row">
         <button class="undo-btn" onclick="undoLast()">Angre siste</button>
     </div>
 
-    <!-- Putt buttons -->
     <div class="putt-buttons">
-        <button class="btn-made" onclick="recordPutt(true)">INNE</button>
-        <button class="btn-missed" onclick="recordPutt(false)">UTE</button>
+        <button class="btn-hit" id="btnHit" onclick="recordPutt(true)">HIT</button>
+        <button class="btn-miss" id="btnMiss" onclick="recordPutt(false)">MISS</button>
     </div>
 
-    <button class="btn-ghost" onclick="restartDrill()">Start drill pa nytt</button>
+    <button class="btn-ghost" onclick="restartDrill()">Start drill på nytt</button>
 </div>
 
-<!-- ========================================
+<!-- =============================================
      COMPLETE SCREEN
-     ======================================== -->
+     ============================================= -->
 <div id="completeScreen" class="hidden">
     <div class="header">
         <div class="logo">Putte<span>App</span></div>
         <button class="icon-btn" onclick="toggleTheme()">M</button>
     </div>
-
     <div class="complete-hero">
-        <div class="complete-title">Fullfort!</div>
-        <div class="complete-sub" id="completeSub">Du klarte drilla!</div>
+        <div class="complete-title">Fullført!</div>
+        <div class="complete-sub" id="completeSub"></div>
     </div>
-
-    <div class="stats-row" style="margin-bottom:24px">
-        <div class="stat-box">
-            <div class="stat-value" id="finalMade">0</div>
-            <div class="stat-label">Treff</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value" id="finalMissed">0</div>
-            <div class="stat-label">Bom</div>
-        </div>
-        <div class="stat-box">
-            <div class="stat-value" id="finalPct">0%</div>
-            <div class="stat-label">Prosent</div>
-        </div>
+    <div class="stats-row" style="margin-bottom:28px">
+        <div class="stat-box"><div class="stat-value" id="finalMade">0</div><div class="stat-label">Treff</div></div>
+        <div class="stat-box"><div class="stat-value" id="finalMissed">0</div><div class="stat-label">Bom</div></div>
+        <div class="stat-box"><div class="stat-value" id="finalPct">0%</div><div class="stat-label">Prosent</div></div>
     </div>
-
-    <button class="btn-primary" onclick="restartDrill()">Ta drilla en gang til</button>
+    <div id="completeDists" style="margin-bottom:24px"></div>
+    <button class="btn-primary" onclick="restartDrill()">Kjør igjen</button>
     <button class="btn-ghost" style="margin-top:12px" onclick="goBack()">Tilbake til oppsett</button>
+</div>
+
+<!-- =============================================
+     STATS SCREEN
+     ============================================= -->
+<div id="statsScreen" class="hidden">
+    <div class="header">
+        <div class="logo">Putte<span>App</span></div>
+        <div class="header-actions">
+            <button class="icon-btn" onclick="hideStats()">&#8592;</button>
+            <button class="icon-btn" onclick="toggleTheme()">M</button>
+        </div>
+    </div>
+
+    <div id="statsContent"></div>
 </div>
 
 <script>
 // ================================================
+//  STORAGE
+// ================================================
+const SK = 'putteapp_v2';
+
+function loadSessions() {
+    try { return JSON.parse(localStorage.getItem(SK) || '[]'); }
+    catch(e) { return []; }
+}
+
+function storeSession(s) {
+    const all = loadSessions();
+    all.push(s);
+    while (all.length > 500) all.shift();
+    try { localStorage.setItem(SK, JSON.stringify(all)); } catch(e) {}
+}
+
+function clearAllSessions() {
+    if (confirm('Slett all statistikk? Dette kan ikke angres.')) {
+        localStorage.removeItem(SK);
+        renderStatsContent();
+    }
+}
+
+// ================================================
+//  WEEK HELPERS
+// ================================================
+function isoWeekKey(date) {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+    const w1 = new Date(d.getFullYear(), 0, 4);
+    const wn = 1 + Math.round(((d - w1) / 86400000 - 3 + (w1.getDay() + 6) % 7) / 7);
+    return d.getFullYear() + '-W' + String(wn).padStart(2, '0');
+}
+
+function thisWeek() { return isoWeekKey(new Date()); }
+function lastWeek() { const d = new Date(); d.setDate(d.getDate() - 7); return isoWeekKey(d); }
+
+function sessionsByWeek(key) {
+    return loadSessions().filter(s => isoWeekKey(s.date) === key);
+}
+
+// ================================================
 //  STATE
 // ================================================
-let theme = 'dark';
+let theme       = 'dark';
 let selectedMode = 'c1';
 let requiredMakes = 3;
-let discCount = 3;
-let streakDist = 3.3;
-let freeDist = 3.3;
+let discCount   = 3;
+let streakDist  = 3.3;
+let freeDist    = 3.3;
 
 let discs = [
-    { name: 'Roc3', selected: true },
-    { name: 'Aviar', selected: true },
+    { name: 'Roc3',   selected: true },
+    { name: 'Aviar',  selected: true },
     { name: 'Wizard', selected: true },
 ];
 
 // Drill runtime
-let distances = [];
-let currentDistIdx = 0;
-let madeAtCurrent = 0;
-let currentDiscIdx = 0;
-let totalMade = 0;
-let totalAttempts = 0;
-let streakCount = 0;
-
-// History for undo
-let history = [];
+let distances        = [];
+let currentDistIdx   = 0;
+let madeAtCurrent    = 0;
+let currentDiscIdx   = 0;
+let totalMade        = 0;
+let totalAttempts    = 0;
+let streakCount      = 0;
+let freeDist_rt      = 3.3;
+let sessionDistStats = {};   // { '3.3': { made, attempts }, ... }
+let history          = [];
+let processing       = false;
+let drillStarted     = false;
 
 // ================================================
 //  SETUP
@@ -840,25 +635,20 @@ let history = [];
 function renderDiscList() {
     const el = document.getElementById('discList');
     el.innerHTML = '';
-    discs.forEach((d, i) => {
+    discs.forEach(function(d, i) {
         const row = document.createElement('div');
         row.className = 'disc-item';
         row.innerHTML =
-            '<input type="checkbox"' + (d.selected ? ' checked' : '') + ' onchange="toggleDisc(' + i + ', this.checked)">' +
+            '<input type="checkbox"' + (d.selected ? ' checked' : '') + ' onchange="toggleDisc(' + i + ',this.checked)">' +
             '<span class="disc-name">' + d.name + '</span>' +
             '<button class="remove-btn" onclick="removeDisc(' + i + ')">&#215;</button>';
         el.appendChild(row);
     });
 }
 
-function toggleDisc(i, checked) {
-    discs[i].selected = checked;
-}
+function toggleDisc(i, v) { discs[i].selected = v; }
 
-function removeDisc(i) {
-    discs.splice(i, 1);
-    renderDiscList();
-}
+function removeDisc(i) { discs.splice(i, 1); renderDiscList(); }
 
 function addDisc() {
     const input = document.getElementById('discInput');
@@ -873,13 +663,13 @@ document.getElementById('discInput').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') addDisc();
 });
 
-function changeRequired(delta) {
-    requiredMakes = Math.max(1, Math.min(20, requiredMakes + delta));
+function changeRequired(d) {
+    requiredMakes = Math.max(1, Math.min(20, requiredMakes + d));
     document.getElementById('requiredValue').textContent = requiredMakes;
 }
 
-function changeDiscCount(delta) {
-    discCount = Math.max(1, Math.min(20, discCount + delta));
+function changeDiscCount(d) {
+    discCount = Math.max(1, Math.min(20, discCount + d));
     document.getElementById('discCountValue').textContent = discCount;
 }
 
@@ -887,16 +677,11 @@ function selectMode(mode) {
     selectedMode = mode;
     document.querySelectorAll('.mode-card').forEach(function(el) { el.classList.remove('active'); });
     document.getElementById('mode-' + mode).classList.add('active');
-    const streakSection = document.getElementById('streakSection');
-    if (mode === 'streak') {
-        streakSection.classList.remove('hidden');
-    } else {
-        streakSection.classList.add('hidden');
-    }
+    document.getElementById('streakSection').classList.toggle('hidden', mode !== 'streak');
 }
 
-function setStreakDist(btn, dist) {
-    streakDist = dist;
+function setStreakDist(btn, d) {
+    streakDist = d;
     document.querySelectorAll('#streakPills .pill').forEach(function(el) { el.classList.remove('active'); });
     btn.classList.add('active');
 }
@@ -915,125 +700,104 @@ function getDistances() {
     }
 }
 
-function getActiveDiscs() {
-    return discs.filter(function(d) { return d.selected; });
-}
+function activeDiscs() { return discs.filter(function(d) { return d.selected; }); }
 
 function startDrill() {
-    const active = getActiveDiscs();
-    if (active.length === 0) {
-        showToast('Velg minst en disc', false);
-        return;
-    }
-    distances = getDistances();
-    currentDistIdx = 0;
-    madeAtCurrent = 0;
-    currentDiscIdx = 0;
-    totalMade = 0;
-    totalAttempts = 0;
-    streakCount = 0;
-    history = [];
-    freeDist = distances[0];
+    if (activeDiscs().length === 0) { showToast('Velg minst én disc', false); return; }
+    distances        = getDistances();
+    currentDistIdx   = 0;
+    madeAtCurrent    = 0;
+    currentDiscIdx   = 0;
+    totalMade        = 0;
+    totalAttempts    = 0;
+    streakCount      = 0;
+    sessionDistStats = {};
+    freeDist_rt      = distances[0];
+    history          = [];
+    processing       = false;
+    drillStarted     = false;
 
-    document.getElementById('setupScreen').classList.add('hidden');
-    document.getElementById('completeScreen').classList.add('hidden');
-    document.getElementById('drillScreen').classList.remove('hidden');
+    show('drillScreen');
+    hide('setupScreen');
+    hide('completeScreen');
 
-    const titles = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X pa rad', free: 'Fri puttøkt' };
+    var titles = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X på rad', free: 'Fri økt' };
     document.getElementById('drillTitle').textContent = titles[selectedMode];
 
-    // Show/hide free mode pills
-    const freePills = document.getElementById('freePills');
-    if (selectedMode === 'free') {
-        freePills.classList.remove('hidden');
-    } else {
-        freePills.classList.add('hidden');
-    }
-
+    document.getElementById('freePills').classList.toggle('hidden', selectedMode !== 'free');
     updateDrillUI();
 }
 
 // ================================================
 //  DRILL UI
 // ================================================
-function fmtDist(d) {
-    return d.toString().replace('.', ',');
+function fmt(d) { return d.toString().replace('.', ','); }
+
+function currentDrillDist() {
+    return selectedMode === 'free' ? freeDist_rt : distances[currentDistIdx];
 }
 
 function updateDrillUI() {
-    const active = getActiveDiscs();
-    const dist = selectedMode === 'free' ? freeDist : distances[currentDistIdx];
+    var active = activeDiscs();
+    var dist   = currentDrillDist();
 
-    // Distance
-    document.getElementById('distNumber').textContent = fmtDist(dist);
+    document.getElementById('distNumber').textContent = fmt(dist);
 
-    // Current disc
-    const dIdx = currentDiscIdx % active.length;
+    var dIdx = currentDiscIdx % active.length;
     document.getElementById('discIndicatorName').textContent = active[dIdx].name;
 
     if (selectedMode === 'streak') {
-        document.getElementById('discIndicatorSub').textContent = 'Pa rad: ' + streakCount + ' av ' + requiredMakes;
+        document.getElementById('discIndicatorSub').textContent = 'På rad: ' + streakCount + ' av ' + requiredMakes;
     } else if (selectedMode === 'free') {
         document.getElementById('discIndicatorSub').textContent = 'Disc ' + ((currentDiscIdx % discCount) + 1) + ' av ' + discCount;
     } else {
         document.getElementById('discIndicatorSub').textContent =
             'Disc ' + ((currentDiscIdx % discCount) + 1) + ' av ' + discCount +
-            '  |  Treff: ' + madeAtCurrent + ' av ' + requiredMakes;
+            '  ·  ' + madeAtCurrent + ' av ' + requiredMakes + ' treff';
     }
 
-    // Stats
-    const missed = totalAttempts - totalMade;
-    const pct = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
-    document.getElementById('statMade').textContent = totalMade;
+    var missed = totalAttempts - totalMade;
+    var pct    = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
+    document.getElementById('statMade').textContent   = totalMade;
     document.getElementById('statMissed').textContent = missed;
-    document.getElementById('statPct').textContent = pct + '%';
+    document.getElementById('statPct').textContent    = pct + '%';
 
-    // Progress steps
     renderProgressSteps();
 
-    // Streak dots
-    const streakDots = document.getElementById('streakDots');
+    var sd = document.getElementById('streakDots');
     if (selectedMode === 'streak') {
-        streakDots.classList.remove('hidden');
-        streakDots.innerHTML = '';
-        for (let i = 0; i < requiredMakes; i++) {
-            const dot = document.createElement('div');
+        sd.classList.remove('hidden');
+        sd.innerHTML = '';
+        for (var i = 0; i < requiredMakes; i++) {
+            var dot = document.createElement('div');
             dot.className = 'streak-dot' + (i < streakCount ? ' made' : '');
-            streakDots.appendChild(dot);
+            sd.appendChild(dot);
         }
     } else {
-        streakDots.classList.add('hidden');
+        sd.classList.add('hidden');
     }
 }
 
 function renderProgressSteps() {
-    const container = document.getElementById('progressSteps');
+    var container = document.getElementById('progressSteps');
     container.innerHTML = '';
-
-    if (selectedMode === 'streak' || selectedMode === 'free') {
-        return; // No progress steps for these modes
-    }
+    if (selectedMode === 'streak' || selectedMode === 'free') return;
 
     distances.forEach(function(dist, idx) {
-        const step = document.createElement('div');
-        let cls = 'progress-step';
+        var step = document.createElement('div');
+        var cls  = 'progress-step';
         if (idx === currentDistIdx) cls += ' step-active';
-        else if (idx < currentDistIdx) cls += ' step-done';
         step.className = cls;
 
-        let dots = '';
-        for (let i = 0; i < requiredMakes; i++) {
-            let dotClass = 'dot';
-            if (idx < currentDistIdx) {
-                dotClass += ' made';
-            } else if (idx === currentDistIdx) {
-                if (i < madeAtCurrent) dotClass += ' made';
-            }
-            dots += '<div class="' + dotClass + '"></div>';
+        var dots = '';
+        for (var i = 0; i < requiredMakes; i++) {
+            var dc = 'dot';
+            if (idx < currentDistIdx) dc += ' made';
+            else if (idx === currentDistIdx && i < madeAtCurrent) dc += ' made';
+            dots += '<div class="' + dc + '"></div>';
         }
-
         step.innerHTML =
-            '<div class="step-label">' + fmtDist(dist) + ' m</div>' +
+            '<div class="step-label">' + fmt(dist) + ' m</div>' +
             '<div class="step-dots">' + dots + '</div>';
         container.appendChild(step);
     });
@@ -1043,96 +807,171 @@ function renderProgressSteps() {
 //  RECORD PUTT
 // ================================================
 function recordPutt(made) {
-    // Save state for undo
+    if (processing) return;
+    drillStarted = true;
+
+    var dist = currentDrillDist();
+    var key  = String(dist);
+    if (!sessionDistStats[key]) sessionDistStats[key] = { made: 0, attempts: 0 };
+    sessionDistStats[key].attempts++;
+    if (made) sessionDistStats[key].made++;
+
     history.push({
         made: made,
-        totalMade: totalMade,
-        totalAttempts: totalAttempts,
-        currentDistIdx: currentDistIdx,
-        madeAtCurrent: madeAtCurrent,
-        currentDiscIdx: currentDiscIdx,
-        streakCount: streakCount,
-        freeDist: freeDist,
+        totalMade: totalMade, totalAttempts: totalAttempts,
+        currentDistIdx: currentDistIdx, madeAtCurrent: madeAtCurrent,
+        currentDiscIdx: currentDiscIdx, streakCount: streakCount,
+        freeDist_rt: freeDist_rt,
+        sessionDistStats: JSON.parse(JSON.stringify(sessionDistStats))
     });
 
     totalAttempts++;
     if (made) totalMade++;
 
-    // ---- FREE MODE ----
     if (selectedMode === 'free') {
         currentDiscIdx++;
         updateDrillUI();
         return;
     }
 
-    // ---- STREAK MODE ----
     if (selectedMode === 'streak') {
         if (made) {
             streakCount++;
             currentDiscIdx++;
+            updateDrillUI();
             if (streakCount >= requiredMakes) {
-                showComplete();
-                return;
+                setTimeout(function() { completeDrill(); }, 350);
+            } else {
+                animateDotPop(streakCount - 1);
             }
         } else {
-            if (streakCount > 0) {
-                showToast('Rekken brutt! Tilbake til 0', false);
-            }
+            if (streakCount > 0) showToast('Rekken brutt! Tilbake til 0', false);
             streakCount = 0;
             currentDiscIdx++;
+            updateDrillUI();
         }
-        updateDrillUI();
         return;
     }
 
-    // ---- STIGE MODES ----
+    // Stige modes
     if (made) {
         madeAtCurrent++;
         currentDiscIdx++;
+        updateDrillUI();
 
         if (madeAtCurrent >= requiredMakes) {
-            // Advance to next distance
             currentDistIdx++;
-            madeAtCurrent = 0;
-
             if (currentDistIdx >= distances.length) {
-                showComplete();
-                return;
+                processing = true;
+                lockButtons();
+                animateAdvance(function() {
+                    completeDrill();
+                    processing = false;
+                    unlockButtons();
+                });
+            } else {
+                processing = true;
+                lockButtons();
+                animateAdvance(function() {
+                    madeAtCurrent = 0;
+                    updateDrillUI();
+                    showToast('Neste: ' + fmt(distances[currentDistIdx]) + ' m', true);
+                    processing = false;
+                    unlockButtons();
+                });
             }
-            showToast('Bra! Neste: ' + fmtDist(distances[currentDistIdx]) + ' m', true);
         }
     } else {
-        // Miss: restart from beginning
-        const wasProgressed = currentDistIdx > 0 || madeAtCurrent > 0;
-        if (wasProgressed) {
-            showToast('Miss! Starter pa nytt fra ' + fmtDist(distances[0]) + ' m', false);
+        var hadProgress = currentDistIdx > 0 || madeAtCurrent > 0;
+        currentDistIdx  = 0;
+        madeAtCurrent   = 0;
+        currentDiscIdx  = 0;
+        if (hadProgress) {
+            animateMiss(function() {
+                showToast('Miss! Starter fra ' + fmt(distances[0]) + ' m', false);
+                updateDrillUI();
+            });
         } else {
             showToast('Miss!', false);
+            updateDrillUI();
         }
-        currentDistIdx = 0;
-        madeAtCurrent = 0;
-        currentDiscIdx = 0;
     }
+}
 
-    updateDrillUI();
+// ================================================
+//  ANIMATIONS
+// ================================================
+function animateAdvance(cb) {
+    var el = document.getElementById('distNumber');
+    el.classList.add('animate-advance');
+    setTimeout(function() {
+        el.classList.remove('animate-advance');
+        if (cb) cb();
+    }, 520);
+}
+
+function animateMiss(cb) {
+    var el = document.getElementById('distNumber');
+    el.classList.add('animate-miss');
+    setTimeout(function() {
+        el.classList.remove('animate-miss');
+        if (cb) cb();
+    }, 420);
+}
+
+function animateDotPop(idx) {
+    var dots = document.querySelectorAll('#streakDots .streak-dot');
+    if (dots[idx]) {
+        dots[idx].classList.add('pop');
+        setTimeout(function() { dots[idx].classList.remove('pop'); }, 400);
+    }
+}
+
+function lockButtons() {
+    document.getElementById('btnHit').classList.add('disabled');
+    document.getElementById('btnMiss').classList.add('disabled');
+}
+
+function unlockButtons() {
+    document.getElementById('btnHit').classList.remove('disabled');
+    document.getElementById('btnMiss').classList.remove('disabled');
+}
+
+function showConfetti() {
+    var colors = ['#3fb950','#58a6ff','#f0883e','#bc8cff','#ff7b72','#ffa657'];
+    var wrap   = document.getElementById('confettiWrap');
+    wrap.innerHTML = '';
+    for (var i = 0; i < 70; i++) {
+        var bit = document.createElement('div');
+        bit.className = 'confetti-bit';
+        var size = 6 + Math.random() * 8;
+        bit.style.cssText =
+            'left:'               + (Math.random() * 100) + '%;' +
+            'background:'        + colors[Math.floor(Math.random() * colors.length)] + ';' +
+            'animation-delay:'   + (Math.random() * 0.6) + 's;' +
+            'animation-duration:'+ (0.9 + Math.random() * 0.9) + 's;' +
+            'width:'             + size + 'px;' +
+            'height:'            + size + 'px;' +
+            'border-radius:'     + (Math.random() > 0.5 ? '50%' : '3px') + ';';
+        wrap.appendChild(bit);
+    }
+    setTimeout(function() { wrap.innerHTML = ''; }, 2200);
 }
 
 // ================================================
 //  UNDO
 // ================================================
 function undoLast() {
-    if (history.length === 0) {
-        showToast('Ingenting a angre', false);
-        return;
-    }
-    const prev = history.pop();
-    totalMade = prev.totalMade;
-    totalAttempts = prev.totalAttempts;
-    currentDistIdx = prev.currentDistIdx;
-    madeAtCurrent = prev.madeAtCurrent;
-    currentDiscIdx = prev.currentDiscIdx;
-    streakCount = prev.streakCount;
-    freeDist = prev.freeDist;
+    if (history.length === 0) { showToast('Ingenting å angre', false); return; }
+    var prev = history.pop();
+    totalMade        = prev.totalMade;
+    totalAttempts    = prev.totalAttempts;
+    currentDistIdx   = prev.currentDistIdx;
+    madeAtCurrent    = prev.madeAtCurrent;
+    currentDiscIdx   = prev.currentDiscIdx;
+    streakCount      = prev.streakCount;
+    freeDist_rt      = prev.freeDist_rt;
+    sessionDistStats = prev.sessionDistStats;
     updateDrillUI();
     showToast('Angret', true);
 }
@@ -1140,11 +979,11 @@ function undoLast() {
 // ================================================
 //  FREE MODE DISTANCE
 // ================================================
-function setFreeDist(btn, dist) {
-    freeDist = dist;
+function setFreeDist(btn, d) {
+    freeDist_rt = d;
     document.querySelectorAll('#freePills .pill').forEach(function(el) { el.classList.remove('active'); });
     btn.classList.add('active');
-    document.getElementById('distNumber').textContent = fmtDist(dist);
+    document.getElementById('distNumber').textContent = fmt(d);
     updateDrillUI();
 }
 
@@ -1152,55 +991,245 @@ function setFreeDist(btn, dist) {
 //  RESTART / BACK
 // ================================================
 function restartDrill() {
-    currentDistIdx = 0;
-    madeAtCurrent = 0;
-    currentDiscIdx = 0;
-    totalMade = 0;
-    totalAttempts = 0;
-    streakCount = 0;
-    history = [];
-    freeDist = distances[0];
+    currentDistIdx   = 0;
+    madeAtCurrent    = 0;
+    currentDiscIdx   = 0;
+    totalMade        = 0;
+    totalAttempts    = 0;
+    streakCount      = 0;
+    sessionDistStats = {};
+    history          = [];
+    processing       = false;
+    drillStarted     = false;
+    freeDist_rt      = distances[0];
 
-    document.getElementById('completeScreen').classList.add('hidden');
-    document.getElementById('drillScreen').classList.remove('hidden');
+    unlockButtons();
+    hide('completeScreen');
+    show('drillScreen');
     updateDrillUI();
 }
 
 function goBack() {
-    document.getElementById('drillScreen').classList.add('hidden');
-    document.getElementById('completeScreen').classList.add('hidden');
-    document.getElementById('setupScreen').classList.remove('hidden');
+    if (drillStarted && totalAttempts > 0) {
+        saveCurrentSession(false);
+    }
+    hide('drillScreen');
+    hide('completeScreen');
+    show('setupScreen');
 }
 
 // ================================================
 //  COMPLETE
 // ================================================
-function showComplete() {
-    const missed = totalAttempts - totalMade;
-    const pct = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
+function completeDrill() {
+    showConfetti();
+    saveCurrentSession(true);
 
-    document.getElementById('drillScreen').classList.add('hidden');
-    document.getElementById('completeScreen').classList.remove('hidden');
+    var missed = totalAttempts - totalMade;
+    var pct    = totalAttempts > 0 ? Math.round(totalMade / totalAttempts * 100) : 0;
 
-    document.getElementById('finalMade').textContent = totalMade;
+    document.getElementById('finalMade').textContent   = totalMade;
     document.getElementById('finalMissed').textContent = missed;
-    document.getElementById('finalPct').textContent = pct + '%';
-    document.getElementById('completeSub').textContent =
-        totalMade + ' treff av ' + totalAttempts + ' putter (' + pct + '%)';
+    document.getElementById('finalPct').textContent    = pct + '%';
+    document.getElementById('completeSub').textContent = totalMade + ' av ' + totalAttempts + ' putter (' + pct + '%)';
+
+    // Per distance breakdown on complete screen
+    var distHtml = '';
+    var allDists = Object.keys(sessionDistStats).sort(function(a,b){ return parseFloat(a) - parseFloat(b); });
+    if (allDists.length > 1) {
+        distHtml = '<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:16px">';
+        distHtml += '<div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Fordelt per avstand</div>';
+        allDists.forEach(function(key) {
+            var s   = sessionDistStats[key];
+            var p   = s.attempts > 0 ? Math.round(s.made / s.attempts * 100) : 0;
+            var cls = p >= 75 ? 'pct-good' : p >= 50 ? 'pct-ok' : 'pct-bad';
+            distHtml +=
+                '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--border)">' +
+                '<span style="font-weight:600">' + fmt(parseFloat(key)) + ' m</span>' +
+                '<span>' + s.made + '/' + s.attempts + '</span>' +
+                '<span class="' + cls + '">' + p + '%</span>' +
+                '</div>';
+        });
+        distHtml += '</div>';
+    }
+    document.getElementById('completeDists').innerHTML = distHtml;
+
+    hide('drillScreen');
+    show('completeScreen');
+}
+
+// ================================================
+//  SAVE SESSION
+// ================================================
+function saveCurrentSession(completed) {
+    if (totalAttempts === 0) return;
+    var modeLabels = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X på rad', free: 'Fri økt' };
+    storeSession({
+        id:            Date.now(),
+        date:          new Date().toISOString(),
+        mode:          selectedMode,
+        modeLabel:     modeLabels[selectedMode],
+        distanceStats: JSON.parse(JSON.stringify(sessionDistStats)),
+        totalMade:     totalMade,
+        totalAttempts: totalAttempts,
+        completed:     completed
+    });
+}
+
+// ================================================
+//  STATS SCREEN
+// ================================================
+function showStats() {
+    renderStatsContent();
+    hide('setupScreen');
+    show('statsScreen');
+}
+
+function hideStats() {
+    hide('statsScreen');
+    show('setupScreen');
+}
+
+function pctClass(p) {
+    if (p === null) return 'pct-none';
+    if (p >= 75) return 'pct-good';
+    if (p >= 50) return 'pct-ok';
+    return 'pct-bad';
+}
+
+function pctStr(p) { return p === null ? '—' : p + '%'; }
+
+function trendHTML(cur, prev) {
+    if (prev === null || cur === null) return '<span class="trend-flat">—</span>';
+    if (cur > prev + 3) return '<span class="trend-up">↑</span>';
+    if (cur < prev - 3) return '<span class="trend-down">↓</span>';
+    return '<span class="trend-flat">→</span>';
+}
+
+function aggregateDists(sessions) {
+    var r = {};
+    sessions.forEach(function(s) {
+        Object.keys(s.distanceStats || {}).forEach(function(k) {
+            if (!r[k]) r[k] = { made: 0, attempts: 0 };
+            r[k].made     += s.distanceStats[k].made;
+            r[k].attempts += s.distanceStats[k].attempts;
+        });
+    });
+    return r;
+}
+
+function getPct(agg, key) {
+    var s = agg[key];
+    if (!s || s.attempts === 0) return null;
+    return Math.round(s.made / s.attempts * 100);
+}
+
+function fmtDate(iso) {
+    var d     = new Date(iso);
+    var now   = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var yday  = new Date(today.getTime() - 86400000);
+    var sd    = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    if (sd.getTime() === today.getTime()) return 'I dag';
+    if (sd.getTime() === yday.getTime())  return 'I går';
+    return d.toLocaleDateString('no-NO', { day: 'numeric', month: 'short' });
+}
+
+function renderStatsContent() {
+    var all      = loadSessions();
+    var thisW    = sessionsByWeek(thisWeek());
+    var lastW    = sessionsByWeek(lastWeek());
+    var thisAgg  = aggregateDists(thisW);
+    var lastAgg  = aggregateDists(lastW);
+    var allDists = ['3.3','6.6','10','15','20'];
+
+    var html = '';
+
+    if (all.length === 0) {
+        html =
+            '<div class="empty-state">' +
+            '<strong>Ingen data ennå</strong>' +
+            'Fullfør en drill for å se statistikk her.' +
+            '</div>';
+        document.getElementById('statsContent').innerHTML = html;
+        return;
+    }
+
+    // This week summary
+    var twMade = thisW.reduce(function(a,s) { return a + s.totalMade; }, 0);
+    var twAtt  = thisW.reduce(function(a,s) { return a + s.totalAttempts; }, 0);
+    var twDone = thisW.filter(function(s) { return s.completed; }).length;
+    var twPct  = twAtt > 0 ? Math.round(twMade / twAtt * 100) : 0;
+
+    html += '<div class="stat-week-header">Denne uken</div>';
+
+    if (thisW.length === 0) {
+        html += '<div style="color:var(--muted);font-size:14px;margin-bottom:20px">Ingen økter denne uken ennå.</div>';
+    } else {
+        html +=
+            '<div class="stat-summary-row">' +
+            '<div class="stat-mini-box"><div class="stat-mini-val">' + thisW.length + '</div><div class="stat-mini-lbl">Økter</div></div>' +
+            '<div class="stat-mini-box"><div class="stat-mini-val">' + twDone + '</div><div class="stat-mini-lbl">Fullført</div></div>' +
+            '<div class="stat-mini-box"><div class="stat-mini-val ' + pctClass(twPct) + '">' + twPct + '%</div><div class="stat-mini-lbl">Treff</div></div>' +
+            '</div>';
+    }
+
+    // Distance breakdown
+    var hasAnyDist = allDists.some(function(k) {
+        return (thisAgg[k] && thisAgg[k].attempts > 0) || (lastAgg[k] && lastAgg[k].attempts > 0);
+    });
+
+    if (hasAnyDist) {
+        html +=
+            '<div class="section-label">Per avstand</div>' +
+            '<table class="dist-table">' +
+            '<thead><tr><th>Avstand</th><th>Denne</th><th>Sist</th><th>Trend</th></tr></thead><tbody>';
+
+        allDists.forEach(function(key) {
+            var cur  = getPct(thisAgg, key);
+            var prev = getPct(lastAgg, key);
+            if (cur === null && prev === null) return;
+            html +=
+                '<tr>' +
+                '<td>' + fmt(parseFloat(key)) + ' m</td>' +
+                '<td class="' + pctClass(cur) + '">'  + pctStr(cur)  + '</td>' +
+                '<td class="' + pctClass(prev) + '">' + pctStr(prev) + '</td>' +
+                '<td>' + trendHTML(cur, prev) + '</td>' +
+                '</tr>';
+        });
+
+        html += '</tbody></table>';
+    }
+
+    // Recent sessions
+    var recent = all.slice().reverse().slice(0, 15);
+    html += '<div class="section-label">Siste økter</div>';
+    recent.forEach(function(s) {
+        var pct = s.totalAttempts > 0 ? Math.round(s.totalMade / s.totalAttempts * 100) : 0;
+        var cls = pctClass(pct);
+        html +=
+            '<div class="session-item">' +
+            '<span class="session-date">' + fmtDate(s.date) + '</span>' +
+            '<span class="session-mode">' + s.modeLabel + '</span>' +
+            '<span class="session-pct ' + cls + '">' + pct + '%</span>' +
+            '<span class="session-check">' + (s.completed ? '&#10003;' : '&#8226;') + '</span>' +
+            '</div>';
+    });
+
+    html += '<button class="danger-btn" onclick="clearAllSessions()">Slett all statistikk</button>';
+    document.getElementById('statsContent').innerHTML = html;
 }
 
 // ================================================
 //  TOAST
 // ================================================
-let toastTimer;
-function showToast(msg, success) {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.className = 'toast show ' + (success ? 'success' : 'error');
+var toastTimer;
+function showToast(msg, ok) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className   = 'toast show ' + (ok ? 'ok' : 'bad');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function() {
-        toast.classList.remove('show');
-    }, 2200);
+    toastTimer = setTimeout(function() { t.classList.remove('show'); }, 2200);
 }
 
 // ================================================
@@ -1209,9 +1238,22 @@ function showToast(msg, success) {
 function toggleTheme() {
     theme = theme === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : '');
-    const label = theme === 'dark' ? 'M' : 'L';
-    document.getElementById('themeBtn').textContent = label;
+    ['themeBtn'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = theme === 'dark' ? 'M' : 'L';
+    });
+    document.querySelectorAll('.icon-btn').forEach(function(btn) {
+        if (btn.textContent === 'M' || btn.textContent === 'L') {
+            btn.textContent = theme === 'dark' ? 'M' : 'L';
+        }
+    });
 }
+
+// ================================================
+//  SCREEN HELPERS
+// ================================================
+function show(id) { document.getElementById(id).classList.remove('hidden'); }
+function hide(id) { document.getElementById(id).classList.add('hidden'); }
 
 // ================================================
 //  INIT

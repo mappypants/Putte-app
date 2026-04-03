@@ -1,381 +1,820 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="no" data-theme="dark" data-scheme="standard">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Putte App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Airmail</title>
     <style>
-        :root {
-            --bg:         #0d1117;
-            --surface:    #161b22;
-            --card:       #21262d;
-            --accent:     #3fb950;
-            --accent-bg:  #0d2e16;
-            --danger:     #f85149;
-            --danger-bg:  #2d1117;
-            --warn:       #d29922;
-            --warn-bg:    #2d2100;
-            --text:       #e6edf3;
-            --muted:      #8b949e;
-            --border:     #30363d;
-            --r:          14px;
-            --r-sm:       10px;
-            --r-pill:     100px;
-        }
-        [data-theme="light"] {
-            --bg:         #f6f8fa;
-            --surface:    #ffffff;
-            --card:       #f0f2f4;
-            --accent:     #1a7f37;
-            --accent-bg:  #d1f0d9;
-            --danger:     #cf222e;
-            --danger-bg:  #ffd7d5;
-            --warn:       #9a6700;
-            --warn-bg:    #fff8c5;
-            --text:       #1f2328;
-            --muted:      #656d76;
-            --border:     #d0d7de;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            min-height: 100vh;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 0 16px 48px;
-            overflow-x: hidden;
-        }
 
-        /* ===== HEADER ===== */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0 16px;
-            gap: 10px;
-        }
-        .logo { font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -0.3px; }
-        .logo span { color: var(--text); font-weight: 400; }
-        .header-actions { display: flex; gap: 8px; }
-        .icon-btn {
-            width: 38px; height: 38px;
-            border-radius: var(--r-sm);
-            border: 1px solid var(--border);
-            background: var(--card);
-            color: var(--text);
-            font-size: 15px;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        .stats-btn {
-            padding: 0 14px;
-            width: auto;
-            font-size: 13px;
-            letter-spacing: 0.02em;
-        }
+/* =============================================
+   BASE TOKENS
+   ============================================= */
 
-        /* ===== LABELS ===== */
-        .section-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin: 22px 0 10px;
-        }
+:root {
+    --bg:          #07080e;
+    --surface:     #0c0e18;
+    --card:        #111520;
+    --card-2:      #181e2c;
+    --text:        #f0f2f8;
+    --muted:       #5a5f72;
+    --muted-2:     #8a90a8;
+    --border:      rgba(255,255,255,0.06);
+    --border-mid:  rgba(255,255,255,0.10);
+    --r:           16px;
+    --r-sm:        10px;
+    --r-pill:      100px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-        /* ===== MODE CARDS ===== */
-        .mode-card {
-            padding: 14px 16px;
-            border-radius: var(--r);
-            border: 2px solid var(--border);
-            background: var(--card);
-            cursor: pointer;
-            margin-bottom: 8px;
-            transition: border-color 0.15s, background 0.15s;
-            user-select: none;
-        }
-        .mode-card.active { border-color: var(--accent); background: var(--accent-bg); }
-        .mode-card-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
-        .mode-card.active .mode-card-title { color: var(--accent); }
-        .mode-card-desc { font-size: 13px; color: var(--muted); line-height: 1.45; }
+/* ---- Color schemes ---- */
+:root, [data-scheme="standard"] {
+    --accent:      #30d158;
+    --accent-dim:  rgba(48,209,88,0.10);
+    --accent-glow: rgba(48,209,88,0.22);
+    --danger:      #ff375f;
+    --danger-dim:  rgba(255,55,95,0.10);
+    --warn:        #ffd60a;
+}
+[data-scheme="neon"] {
+    --accent:      #d4ff00;
+    --accent-dim:  rgba(212,255,0,0.10);
+    --accent-glow: rgba(212,255,0,0.20);
+    --danger:      #ff375f;
+    --danger-dim:  rgba(255,55,95,0.10);
+    --bg:          #040613;
+    --surface:     #080b1a;
+    --card:        #0d1124;
+    --card-2:      #131830;
+    --border:      rgba(255,255,255,0.06);
+}
+[data-scheme="sport"] {
+    --accent:      #c8ff47;
+    --accent-dim:  rgba(200,255,71,0.10);
+    --accent-glow: rgba(200,255,71,0.20);
+    --danger:      #ff6b6b;
+    --danger-dim:  rgba(255,107,107,0.10);
+    --bg:          #0c0e0e;
+    --surface:     #111414;
+    --card:        #181c1c;
+    --card-2:      #1e2424;
+    --border:      rgba(255,255,255,0.06);
+}
+[data-scheme="ocean"] {
+    --accent:      #0a84ff;
+    --accent-dim:  rgba(10,132,255,0.12);
+    --accent-glow: rgba(10,132,255,0.25);
+    --danger:      #ff453a;
+    --danger-dim:  rgba(255,69,58,0.10);
+    --bg:          #060c14;
+    --surface:     #0b1220;
+    --card:        #101928;
+    --card-2:      #172132;
+    --border:      rgba(255,255,255,0.07);
+}
+[data-scheme="ember"] {
+    --accent:      #ff9f0a;
+    --accent-dim:  rgba(255,159,10,0.10);
+    --accent-glow: rgba(255,159,10,0.22);
+    --danger:      #ff453a;
+    --danger-dim:  rgba(255,69,58,0.10);
+    --bg:          #090605;
+    --surface:     #120e0a;
+    --card:        #1a1410;
+    --card-2:      #221c16;
+    --border:      rgba(255,255,255,0.06);
+}
 
-        /* ===== PILLS ===== */
-        .pill-group { display: flex; gap: 8px; flex-wrap: wrap; }
-        .pill {
-            padding: 8px 16px;
-            border-radius: var(--r-pill);
-            border: 1px solid var(--border);
-            background: var(--card);
-            color: var(--text);
-            font-size: 14px; font-weight: 500;
-            cursor: pointer;
-            transition: all 0.15s;
-            user-select: none;
-        }
-        .pill.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+/* ---- Light mode overrides ---- */
+[data-theme="light"] {
+    --bg:         #f2f4f8;
+    --surface:    #ffffff;
+    --card:       #edf0f6;
+    --card-2:     #e4e8f0;
+    --text:       #12151e;
+    --muted:      #8a90a4;
+    --muted-2:    #a0a6bc;
+    --border:     rgba(0,0,0,0.07);
+    --border-mid: rgba(0,0,0,0.12);
+}
+[data-theme="light"][data-scheme="neon"] {
+    --accent: #8aaa00;
+}
+[data-theme="light"][data-scheme="sport"] {
+    --accent: #6da800;
+}
 
-        /* ===== STEPPERS ===== */
-        .stepper-row {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 14px 16px;
-            border-radius: var(--r);
-            border: 1px solid var(--border);
-            background: var(--card);
-            margin-bottom: 8px;
-        }
-        .stepper-label { font-size: 15px; font-weight: 600; }
-        .stepper-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-        .stepper { display: flex; align-items: center; gap: 14px; }
-        .stepper-btn {
-            width: 34px; height: 34px;
-            border-radius: var(--r-sm);
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            font-size: 20px; font-weight: 600;
-            cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            user-select: none;
-        }
-        .stepper-value { font-size: 22px; font-weight: 800; min-width: 28px; text-align: center; color: var(--accent); }
 
-        /* ===== DISC LIST ===== */
-        .disc-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 12px 14px;
-            border-radius: var(--r-sm);
-            border: 1px solid var(--border);
-            background: var(--card);
-            margin-bottom: 8px;
-        }
-        .disc-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
-        .disc-name { flex: 1; font-size: 15px; font-weight: 500; }
-        .remove-btn { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 2px 6px; border-radius: 6px; line-height: 1; }
-        .add-disc-row { display: flex; gap: 8px; margin-top: 4px; }
-        .disc-input {
-            flex: 1; padding: 10px 14px;
-            border-radius: var(--r-sm);
-            border: 1px solid var(--border);
-            background: var(--card);
-            color: var(--text);
-            font-size: 15px; outline: none;
-        }
-        .disc-input:focus { border-color: var(--accent); }
-        .add-btn { padding: 10px 16px; border-radius: var(--r-sm); border: none; background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; }
+/* =============================================
+   RESET & BODY
+   ============================================= */
 
-        /* ===== BUTTONS ===== */
-        .btn-primary {
-            width: 100%; padding: 18px;
-            border-radius: var(--r); border: none;
-            background: var(--accent); color: #fff;
-            font-size: 17px; font-weight: 800;
-            cursor: pointer; letter-spacing: 0.01em;
-            transition: opacity 0.15s;
-        }
-        .btn-primary:active { opacity: 0.85; }
-        .btn-ghost {
-            width: 100%; padding: 14px;
-            border-radius: var(--r);
-            border: 1px solid var(--border);
-            background: transparent;
-            color: var(--muted);
-            font-size: 15px; font-weight: 600;
-            cursor: pointer;
-        }
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
 
-        /* ===== DRILL SCREEN ===== */
-        .drill-topbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 18px 0 12px; gap: 12px;
-        }
-        .drill-title { font-size: 15px; font-weight: 700; color: var(--muted); flex: 1; text-align: center; }
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 18px 56px;
+    overflow-x: hidden;
+}
 
-        /* ===== PROGRESS STEPS ===== */
-        .progress-steps { display: flex; justify-content: center; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
-        .progress-step { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .step-label { font-size: 11px; color: var(--muted); font-weight: 600; }
-        .step-active .step-label { color: var(--accent); font-weight: 700; }
-        .step-dots { display: flex; gap: 4px; }
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: background 0.25s; }
-        .dot.made { background: var(--accent); }
-        .dot.pop { animation: dotPop 0.35s ease; }
 
-        /* ===== DISTANCE DISPLAY ===== */
-        .distance-display { text-align: center; padding: 24px 0 18px; }
-        .distance-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
-        .distance-number { font-size: 80px; font-weight: 900; color: var(--accent); line-height: 1; letter-spacing: -3px; }
-        .distance-unit { font-size: 22px; color: var(--muted); margin-top: 6px; font-weight: 500; }
+/* =============================================
+   HEADER
+   ============================================= */
 
-        /* ===== DISC INDICATOR ===== */
-        .disc-indicator {
-            text-align: center; padding: 12px 20px;
-            background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--r); margin-bottom: 16px;
-        }
-        .disc-indicator-name { font-size: 18px; font-weight: 800; }
-        .disc-indicator-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0 18px;
+}
 
-        /* ===== STATS ROW ===== */
-        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
-        .stat-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 8px; text-align: center; }
-        .stat-value { font-size: 24px; font-weight: 800; }
-        .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.logo {
+    font-size: 22px;
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+.logo-air  { font-weight: 800; color: var(--accent); }
+.logo-mail { font-weight: 400; color: var(--text); }
 
-        /* ===== HIT / MISS BUTTONS ===== */
-        .putt-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-        .btn-hit {
-            padding: 34px 16px;
-            border-radius: var(--r);
-            border: 2px solid var(--accent);
-            background: var(--accent-bg);
-            color: var(--accent);
-            font-size: 20px; font-weight: 900;
-            cursor: pointer; text-align: center;
-            letter-spacing: 0.05em;
-            transition: opacity 0.1s;
-            user-select: none;
-        }
-        .btn-miss {
-            padding: 34px 16px;
-            border-radius: var(--r);
-            border: 2px solid var(--danger);
-            background: var(--danger-bg);
-            color: var(--danger);
-            font-size: 20px; font-weight: 900;
-            cursor: pointer; text-align: center;
-            letter-spacing: 0.05em;
-            transition: opacity 0.1s;
-            user-select: none;
-        }
-        .btn-hit:active, .btn-miss:active { opacity: 0.75; }
-        .btn-hit.disabled, .btn-miss.disabled { opacity: 0.4; pointer-events: none; }
+.header-right { display: flex; align-items: center; gap: 8px; }
 
-        /* ===== UNDO ===== */
-        .undo-row { display: flex; justify-content: flex-end; margin-bottom: 12px; }
-        .undo-btn { padding: 7px 16px; border-radius: var(--r-pill); border: 1px solid var(--border); background: var(--card); color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; }
+.icon-btn {
+    height: 36px;
+    min-width: 36px;
+    padding: 0 12px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border-mid);
+    background: var(--card);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
 
-        /* ===== STREAK DOTS ===== */
-        .streak-dots { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 14px 0; }
-        .streak-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--border); transition: background 0.25s; }
-        .streak-dot.made { background: var(--accent); }
 
-        /* ===== COMPLETE SCREEN ===== */
-        .complete-hero { text-align: center; padding: 40px 0 28px; animation: slideUp 0.45s ease; }
-        .complete-title { font-size: 42px; font-weight: 900; color: var(--accent); letter-spacing: -1.5px; margin-bottom: 8px; }
-        .complete-sub { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
+/* =============================================
+   COLOR SCHEME PICKER
+   ============================================= */
 
-        /* ===== STATS SCREEN ===== */
-        .stat-week-header { font-size: 17px; font-weight: 800; margin-bottom: 12px; }
-        .stat-summary-row {
-            display: flex; gap: 8px;
-            margin-bottom: 20px;
-        }
-        .stat-mini-box {
-            flex: 1; background: var(--card); border: 1px solid var(--border);
-            border-radius: var(--r-sm); padding: 10px 8px; text-align: center;
-        }
-        .stat-mini-val { font-size: 20px; font-weight: 800; }
-        .stat-mini-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.scheme-picker {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 14px 0 4px;
+    margin-bottom: 4px;
+}
 
-        .dist-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
-        .dist-table th { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; padding: 0 0 10px; text-align: left; }
-        .dist-table th:not(:first-child) { text-align: center; }
-        .dist-table td { padding: 9px 0; border-top: 1px solid var(--border); font-size: 14px; }
-        .dist-table td:not(:first-child) { text-align: center; }
-        .dist-table td:first-child { font-weight: 600; }
+.scheme-dot {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.15s, border-color 0.15s;
+    position: relative;
+}
+.scheme-dot.active {
+    border-color: var(--text);
+    transform: scale(1.15);
+}
+.scheme-dot[data-s="standard"] { background: #30d158; }
+.scheme-dot[data-s="neon"]     { background: #d4ff00; }
+.scheme-dot[data-s="sport"]    { background: #c8ff47; }
+.scheme-dot[data-s="ocean"]    { background: #0a84ff; }
+.scheme-dot[data-s="ember"]    { background: #ff9f0a; }
 
-        .pct-good    { color: var(--accent); font-weight: 700; }
-        .pct-ok      { color: var(--warn);   font-weight: 700; }
-        .pct-bad     { color: var(--danger); font-weight: 700; }
-        .pct-none    { color: var(--muted);  }
+.scheme-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-right: 4px;
+}
 
-        .trend-up   { color: var(--accent); }
-        .trend-down { color: var(--danger); }
-        .trend-flat { color: var(--muted); }
 
-        .session-item {
-            display: flex; align-items: center; gap: 10px;
-            padding: 12px 14px;
-            border-radius: var(--r-sm);
-            border: 1px solid var(--border);
-            background: var(--card);
-            margin-bottom: 8px;
-        }
-        .session-date { font-size: 12px; color: var(--muted); min-width: 44px; }
-        .session-mode { font-size: 14px; font-weight: 700; flex: 1; }
-        .session-pct { font-size: 14px; font-weight: 800; }
-        .session-check { font-size: 16px; }
+/* =============================================
+   SECTION LABEL
+   ============================================= */
 
-        .empty-state { text-align: center; padding: 48px 0; color: var(--muted); font-size: 15px; line-height: 1.6; }
-        .empty-state strong { display: block; font-size: 20px; color: var(--text); margin-bottom: 8px; }
+.section-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 24px 0 10px;
+}
 
-        .danger-btn {
-            width: 100%; padding: 12px;
-            border-radius: var(--r);
-            border: 1px solid var(--danger);
-            background: transparent;
-            color: var(--danger);
-            font-size: 14px; font-weight: 600;
-            cursor: pointer; margin-top: 32px; margin-bottom: 48px;
-        }
 
-        /* ===== TOAST ===== */
-        .toast {
-            position: fixed; top: 24px; left: 50%;
-            transform: translateX(-50%) translateY(-10px);
-            padding: 11px 22px;
-            border-radius: var(--r-pill);
-            font-size: 14px; font-weight: 700;
-            z-index: 1000; opacity: 0;
-            transition: opacity 0.25s, transform 0.25s;
-            pointer-events: none;
-            white-space: nowrap; max-width: 88vw;
-        }
-        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-        .toast.ok  { background: var(--accent); color: #fff; }
-        .toast.bad { background: var(--danger); color: #fff; }
+/* =============================================
+   MODE CARDS
+   ============================================= */
 
-        /* ===== CONFETTI ===== */
-        #confettiWrap { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 998; overflow: hidden; }
-        .confetti-bit { position: absolute; top: -12px; border-radius: 2px; animation: confettiFall linear forwards; }
+.mode-cards { display: flex; flex-direction: column; gap: 6px; }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes confettiFall {
-            to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-        }
-        @keyframes dotPop {
-            0%   { transform: scale(0.6); }
-            60%  { transform: scale(1.35); }
-            100% { transform: scale(1); }
-        }
-        @keyframes distPulse {
-            0%   { transform: scale(1);    color: var(--accent); }
-            40%  { transform: scale(1.18); color: #fff; }
-            100% { transform: scale(1);    color: var(--accent); }
-        }
-        @keyframes distShake {
-            0%, 100% { transform: translateX(0); }
-            20%      { transform: translateX(-9px); }
-            40%      { transform: translateX(9px); }
-            60%      { transform: translateX(-5px); }
-            80%      { transform: translateX(5px); }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(28px); opacity: 0; }
-            to   { transform: translateY(0);    opacity: 1; }
-        }
+.mode-card {
+    padding: 14px 16px 14px 18px;
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    background: var(--card);
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    user-select: none;
+}
+.mode-card.active {
+    border-left-color: var(--accent);
+    background: var(--accent-dim);
+}
+.mode-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    letter-spacing: -0.1px;
+}
+.mode-card.active .mode-card-title { color: var(--accent); }
+.mode-card-desc {
+    font-size: 13px;
+    color: var(--muted-2);
+    line-height: 1.45;
+}
 
-        .animate-advance { animation: distPulse 0.5s ease forwards; }
-        .animate-miss    { animation: distShake 0.4s ease; }
 
-        .hidden { display: none !important; }
+/* =============================================
+   PILLS
+   ============================================= */
+
+.pill-group { display: flex; gap: 7px; flex-wrap: wrap; }
+
+.pill {
+    padding: 8px 16px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border-mid);
+    background: var(--card);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+}
+.pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+    font-weight: 700;
+}
+
+
+/* =============================================
+   STEPPER ROWS
+   ============================================= */
+
+.stepper-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+    background: var(--card);
+    margin-bottom: 8px;
+}
+.stepper-label { font-size: 15px; font-weight: 600; }
+.stepper-sub   { font-size: 12px; color: var(--muted-2); margin-top: 2px; }
+
+.stepper { display: flex; align-items: center; gap: 14px; }
+
+.stepper-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border-mid);
+    background: var(--card-2);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    line-height: 1;
+}
+.stepper-value {
+    font-size: 22px;
+    font-weight: 800;
+    min-width: 30px;
+    text-align: center;
+    color: var(--accent);
+}
+
+
+/* =============================================
+   DISC LIST
+   ============================================= */
+
+.disc-list { display: flex; flex-direction: column; gap: 6px; }
+
+.disc-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    background: var(--card);
+}
+.disc-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.disc-name   { flex: 1; font-size: 14px; font-weight: 500; }
+.remove-btn  { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; padding: 2px 6px; line-height: 1; }
+
+.add-disc-row { display: flex; gap: 8px; margin-top: 6px; }
+
+.disc-input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border-mid);
+    background: var(--card);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.15s;
+}
+.disc-input:focus { border-color: var(--accent); }
+.disc-input::placeholder { color: var(--muted); }
+
+.add-btn {
+    padding: 10px 16px;
+    border-radius: var(--r-sm);
+    border: none;
+    background: var(--accent);
+    color: #000;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+
+.btn-primary {
+    width: 100%;
+    padding: 17px;
+    border-radius: var(--r);
+    border: none;
+    background: var(--accent);
+    color: #000;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: opacity 0.15s;
+}
+.btn-primary:active { opacity: 0.8; }
+
+.btn-ghost {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--r);
+    border: 1px solid var(--border-mid);
+    background: transparent;
+    color: var(--muted-2);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/* =============================================
+   DRILL SCREEN
+   ============================================= */
+
+.drill-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0 14px;
+    gap: 12px;
+}
+.drill-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted-2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex: 1;
+    text-align: center;
+}
+
+/* Progress steps */
+.progress-steps {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+}
+.progress-step { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.step-label    { font-size: 11px; color: var(--muted); font-weight: 600; }
+.step-active .step-label { color: var(--accent); font-weight: 700; }
+.step-dots     { display: flex; gap: 5px; }
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-mid);
+    transition: background 0.2s;
+}
+.dot.made { background: var(--accent); }
+
+/* Distance */
+.distance-display {
+    text-align: center;
+    padding: 28px 0 20px;
+}
+.distance-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+}
+.distance-number {
+    font-size: 88px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 0.95;
+    letter-spacing: -4px;
+    text-shadow: 0 0 48px var(--accent-glow), 0 0 96px var(--accent-glow);
+}
+.distance-unit {
+    font-size: 20px;
+    color: var(--muted-2);
+    margin-top: 10px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* Disc indicator */
+.disc-indicator {
+    text-align: center;
+    padding: 12px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    margin-bottom: 14px;
+}
+.disc-indicator-name { font-size: 17px; font-weight: 800; letter-spacing: -0.2px; }
+.disc-indicator-sub  { font-size: 13px; color: var(--muted-2); margin-top: 2px; }
+
+/* Session stats */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+}
+.stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 12px 8px;
+    text-align: center;
+}
+.stat-value { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+.stat-label { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* Undo */
+.undo-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+.undo-btn {
+    padding: 7px 14px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border-mid);
+    background: none;
+    color: var(--muted-2);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* HIT / MISS */
+.putt-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+
+.btn-hit {
+    padding: 36px 16px;
+    border-radius: var(--r);
+    border: none;
+    background: var(--accent);
+    color: #000;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    transition: opacity 0.1s;
+    user-select: none;
+}
+.btn-miss {
+    padding: 36px 16px;
+    border-radius: var(--r);
+    border: none;
+    background: var(--danger);
+    color: #fff;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    transition: opacity 0.1s;
+    user-select: none;
+}
+.btn-hit:active, .btn-miss:active { opacity: 0.8; }
+.btn-hit.disabled, .btn-miss.disabled { opacity: 0.35; pointer-events: none; }
+
+/* Streak dots */
+.streak-dots { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 12px 0; }
+.streak-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--border-mid);
+    transition: background 0.2s;
+}
+.streak-dot.made { background: var(--accent); }
+
+
+/* =============================================
+   COMPLETE SCREEN
+   ============================================= */
+
+.complete-hero {
+    text-align: center;
+    padding: 44px 0 28px;
+    animation: slideUp 0.45s cubic-bezier(0.22,1,0.36,1);
+}
+.complete-title {
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: -2px;
+    margin-bottom: 8px;
+    text-shadow: 0 0 40px var(--accent-glow);
+}
+.complete-sub { font-size: 15px; color: var(--muted-2); margin-bottom: 32px; }
+
+.dist-breakdown {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+}
+.dist-breakdown-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+}
+.dist-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-top: 1px solid var(--border);
+}
+.dist-row-label { font-size: 13px; font-weight: 600; min-width: 44px; }
+.dist-row-bar   { flex: 1; height: 5px; background: var(--border-mid); border-radius: 4px; overflow: hidden; }
+.dist-row-fill  { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.5s cubic-bezier(0.22,1,0.36,1); }
+.dist-row-pct   { font-size: 13px; font-weight: 700; min-width: 38px; text-align: right; }
+
+
+/* =============================================
+   STATS SCREEN
+   ============================================= */
+
+.stats-week-title { font-size: 18px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 12px; }
+
+.week-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+}
+.week-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 14px 8px;
+    text-align: center;
+}
+.week-val { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+.week-lbl { font-size: 10px; color: var(--muted); margin-top: 3px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+.dist-stats { margin-bottom: 24px; }
+.dist-stat-row { padding: 9px 0; border-top: 1px solid var(--border); }
+.dist-stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+.dist-stat-label { font-size: 13px; font-weight: 600; }
+.dist-stat-right { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.dist-stat-this  { font-weight: 700; }
+.dist-stat-last  { color: var(--muted-2); }
+.dist-stat-bar   { height: 5px; background: var(--border-mid); border-radius: 4px; overflow: hidden; }
+.dist-stat-fill  { height: 100%; border-radius: 4px; background: var(--accent); }
+.dist-stat-fill.warn { background: var(--warn); }
+.dist-stat-fill.bad  { background: var(--danger); }
+
+.trend-up   { color: var(--accent); font-weight: 700; }
+.trend-down { color: var(--danger); font-weight: 700; }
+.trend-flat { color: var(--muted);  }
+
+.session-list { display: flex; flex-direction: column; gap: 6px; }
+.session-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border);
+    background: var(--card);
+}
+.session-date  { font-size: 12px; color: var(--muted-2); min-width: 46px; font-weight: 500; }
+.session-mode  { font-size: 14px; font-weight: 700; flex: 1; }
+.session-pct   { font-size: 14px; font-weight: 800; }
+.session-check { font-size: 14px; min-width: 16px; text-align: center; }
+
+.pct-good  { color: var(--accent); }
+.pct-ok    { color: var(--warn);   }
+.pct-bad   { color: var(--danger); }
+.pct-none  { color: var(--muted);  }
+
+.empty-state {
+    text-align: center;
+    padding: 56px 0;
+    color: var(--muted-2);
+    font-size: 15px;
+    line-height: 1.7;
+}
+.empty-state strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+}
+
+.danger-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--r);
+    border: 1px solid var(--danger);
+    background: transparent;
+    color: var(--danger);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 32px;
+    margin-bottom: 48px;
+}
+
+.no-data { color: var(--muted); font-size: 13px; padding: 6px 0; }
+
+
+/* =============================================
+   TOAST
+   ============================================= */
+
+.toast {
+    position: fixed;
+    top: 26px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-12px);
+    padding: 11px 22px;
+    border-radius: var(--r-pill);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.22s, transform 0.22s;
+    pointer-events: none;
+    white-space: nowrap;
+    max-width: 88vw;
+    letter-spacing: 0.01em;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.ok   { background: var(--accent); color: #000; }
+.toast.bad  { background: var(--danger); color: #fff; }
+
+
+/* =============================================
+   CONFETTI
+   ============================================= */
+
+#confettiWrap {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 998;
+    overflow: hidden;
+}
+.confetti-bit {
+    position: absolute;
+    top: -12px;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+}
+
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+
+@keyframes confettiFall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+@keyframes distPulse {
+    0%   { transform: scale(1);    }
+    40%  { transform: scale(1.12); }
+    100% { transform: scale(1);    }
+}
+@keyframes distShake {
+    0%,100% { transform: translateX(0);  }
+    20%     { transform: translateX(-9px); }
+    40%     { transform: translateX(9px); }
+    60%     { transform: translateX(-5px); }
+    80%     { transform: translateX(5px); }
+}
+@keyframes slideUp {
+    from { transform: translateY(28px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes dotPop {
+    0%  { transform: scale(0.5); }
+    60% { transform: scale(1.4); }
+    100%{ transform: scale(1);   }
+}
+
+.animate-advance { animation: distPulse 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+.animate-miss    { animation: distShake 0.4s ease; }
+
+
+/* =============================================
+   UTILITY
+   ============================================= */
+
+.hidden { display: none !important; }
+
     </style>
 </head>
 <body>
@@ -383,56 +822,70 @@
 <div id="confettiWrap"></div>
 <div id="toast" class="toast"></div>
 
+
 <!-- =============================================
      SETUP SCREEN
      ============================================= -->
 <div id="setupScreen">
     <div class="header">
-        <div class="logo">Putte<span>App</span></div>
-        <div class="header-actions">
-            <button class="icon-btn stats-btn" onclick="showStats()">Statistikk</button>
-            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">M</button>
+        <div class="logo">
+            <span class="logo-air">Air</span><span class="logo-mail">mail</span>
+        </div>
+        <div class="header-right">
+            <button class="icon-btn" onclick="showStats()">Statistikk</button>
+            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">Lys</button>
         </div>
     </div>
 
-    <div class="section-label">Velg drill</div>
+    <!-- Color scheme picker -->
+    <div class="scheme-picker">
+        <span class="scheme-label">Farge</span>
+        <div class="scheme-dot active" data-s="standard" onclick="setScheme('standard')"></div>
+        <div class="scheme-dot" data-s="neon"     onclick="setScheme('neon')"></div>
+        <div class="scheme-dot" data-s="sport"    onclick="setScheme('sport')"></div>
+        <div class="scheme-dot" data-s="ocean"    onclick="setScheme('ocean')"></div>
+        <div class="scheme-dot" data-s="ember"    onclick="setScheme('ember')"></div>
+    </div>
 
-    <div class="mode-card active" id="mode-c1" onclick="selectMode('c1')">
-        <div class="mode-card-title">C1 Stige</div>
-        <div class="mode-card-desc">Sett X putter fra 3,3 m, 6,6 m og 10 m. Bommer du på en avstand starter du helt fra begynnelsen.</div>
-    </div>
-    <div class="mode-card" id="mode-c2" onclick="selectMode('c2')">
-        <div class="mode-card-title">C2 Stige</div>
-        <div class="mode-card-desc">Sett X putter fra 10 m, 15 m og 20 m. Bommer du på en avstand starter du helt fra begynnelsen.</div>
-    </div>
-    <div class="mode-card" id="mode-full" onclick="selectMode('full')">
-        <div class="mode-card-title">Full Stige</div>
-        <div class="mode-card-desc">C1 og C2 kombinert. Alle fem avstandene: 3,3 m, 6,6 m, 10 m, 15 m og 20 m.</div>
-    </div>
-    <div class="mode-card" id="mode-streak" onclick="selectMode('streak')">
-        <div class="mode-card-title">X på rad</div>
-        <div class="mode-card-desc">Velg en avstand og sett X putter på rad. Én miss og du starter telleren på nytt.</div>
-    </div>
-    <div class="mode-card" id="mode-free" onclick="selectMode('free')">
-        <div class="mode-card-title">Fri økt</div>
-        <div class="mode-card-desc">Ingen regler, bare tell treff og miss. Bytt avstand når du vil.</div>
+    <div class="section-label">Velg drill</div>
+    <div class="mode-cards">
+        <div class="mode-card active" id="mode-c1" onclick="selectMode('c1')">
+            <div class="mode-card-title">C1 Stige</div>
+            <div class="mode-card-desc">Sett X putter fra 3,3 m, 6,6 m og 10 m. Bommer du starter du fra begynnelsen.</div>
+        </div>
+        <div class="mode-card" id="mode-c2" onclick="selectMode('c2')">
+            <div class="mode-card-title">C2 Stige</div>
+            <div class="mode-card-desc">Sett X putter fra 10 m, 15 m og 20 m. Bommer du starter du fra begynnelsen.</div>
+        </div>
+        <div class="mode-card" id="mode-full" onclick="selectMode('full')">
+            <div class="mode-card-title">Full Stige</div>
+            <div class="mode-card-desc">C1 og C2 kombinert. Alle fem avstandene fra 3,3 m til 20 m.</div>
+        </div>
+        <div class="mode-card" id="mode-streak" onclick="selectMode('streak')">
+            <div class="mode-card-title">X på rad</div>
+            <div class="mode-card-desc">Velg en avstand og sett X putter på rad. Én miss nullstiller telleren.</div>
+        </div>
+        <div class="mode-card" id="mode-free" onclick="selectMode('free')">
+            <div class="mode-card-title">Fri økt</div>
+            <div class="mode-card-desc">Ingen regler, bare tell treff og miss. Bytt avstand når du vil.</div>
+        </div>
     </div>
 
     <div id="streakSection" class="hidden">
         <div class="section-label">Avstand</div>
         <div class="pill-group" id="streakPills">
-            <button class="pill active" onclick="setStreakDist(this, 3.3)">3,3 m</button>
-            <button class="pill" onclick="setStreakDist(this, 6.6)">6,6 m</button>
-            <button class="pill" onclick="setStreakDist(this, 10)">10 m</button>
-            <button class="pill" onclick="setStreakDist(this, 15)">15 m</button>
-            <button class="pill" onclick="setStreakDist(this, 20)">20 m</button>
+            <button class="pill active" onclick="setStreakDist(this,3.3)">3,3 m</button>
+            <button class="pill" onclick="setStreakDist(this,6.6)">6,6 m</button>
+            <button class="pill" onclick="setStreakDist(this,10)">10 m</button>
+            <button class="pill" onclick="setStreakDist(this,15)">15 m</button>
+            <button class="pill" onclick="setStreakDist(this,20)">20 m</button>
         </div>
     </div>
 
-    <div class="section-label">Treffer per avstand</div>
+    <div class="section-label">Krav per avstand</div>
     <div class="stepper-row">
         <div>
-            <div class="stepper-label">Krav</div>
+            <div class="stepper-label">Nødvendige treff</div>
             <div class="stepper-sub">Du må sette alle for å gå videre</div>
         </div>
         <div class="stepper">
@@ -443,13 +896,13 @@
     </div>
 
     <div class="section-label">Dine discer</div>
-    <div id="discList"></div>
+    <div class="disc-list" id="discList"></div>
     <div class="add-disc-row">
         <input class="disc-input" id="discInput" placeholder="Legg til disc..." />
         <button class="add-btn" onclick="addDisc()">Legg til</button>
     </div>
 
-    <div class="section-label" style="margin-top:20px">Discer i hånden</div>
+    <div class="section-label">Discer i hånden</div>
     <div class="stepper-row">
         <div>
             <div class="stepper-label">Antall</div>
@@ -462,8 +915,9 @@
         </div>
     </div>
 
-    <button class="btn-primary" onclick="startDrill()" style="margin-top:20px; margin-bottom:48px">Start drill</button>
+    <button class="btn-primary" onclick="startDrill()" style="margin-top:24px;margin-bottom:48px">Start drill</button>
 </div>
+
 
 <!-- =============================================
      DRILL SCREEN
@@ -472,7 +926,7 @@
     <div class="drill-topbar">
         <button class="icon-btn" onclick="goBack()">&#8592;</button>
         <div class="drill-title" id="drillTitle">C1 Stige</div>
-        <button class="icon-btn" onclick="toggleTheme()">M</button>
+        <button class="icon-btn" onclick="toggleTheme()">Lys</button>
     </div>
 
     <div id="progressSteps" class="progress-steps"></div>
@@ -487,11 +941,11 @@
 
     <div id="freePills" class="hidden" style="margin-bottom:14px">
         <div class="pill-group">
-            <button class="pill active" onclick="setFreeDist(this, 3.3)">3,3 m</button>
-            <button class="pill" onclick="setFreeDist(this, 6.6)">6,6 m</button>
-            <button class="pill" onclick="setFreeDist(this, 10)">10 m</button>
-            <button class="pill" onclick="setFreeDist(this, 15)">15 m</button>
-            <button class="pill" onclick="setFreeDist(this, 20)">20 m</button>
+            <button class="pill active" onclick="setFreeDist(this,3.3)">3,3 m</button>
+            <button class="pill" onclick="setFreeDist(this,6.6)">6,6 m</button>
+            <button class="pill" onclick="setFreeDist(this,10)">10 m</button>
+            <button class="pill" onclick="setFreeDist(this,15)">15 m</button>
+            <button class="pill" onclick="setFreeDist(this,20)">20 m</button>
         </div>
     </div>
 
@@ -518,61 +972,64 @@
     <button class="btn-ghost" onclick="restartDrill()">Start drill på nytt</button>
 </div>
 
+
 <!-- =============================================
      COMPLETE SCREEN
      ============================================= -->
 <div id="completeScreen" class="hidden">
     <div class="header">
-        <div class="logo">Putte<span>App</span></div>
-        <button class="icon-btn" onclick="toggleTheme()">M</button>
+        <div class="logo">
+            <span class="logo-air">Air</span><span class="logo-mail">mail</span>
+        </div>
+        <button class="icon-btn" onclick="toggleTheme()">Lys</button>
     </div>
     <div class="complete-hero">
-        <div class="complete-title">Fullført!</div>
+        <div class="complete-title">Fullført</div>
         <div class="complete-sub" id="completeSub"></div>
     </div>
-    <div class="stats-row" style="margin-bottom:28px">
+    <div class="stats-row" style="margin-bottom:20px">
         <div class="stat-box"><div class="stat-value" id="finalMade">0</div><div class="stat-label">Treff</div></div>
         <div class="stat-box"><div class="stat-value" id="finalMissed">0</div><div class="stat-label">Bom</div></div>
         <div class="stat-box"><div class="stat-value" id="finalPct">0%</div><div class="stat-label">Prosent</div></div>
     </div>
-    <div id="completeDists" style="margin-bottom:24px"></div>
+    <div id="completeDists"></div>
     <button class="btn-primary" onclick="restartDrill()">Kjør igjen</button>
-    <button class="btn-ghost" style="margin-top:12px" onclick="goBack()">Tilbake til oppsett</button>
+    <button class="btn-ghost" style="margin-top:10px" onclick="goBack()">Tilbake til oppsett</button>
 </div>
+
 
 <!-- =============================================
      STATS SCREEN
      ============================================= -->
 <div id="statsScreen" class="hidden">
     <div class="header">
-        <div class="logo">Putte<span>App</span></div>
-        <div class="header-actions">
+        <div class="logo">
+            <span class="logo-air">Air</span><span class="logo-mail">mail</span>
+        </div>
+        <div class="header-right">
             <button class="icon-btn" onclick="hideStats()">&#8592;</button>
-            <button class="icon-btn" onclick="toggleTheme()">M</button>
+            <button class="icon-btn" onclick="toggleTheme()">Lys</button>
         </div>
     </div>
-
     <div id="statsContent"></div>
 </div>
+
 
 <script>
 // ================================================
 //  STORAGE
 // ================================================
-const SK = 'putteapp_v2';
+var SK = 'putteapp_v2';
 
 function loadSessions() {
-    try { return JSON.parse(localStorage.getItem(SK) || '[]'); }
-    catch(e) { return []; }
+    try { return JSON.parse(localStorage.getItem(SK) || '[]'); } catch(e) { return []; }
 }
-
 function storeSession(s) {
-    const all = loadSessions();
+    var all = loadSessions();
     all.push(s);
     while (all.length > 500) all.shift();
     try { localStorage.setItem(SK, JSON.stringify(all)); } catch(e) {}
 }
-
 function clearAllSessions() {
     if (confirm('Slett all statistikk? Dette kan ikke angres.')) {
         localStorage.removeItem(SK);
@@ -584,59 +1041,74 @@ function clearAllSessions() {
 //  WEEK HELPERS
 // ================================================
 function isoWeekKey(date) {
-    const d = new Date(date);
-    d.setHours(0, 0, 0, 0);
+    var d = new Date(date);
+    d.setHours(0,0,0,0);
     d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
-    const w1 = new Date(d.getFullYear(), 0, 4);
-    const wn = 1 + Math.round(((d - w1) / 86400000 - 3 + (w1.getDay() + 6) % 7) / 7);
+    var w1 = new Date(d.getFullYear(), 0, 4);
+    var wn = 1 + Math.round(((d - w1) / 86400000 - 3 + (w1.getDay() + 6) % 7) / 7);
     return d.getFullYear() + '-W' + String(wn).padStart(2, '0');
 }
-
-function thisWeek() { return isoWeekKey(new Date()); }
-function lastWeek() { const d = new Date(); d.setDate(d.getDate() - 7); return isoWeekKey(d); }
-
-function sessionsByWeek(key) {
-    return loadSessions().filter(s => isoWeekKey(s.date) === key);
-}
+function thisWeekKey() { return isoWeekKey(new Date()); }
+function lastWeekKey() { var d = new Date(); d.setDate(d.getDate() - 7); return isoWeekKey(d); }
+function sessionsByWeek(key) { return loadSessions().filter(function(s){ return isoWeekKey(s.date) === key; }); }
 
 // ================================================
 //  STATE
 // ================================================
-let theme       = 'dark';
-let selectedMode = 'c1';
-let requiredMakes = 3;
-let discCount   = 3;
-let streakDist  = 3.3;
-let freeDist    = 3.3;
+var theme        = 'dark';
+var colorScheme  = 'standard';
+var selectedMode = 'c1';
+var requiredMakes = 3;
+var discCount    = 3;
+var streakDist   = 3.3;
+var freeDist     = 3.3;
 
-let discs = [
+var discs = [
     { name: 'Roc3',   selected: true },
     { name: 'Aviar',  selected: true },
     { name: 'Wizard', selected: true },
 ];
 
-// Drill runtime
-let distances        = [];
-let currentDistIdx   = 0;
-let madeAtCurrent    = 0;
-let currentDiscIdx   = 0;
-let totalMade        = 0;
-let totalAttempts    = 0;
-let streakCount      = 0;
-let freeDist_rt      = 3.3;
-let sessionDistStats = {};   // { '3.3': { made, attempts }, ... }
-let history          = [];
-let processing       = false;
-let drillStarted     = false;
+var distances        = [];
+var currentDistIdx   = 0;
+var madeAtCurrent    = 0;
+var currentDiscIdx   = 0;
+var totalMade        = 0;
+var totalAttempts    = 0;
+var streakCount      = 0;
+var freeDist_rt      = 3.3;
+var sessionDistStats = {};
+var history          = [];
+var processing       = false;
+var drillStarted     = false;
+
+// ================================================
+//  SCHEME
+// ================================================
+function setScheme(name) {
+    colorScheme = name;
+    document.documentElement.setAttribute('data-scheme', name);
+    document.querySelectorAll('.scheme-dot').forEach(function(d) {
+        d.classList.toggle('active', d.dataset.s === name);
+    });
+    try { localStorage.setItem('putteapp_scheme', name); } catch(e) {}
+}
+
+function loadScheme() {
+    try {
+        var s = localStorage.getItem('putteapp_scheme');
+        if (s) setScheme(s);
+    } catch(e) {}
+}
 
 // ================================================
 //  SETUP
 // ================================================
 function renderDiscList() {
-    const el = document.getElementById('discList');
+    var el = document.getElementById('discList');
     el.innerHTML = '';
     discs.forEach(function(d, i) {
-        const row = document.createElement('div');
+        var row = document.createElement('div');
         row.className = 'disc-item';
         row.innerHTML =
             '<input type="checkbox"' + (d.selected ? ' checked' : '') + ' onchange="toggleDisc(' + i + ',this.checked)">' +
@@ -645,33 +1117,20 @@ function renderDiscList() {
         el.appendChild(row);
     });
 }
-
 function toggleDisc(i, v) { discs[i].selected = v; }
-
 function removeDisc(i) { discs.splice(i, 1); renderDiscList(); }
-
 function addDisc() {
-    const input = document.getElementById('discInput');
-    const name = input.value.trim();
+    var input = document.getElementById('discInput');
+    var name = input.value.trim();
     if (!name) return;
     discs.push({ name: name, selected: true });
     input.value = '';
     renderDiscList();
 }
+document.getElementById('discInput').addEventListener('keydown', function(e) { if (e.key === 'Enter') addDisc(); });
 
-document.getElementById('discInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') addDisc();
-});
-
-function changeRequired(d) {
-    requiredMakes = Math.max(1, Math.min(20, requiredMakes + d));
-    document.getElementById('requiredValue').textContent = requiredMakes;
-}
-
-function changeDiscCount(d) {
-    discCount = Math.max(1, Math.min(20, discCount + d));
-    document.getElementById('discCountValue').textContent = discCount;
-}
+function changeRequired(d) { requiredMakes = Math.max(1, Math.min(20, requiredMakes + d)); document.getElementById('requiredValue').textContent = requiredMakes; }
+function changeDiscCount(d) { discCount = Math.max(1, Math.min(20, discCount + d)); document.getElementById('discCountValue').textContent = discCount; }
 
 function selectMode(mode) {
     selectedMode = mode;
@@ -679,7 +1138,6 @@ function selectMode(mode) {
     document.getElementById('mode-' + mode).classList.add('active');
     document.getElementById('streakSection').classList.toggle('hidden', mode !== 'streak');
 }
-
 function setStreakDist(btn, d) {
     streakDist = d;
     document.querySelectorAll('#streakPills .pill').forEach(function(el) { el.classList.remove('active'); });
@@ -699,31 +1157,19 @@ function getDistances() {
         default:       return [3.3, 6.6, 10];
     }
 }
-
 function activeDiscs() { return discs.filter(function(d) { return d.selected; }); }
 
 function startDrill() {
     if (activeDiscs().length === 0) { showToast('Velg minst én disc', false); return; }
-    distances        = getDistances();
-    currentDistIdx   = 0;
-    madeAtCurrent    = 0;
-    currentDiscIdx   = 0;
-    totalMade        = 0;
-    totalAttempts    = 0;
-    streakCount      = 0;
-    sessionDistStats = {};
-    freeDist_rt      = distances[0];
-    history          = [];
-    processing       = false;
-    drillStarted     = false;
+    distances = getDistances();
+    currentDistIdx = 0; madeAtCurrent = 0; currentDiscIdx = 0;
+    totalMade = 0; totalAttempts = 0; streakCount = 0;
+    sessionDistStats = {}; freeDist_rt = distances[0];
+    history = []; processing = false; drillStarted = false;
 
-    show('drillScreen');
-    hide('setupScreen');
-    hide('completeScreen');
-
+    show('drillScreen'); hide('setupScreen'); hide('completeScreen');
     var titles = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X på rad', free: 'Fri økt' };
     document.getElementById('drillTitle').textContent = titles[selectedMode];
-
     document.getElementById('freePills').classList.toggle('hidden', selectedMode !== 'free');
     updateDrillUI();
 }
@@ -732,15 +1178,11 @@ function startDrill() {
 //  DRILL UI
 // ================================================
 function fmt(d) { return d.toString().replace('.', ','); }
-
-function currentDrillDist() {
-    return selectedMode === 'free' ? freeDist_rt : distances[currentDistIdx];
-}
+function currentDrillDist() { return selectedMode === 'free' ? freeDist_rt : distances[currentDistIdx]; }
 
 function updateDrillUI() {
     var active = activeDiscs();
     var dist   = currentDrillDist();
-
     document.getElementById('distNumber').textContent = fmt(dist);
 
     var dIdx = currentDiscIdx % active.length;
@@ -782,13 +1224,9 @@ function renderProgressSteps() {
     var container = document.getElementById('progressSteps');
     container.innerHTML = '';
     if (selectedMode === 'streak' || selectedMode === 'free') return;
-
     distances.forEach(function(dist, idx) {
         var step = document.createElement('div');
-        var cls  = 'progress-step';
-        if (idx === currentDistIdx) cls += ' step-active';
-        step.className = cls;
-
+        step.className = 'progress-step' + (idx === currentDistIdx ? ' step-active' : '');
         var dots = '';
         for (var i = 0; i < requiredMakes; i++) {
             var dc = 'dot';
@@ -796,9 +1234,7 @@ function renderProgressSteps() {
             else if (idx === currentDistIdx && i < madeAtCurrent) dc += ' made';
             dots += '<div class="' + dc + '"></div>';
         }
-        step.innerHTML =
-            '<div class="step-label">' + fmt(dist) + ' m</div>' +
-            '<div class="step-dots">' + dots + '</div>';
+        step.innerHTML = '<div class="step-label">' + fmt(dist) + ' m</div><div class="step-dots">' + dots + '</div>';
         container.appendChild(step);
     });
 }
@@ -841,11 +1277,9 @@ function recordPutt(made) {
             updateDrillUI();
             if (streakCount >= requiredMakes) {
                 setTimeout(function() { completeDrill(); }, 350);
-            } else {
-                animateDotPop(streakCount - 1);
             }
         } else {
-            if (streakCount > 0) showToast('Rekken brutt! Tilbake til 0', false);
+            if (streakCount > 0) showToast('Rekken brutt. Tilbake til 0', false);
             streakCount = 0;
             currentDiscIdx++;
             updateDrillUI();
@@ -853,46 +1287,35 @@ function recordPutt(made) {
         return;
     }
 
-    // Stige modes
     if (made) {
         madeAtCurrent++;
         currentDiscIdx++;
         updateDrillUI();
-
         if (madeAtCurrent >= requiredMakes) {
             currentDistIdx++;
             if (currentDistIdx >= distances.length) {
-                processing = true;
-                lockButtons();
-                animateAdvance(function() {
-                    completeDrill();
-                    processing = false;
-                    unlockButtons();
-                });
+                processing = true; lockButtons();
+                animateAdvance(function() { completeDrill(); processing = false; unlockButtons(); });
             } else {
-                processing = true;
-                lockButtons();
+                processing = true; lockButtons();
                 animateAdvance(function() {
                     madeAtCurrent = 0;
                     updateDrillUI();
                     showToast('Neste: ' + fmt(distances[currentDistIdx]) + ' m', true);
-                    processing = false;
-                    unlockButtons();
+                    processing = false; unlockButtons();
                 });
             }
         }
     } else {
         var hadProgress = currentDistIdx > 0 || madeAtCurrent > 0;
-        currentDistIdx  = 0;
-        madeAtCurrent   = 0;
-        currentDiscIdx  = 0;
+        currentDistIdx = 0; madeAtCurrent = 0; currentDiscIdx = 0;
         if (hadProgress) {
             animateMiss(function() {
-                showToast('Miss! Starter fra ' + fmt(distances[0]) + ' m', false);
+                showToast('Miss. Starter fra ' + fmt(distances[0]) + ' m', false);
                 updateDrillUI();
             });
         } else {
-            showToast('Miss!', false);
+            showToast('Miss', false);
             updateDrillUI();
         }
     }
@@ -904,55 +1327,31 @@ function recordPutt(made) {
 function animateAdvance(cb) {
     var el = document.getElementById('distNumber');
     el.classList.add('animate-advance');
-    setTimeout(function() {
-        el.classList.remove('animate-advance');
-        if (cb) cb();
-    }, 520);
+    setTimeout(function() { el.classList.remove('animate-advance'); if (cb) cb(); }, 520);
 }
-
 function animateMiss(cb) {
     var el = document.getElementById('distNumber');
     el.classList.add('animate-miss');
-    setTimeout(function() {
-        el.classList.remove('animate-miss');
-        if (cb) cb();
-    }, 420);
+    setTimeout(function() { el.classList.remove('animate-miss'); if (cb) cb(); }, 420);
 }
-
-function animateDotPop(idx) {
-    var dots = document.querySelectorAll('#streakDots .streak-dot');
-    if (dots[idx]) {
-        dots[idx].classList.add('pop');
-        setTimeout(function() { dots[idx].classList.remove('pop'); }, 400);
-    }
-}
-
-function lockButtons() {
-    document.getElementById('btnHit').classList.add('disabled');
-    document.getElementById('btnMiss').classList.add('disabled');
-}
-
-function unlockButtons() {
-    document.getElementById('btnHit').classList.remove('disabled');
-    document.getElementById('btnMiss').classList.remove('disabled');
-}
+function lockButtons()   { document.getElementById('btnHit').classList.add('disabled'); document.getElementById('btnMiss').classList.add('disabled'); }
+function unlockButtons() { document.getElementById('btnHit').classList.remove('disabled'); document.getElementById('btnMiss').classList.remove('disabled'); }
 
 function showConfetti() {
-    var colors = ['#3fb950','#58a6ff','#f0883e','#bc8cff','#ff7b72','#ffa657'];
+    var colors = ['#30d158','#58a6ff','#ff9f0a','#bf5af2','#ff375f','#ffd60a'];
     var wrap   = document.getElementById('confettiWrap');
     wrap.innerHTML = '';
     for (var i = 0; i < 70; i++) {
-        var bit = document.createElement('div');
+        var bit  = document.createElement('div');
         bit.className = 'confetti-bit';
-        var size = 6 + Math.random() * 8;
+        var size = 5 + Math.random() * 9;
         bit.style.cssText =
-            'left:'               + (Math.random() * 100) + '%;' +
-            'background:'        + colors[Math.floor(Math.random() * colors.length)] + ';' +
-            'animation-delay:'   + (Math.random() * 0.6) + 's;' +
-            'animation-duration:'+ (0.9 + Math.random() * 0.9) + 's;' +
-            'width:'             + size + 'px;' +
-            'height:'            + size + 'px;' +
-            'border-radius:'     + (Math.random() > 0.5 ? '50%' : '3px') + ';';
+            'left:' + (Math.random() * 100) + '%;' +
+            'background:' + colors[Math.floor(Math.random() * colors.length)] + ';' +
+            'animation-delay:' + (Math.random() * 0.6) + 's;' +
+            'animation-duration:' + (0.8 + Math.random() * 0.9) + 's;' +
+            'width:' + size + 'px;height:' + size + 'px;' +
+            'border-radius:' + (Math.random() > 0.5 ? '50%' : '3px') + ';';
         wrap.appendChild(bit);
     }
     setTimeout(function() { wrap.innerHTML = ''; }, 2200);
@@ -964,20 +1363,17 @@ function showConfetti() {
 function undoLast() {
     if (history.length === 0) { showToast('Ingenting å angre', false); return; }
     var prev = history.pop();
-    totalMade        = prev.totalMade;
-    totalAttempts    = prev.totalAttempts;
-    currentDistIdx   = prev.currentDistIdx;
-    madeAtCurrent    = prev.madeAtCurrent;
-    currentDiscIdx   = prev.currentDiscIdx;
-    streakCount      = prev.streakCount;
-    freeDist_rt      = prev.freeDist_rt;
+    totalMade = prev.totalMade; totalAttempts = prev.totalAttempts;
+    currentDistIdx = prev.currentDistIdx; madeAtCurrent = prev.madeAtCurrent;
+    currentDiscIdx = prev.currentDiscIdx; streakCount = prev.streakCount;
+    freeDist_rt = prev.freeDist_rt;
     sessionDistStats = prev.sessionDistStats;
     updateDrillUI();
     showToast('Angret', true);
 }
 
 // ================================================
-//  FREE MODE DISTANCE
+//  FREE MODE
 // ================================================
 function setFreeDist(btn, d) {
     freeDist_rt = d;
@@ -991,31 +1387,18 @@ function setFreeDist(btn, d) {
 //  RESTART / BACK
 // ================================================
 function restartDrill() {
-    currentDistIdx   = 0;
-    madeAtCurrent    = 0;
-    currentDiscIdx   = 0;
-    totalMade        = 0;
-    totalAttempts    = 0;
-    streakCount      = 0;
-    sessionDistStats = {};
-    history          = [];
-    processing       = false;
-    drillStarted     = false;
-    freeDist_rt      = distances[0];
-
+    currentDistIdx = 0; madeAtCurrent = 0; currentDiscIdx = 0;
+    totalMade = 0; totalAttempts = 0; streakCount = 0;
+    sessionDistStats = {}; history = []; processing = false; drillStarted = false;
+    freeDist_rt = distances[0];
     unlockButtons();
-    hide('completeScreen');
-    show('drillScreen');
+    hide('completeScreen'); show('drillScreen');
     updateDrillUI();
 }
 
 function goBack() {
-    if (drillStarted && totalAttempts > 0) {
-        saveCurrentSession(false);
-    }
-    hide('drillScreen');
-    hide('completeScreen');
-    show('setupScreen');
+    if (drillStarted && totalAttempts > 0) saveCurrentSession(false);
+    hide('drillScreen'); hide('completeScreen'); show('setupScreen');
 }
 
 // ================================================
@@ -1033,74 +1416,49 @@ function completeDrill() {
     document.getElementById('finalPct').textContent    = pct + '%';
     document.getElementById('completeSub').textContent = totalMade + ' av ' + totalAttempts + ' putter (' + pct + '%)';
 
-    // Per distance breakdown on complete screen
+    var allKeys = Object.keys(sessionDistStats).sort(function(a,b){ return parseFloat(a) - parseFloat(b); });
     var distHtml = '';
-    var allDists = Object.keys(sessionDistStats).sort(function(a,b){ return parseFloat(a) - parseFloat(b); });
-    if (allDists.length > 1) {
-        distHtml = '<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:16px">';
-        distHtml += '<div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Fordelt per avstand</div>';
-        allDists.forEach(function(key) {
+    if (allKeys.length > 1) {
+        distHtml += '<div class="dist-breakdown"><div class="dist-breakdown-title">Fordelt per avstand</div>';
+        allKeys.forEach(function(key) {
             var s   = sessionDistStats[key];
             var p   = s.attempts > 0 ? Math.round(s.made / s.attempts * 100) : 0;
             var cls = p >= 75 ? 'pct-good' : p >= 50 ? 'pct-ok' : 'pct-bad';
             distHtml +=
-                '<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--border)">' +
-                '<span style="font-weight:600">' + fmt(parseFloat(key)) + ' m</span>' +
-                '<span>' + s.made + '/' + s.attempts + '</span>' +
-                '<span class="' + cls + '">' + p + '%</span>' +
+                '<div class="dist-row">' +
+                '<span class="dist-row-label">' + fmt(parseFloat(key)) + ' m</span>' +
+                '<div class="dist-row-bar"><div class="dist-row-fill" style="width:' + p + '%"></div></div>' +
+                '<span class="dist-row-pct ' + cls + '">' + p + '%</span>' +
                 '</div>';
         });
         distHtml += '</div>';
     }
     document.getElementById('completeDists').innerHTML = distHtml;
-
-    hide('drillScreen');
-    show('completeScreen');
+    hide('drillScreen'); show('completeScreen');
 }
 
-// ================================================
-//  SAVE SESSION
-// ================================================
 function saveCurrentSession(completed) {
     if (totalAttempts === 0) return;
-    var modeLabels = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X på rad', free: 'Fri økt' };
+    var labels = { c1: 'C1 Stige', c2: 'C2 Stige', full: 'Full Stige', streak: 'X på rad', free: 'Fri økt' };
     storeSession({
-        id:            Date.now(),
-        date:          new Date().toISOString(),
-        mode:          selectedMode,
-        modeLabel:     modeLabels[selectedMode],
+        id: Date.now(), date: new Date().toISOString(),
+        mode: selectedMode, modeLabel: labels[selectedMode],
         distanceStats: JSON.parse(JSON.stringify(sessionDistStats)),
-        totalMade:     totalMade,
-        totalAttempts: totalAttempts,
-        completed:     completed
+        totalMade: totalMade, totalAttempts: totalAttempts, completed: completed
     });
 }
 
 // ================================================
 //  STATS SCREEN
 // ================================================
-function showStats() {
-    renderStatsContent();
-    hide('setupScreen');
-    show('statsScreen');
-}
+function showStats() { renderStatsContent(); hide('setupScreen'); show('statsScreen'); }
+function hideStats() { hide('statsScreen'); show('setupScreen'); }
 
-function hideStats() {
-    hide('statsScreen');
-    show('setupScreen');
-}
-
-function pctClass(p) {
-    if (p === null) return 'pct-none';
-    if (p >= 75) return 'pct-good';
-    if (p >= 50) return 'pct-ok';
-    return 'pct-bad';
-}
-
+function pctCls(p) { return p === null ? 'pct-none' : p >= 75 ? 'pct-good' : p >= 50 ? 'pct-ok' : 'pct-bad'; }
 function pctStr(p) { return p === null ? '—' : p + '%'; }
 
-function trendHTML(cur, prev) {
-    if (prev === null || cur === null) return '<span class="trend-flat">—</span>';
+function trendSpan(cur, prev) {
+    if (cur === null || prev === null) return '<span class="trend-flat">—</span>';
     if (cur > prev + 3) return '<span class="trend-up">↑</span>';
     if (cur < prev - 3) return '<span class="trend-down">↓</span>';
     return '<span class="trend-flat">→</span>';
@@ -1125,97 +1483,94 @@ function getPct(agg, key) {
 }
 
 function fmtDate(iso) {
-    var d     = new Date(iso);
-    var now   = new Date();
-    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    var yday  = new Date(today.getTime() - 86400000);
-    var sd    = new Date(d.getFullYear(), d.getMonth(), d.getDate());
-    if (sd.getTime() === today.getTime()) return 'I dag';
-    if (sd.getTime() === yday.getTime())  return 'I går';
+    var d    = new Date(iso);
+    var now  = new Date();
+    var tod  = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var yd   = new Date(tod.getTime() - 86400000);
+    var sd   = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    if (sd.getTime() === tod.getTime()) return 'I dag';
+    if (sd.getTime() === yd.getTime())  return 'I går';
     return d.toLocaleDateString('no-NO', { day: 'numeric', month: 'short' });
 }
 
 function renderStatsContent() {
     var all      = loadSessions();
-    var thisW    = sessionsByWeek(thisWeek());
-    var lastW    = sessionsByWeek(lastWeek());
+    var thisW    = sessionsByWeek(thisWeekKey());
+    var lastW    = sessionsByWeek(lastWeekKey());
     var thisAgg  = aggregateDists(thisW);
     var lastAgg  = aggregateDists(lastW);
     var allDists = ['3.3','6.6','10','15','20'];
 
-    var html = '';
-
     if (all.length === 0) {
-        html =
-            '<div class="empty-state">' +
-            '<strong>Ingen data ennå</strong>' +
-            'Fullfør en drill for å se statistikk her.' +
-            '</div>';
-        document.getElementById('statsContent').innerHTML = html;
+        document.getElementById('statsContent').innerHTML =
+            '<div class="empty-state"><strong>Ingen data ennå</strong>Fullfør en drill for å se statistikken din her.</div>';
         return;
     }
 
+    var html = '';
+
     // This week summary
-    var twMade = thisW.reduce(function(a,s) { return a + s.totalMade; }, 0);
-    var twAtt  = thisW.reduce(function(a,s) { return a + s.totalAttempts; }, 0);
-    var twDone = thisW.filter(function(s) { return s.completed; }).length;
+    var twMade = thisW.reduce(function(a,s){ return a + s.totalMade; }, 0);
+    var twAtt  = thisW.reduce(function(a,s){ return a + s.totalAttempts; }, 0);
+    var twDone = thisW.filter(function(s){ return s.completed; }).length;
     var twPct  = twAtt > 0 ? Math.round(twMade / twAtt * 100) : 0;
 
-    html += '<div class="stat-week-header">Denne uken</div>';
+    html += '<div class="stats-week-title">Denne uken</div>';
 
     if (thisW.length === 0) {
-        html += '<div style="color:var(--muted);font-size:14px;margin-bottom:20px">Ingen økter denne uken ennå.</div>';
+        html += '<div class="no-data" style="margin-bottom:20px">Ingen registrerte økter denne uken.</div>';
     } else {
         html +=
-            '<div class="stat-summary-row">' +
-            '<div class="stat-mini-box"><div class="stat-mini-val">' + thisW.length + '</div><div class="stat-mini-lbl">Økter</div></div>' +
-            '<div class="stat-mini-box"><div class="stat-mini-val">' + twDone + '</div><div class="stat-mini-lbl">Fullført</div></div>' +
-            '<div class="stat-mini-box"><div class="stat-mini-val ' + pctClass(twPct) + '">' + twPct + '%</div><div class="stat-mini-lbl">Treff</div></div>' +
+            '<div class="week-summary">' +
+            '<div class="week-box"><div class="week-val">' + thisW.length + '</div><div class="week-lbl">Økter</div></div>' +
+            '<div class="week-box"><div class="week-val">' + twDone + '</div><div class="week-lbl">Fullført</div></div>' +
+            '<div class="week-box"><div class="week-val ' + pctCls(twPct) + '">' + twPct + '%</div><div class="week-lbl">Treff</div></div>' +
             '</div>';
     }
 
-    // Distance breakdown
-    var hasAnyDist = allDists.some(function(k) {
+    // Per distance
+    var hasData = allDists.some(function(k) {
         return (thisAgg[k] && thisAgg[k].attempts > 0) || (lastAgg[k] && lastAgg[k].attempts > 0);
     });
 
-    if (hasAnyDist) {
-        html +=
-            '<div class="section-label">Per avstand</div>' +
-            '<table class="dist-table">' +
-            '<thead><tr><th>Avstand</th><th>Denne</th><th>Sist</th><th>Trend</th></tr></thead><tbody>';
-
+    if (hasData) {
+        html += '<div class="section-label">Per avstand</div><div class="dist-stats">';
         allDists.forEach(function(key) {
             var cur  = getPct(thisAgg, key);
             var prev = getPct(lastAgg, key);
             if (cur === null && prev === null) return;
+            var barCls = cur === null ? '' : cur >= 75 ? '' : cur >= 50 ? ' warn' : ' bad';
             html +=
-                '<tr>' +
-                '<td>' + fmt(parseFloat(key)) + ' m</td>' +
-                '<td class="' + pctClass(cur) + '">'  + pctStr(cur)  + '</td>' +
-                '<td class="' + pctClass(prev) + '">' + pctStr(prev) + '</td>' +
-                '<td>' + trendHTML(cur, prev) + '</td>' +
-                '</tr>';
+                '<div class="dist-stat-row">' +
+                '<div class="dist-stat-top">' +
+                '<span class="dist-stat-label">' + fmt(parseFloat(key)) + ' m</span>' +
+                '<div class="dist-stat-right">' +
+                '<span class="dist-stat-this ' + pctCls(cur) + '">' + pctStr(cur) + '</span>' +
+                '<span class="dist-stat-last">' + (prev !== null ? 'Sist: ' + prev + '%' : '') + '</span>' +
+                trendSpan(cur, prev) +
+                '</div></div>' +
+                '<div class="dist-stat-bar"><div class="dist-stat-fill' + barCls + '" style="width:' + (cur || 0) + '%"></div></div>' +
+                '</div>';
         });
-
-        html += '</tbody></table>';
+        html += '</div>';
     }
 
     // Recent sessions
+    html += '<div class="section-label">Siste økter</div><div class="session-list">';
     var recent = all.slice().reverse().slice(0, 15);
-    html += '<div class="section-label">Siste økter</div>';
     recent.forEach(function(s) {
-        var pct = s.totalAttempts > 0 ? Math.round(s.totalMade / s.totalAttempts * 100) : 0;
-        var cls = pctClass(pct);
+        var p   = s.totalAttempts > 0 ? Math.round(s.totalMade / s.totalAttempts * 100) : 0;
+        var cls = pctCls(p);
         html +=
             '<div class="session-item">' +
             '<span class="session-date">' + fmtDate(s.date) + '</span>' +
             '<span class="session-mode">' + s.modeLabel + '</span>' +
-            '<span class="session-pct ' + cls + '">' + pct + '%</span>' +
-            '<span class="session-check">' + (s.completed ? '&#10003;' : '&#8226;') + '</span>' +
+            '<span class="session-pct ' + cls + '">' + p + '%</span>' +
+            '<span class="session-check" style="color:' + (s.completed ? 'var(--accent)' : 'var(--muted)') + '">' +
+            (s.completed ? '&#10003;' : '&#8226;') + '</span>' +
             '</div>';
     });
-
+    html += '</div>';
     html += '<button class="danger-btn" onclick="clearAllSessions()">Slett all statistikk</button>';
     document.getElementById('statsContent').innerHTML = html;
 }
@@ -1227,7 +1582,7 @@ var toastTimer;
 function showToast(msg, ok) {
     var t = document.getElementById('toast');
     t.textContent = msg;
-    t.className   = 'toast show ' + (ok ? 'ok' : 'bad');
+    t.className = 'toast show ' + (ok ? 'ok' : 'bad');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function() { t.classList.remove('show'); }, 2200);
 }
@@ -1237,16 +1592,26 @@ function showToast(msg, ok) {
 // ================================================
 function toggleTheme() {
     theme = theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', theme === 'light' ? 'light' : '');
-    ['themeBtn'].forEach(function(id) {
-        var el = document.getElementById(id);
-        if (el) el.textContent = theme === 'dark' ? 'M' : 'L';
-    });
+    document.documentElement.setAttribute('data-theme', theme);
+    var label = theme === 'dark' ? 'Lys' : 'Mørk';
     document.querySelectorAll('.icon-btn').forEach(function(btn) {
-        if (btn.textContent === 'M' || btn.textContent === 'L') {
-            btn.textContent = theme === 'dark' ? 'M' : 'L';
-        }
+        if (btn.textContent === 'Lys' || btn.textContent === 'Mørk') btn.textContent = label;
     });
+    try { localStorage.setItem('putteapp_theme', theme); } catch(e) {}
+}
+
+function loadTheme() {
+    try {
+        var t = localStorage.getItem('putteapp_theme');
+        if (t && t !== 'dark') {
+            theme = t;
+            document.documentElement.setAttribute('data-theme', theme);
+            var label = theme === 'dark' ? 'Lys' : 'Mørk';
+            document.querySelectorAll('.icon-btn').forEach(function(btn) {
+                if (btn.textContent === 'Lys' || btn.textContent === 'Mørk') btn.textContent = label;
+            });
+        }
+    } catch(e) {}
 }
 
 // ================================================
@@ -1258,6 +1623,8 @@ function hide(id) { document.getElementById(id).classList.add('hidden'); }
 // ================================================
 //  INIT
 // ================================================
+loadScheme();
+loadTheme();
 renderDiscList();
 </script>
 </body>
